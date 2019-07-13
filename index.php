@@ -12,6 +12,7 @@ and open the template in the editor.
     <body>
         <?php
         echo "<h1>Hola mundo!</h1>";
+        header('location: controlador/formulario.php');
         ?>
     </body>
 </html>
