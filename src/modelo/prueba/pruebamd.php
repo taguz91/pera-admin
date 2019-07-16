@@ -1,7 +1,7 @@
 <?php
-require '../sql.php';
+require './src/modelo/sql.php';
 
-class PruebaMD extends SQL{
+class PruebaMD{
 
   private $nombre;
 

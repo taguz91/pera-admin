@@ -1,8 +1,8 @@
 <?php
-require 'prueba.php';
+require './utils.php';
+require './src/modelo/prueba/pruebamd.php';
 
-class PruebaBD extends PruebaMD{
-
+class PruebaBD extends PruebaMD {
 
   function insertarPermiso(){
     $sql = '
@@ -11,15 +11,15 @@ class PruebaBD extends PruebaMD{
     VALUES (:idPeriodo, :idTipoFicha, :fechaInicio, :fechaFin);
     ';
 
-    $ct = $this::getCon();
+    $ct = getCon();
     if($ct != null){
-      $setencia = $ct->prepare($sql);
-      $sentencia->bindParam(':idPeriodo', 21);
-      $sentencia->bindParam(':idTipoFicha', 1);
-      $sentencia->bindParam(':fechaInicio', '27/5/2019');
-      $sentencia->bindParam(':fechaFin', '27/12/2019');
-      $res = $this->noquery($sentencia);
-
+      $sentencia = $ct->prepare($sql);
+      $res = $sentencia->execute([
+        'idPeriodo' => 21,
+        'idTipoFicha' => 1,
+        'fechaInicio' => '27/5/2019',
+        'fechaFin' => '27/12/2019'
+      ]);
       if($res != null){
           echo "<h1>Guardamos correctamente</h1>";
       }
