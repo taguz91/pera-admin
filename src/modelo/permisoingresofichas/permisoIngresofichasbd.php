@@ -70,6 +70,26 @@ class PermisoIngresoFichasBD extends PermisoIngresoFichasMD
       }
     }
   }
+  function buscarPermisoIngresoFichas(){
+  $sql='
+  SELECT p.prd_lectivo_nombre,tF.tipo_ficha, pF.permiso_ingreso_fecha_inicio, pF.permiso_ingreso_fecha_fin
+  FROM public."PermisoIngresoFichas" pF, public."PeriodoLectivo" p,public."TipoFicha" tF
+    WHERE pF.id_prd_lectivo=p.id_prd_lectivo
+    AND pF.id_tipo_ficha=tF.id_tipo_ficha
+    AND pF.permiso_ingreso_activo=true;';
+
+    $ct = getCon();
+      if($ct != null){
+        $sentencia = $ct->prepare($sql);
+        $res = $sentencia->execute([
+
+        ]);
+        if($res != null){
+          echo "<h1>Buscamos correctamente</h1>"; 
+        var_dump($res);
+      }
+    }
+  }
 }
 
 //$ejecucion= new permisoIngresoFichasBD;

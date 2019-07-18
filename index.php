@@ -14,5 +14,7 @@ and open the template in the editor.
   $permisoingresofichas = new PermisoIngresoFichasBD();
   //$permisoingresofichas->guardarPermisoIngresoFichas();
  // $permisoingresofichas->eliminarPermisoIngresoFichas(25);
-  $permisoingresofichas->editarPermisoIngresoFichas(18)
+  //$permisoingresofichas->editarPermisoIngresoFichas(18);
+  $permisoingresofichas->buscarPermisoIngresoFichas();
+  
  ?>
