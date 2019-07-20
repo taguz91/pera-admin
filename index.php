@@ -9,8 +9,12 @@ and open the template in the editor.
 
   //header('location: controlador/formulario.php');
   //Probando el modo de crear clases
-  require_once 'src/modelo/prueba/pruebabd.php';
+  require_once 'src/modelo/permisoingresofichas/permisoingresofichasbd.php';
 
-  $prueba = new PruebaBD();
-  $prueba->insertarPermiso();
+  $permisoingresofichas = new PermisoIngresoFichasBD();
+  //$permisoingresofichas->guardarPermisoIngresoFichas();
+ // $permisoingresofichas->eliminarPermisoIngresoFichas(25);
+  //$permisoingresofichas->editarPermisoIngresoFichas(18);
+  $permisoingresofichas->buscarPermisoIngresoFichas();
+  
  ?>
