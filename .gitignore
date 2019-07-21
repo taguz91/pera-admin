@@ -16,3 +16,4 @@ nbdist/
 
 # Los datos de conexion
 dto.php
+config/

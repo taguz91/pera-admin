@@ -26,16 +26,19 @@ require_once ("src/modelo/permisoingreso/permisoingreso.php");
 - Archivos que estan cargados en la pagina desde el inicio, **No se necesitan requerirlas mas**
 ```
 <?php
+//Si se requieren que mas archivos sean accedidos de manera global deben ser especificados en index.php
 require_once 'config/config.php';
 require_once 'src/utils/dctr.php';
 require_once 'src/utils/controlador.php';
 require_once 'src/utils/error.php';
 require_once 'src/utils/bd.php';
 require_once 'src/controlador/main.php';
-//Si se necesita mas archivos que se deben acceder de manera global se deberan agregar en index.php en la carpeta raiz.
 ?>
 ```
 - Todos los errores estaran en el archivos errores.php de la carpeta utils, son cargados desde el inicio asi que podran ser accedidos desde cualquier punto. Todos los metodos del mismo deben ser staticos.
+
+**Base de datos**
+- La conexion a la base de datos debe ser modificada en la carpeta config/config.php
 
 **Controladores**
 - Todos funcionaran para rutear.
@@ -152,4 +155,5 @@ abstract class ModeloBD {
   }
 }
 ```
-#### Sientanse libres de mejorar el codigo que se expone aqui, cualquiere mejora debe se documentada y escriba la fecha de modificacion y en los lugares que son usadas.
+
+#### Sientanse libres de mejorar el codigo que se expone aqui, cualquier mejora debe se documentada detallando la fecha de modificacion y en los lugares en los que fueron implementados (El autor tambien seria importante.).
