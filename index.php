@@ -1,16 +1,11 @@
-<!DOCTYPE html>
-<!--
-To change this license header, choose License Headers in Project Properties.
-To change this template file, choose Tools | Templates
-and open the template in the editor.
--->
 <?php
-  echo "<h1>Hola mundo!</h1>";
+  require_once 'config/config.php';
+  require_once 'src/utils/dctr.php';
+  require_once 'src/utils/controlador.php';
+  require_once 'src/utils/error.php';
+  require_once 'src/utils/bd.php';
+  require_once 'src/controlador/main.php';
 
-  //header('location: controlador/formulario.php');
-  //Probando el modo de crear clases
-  require_once 'src/modelo/prueba/pruebabd.php';
-
-  $prueba = new PruebaBD();
-  $prueba->insertarPermiso();
+  $M = new Main();
+  $M->obtenerUrl();
  ?>
