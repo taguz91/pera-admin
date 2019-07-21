@@ -1,5 +1,6 @@
 <?php
 require_once("src/modelo/permisoingreso/permisoingresobd.php");
+require_once("src/modelo/clases/periodolectivobd.php");
 
 class PermisoFichaCTR extends CTR implements DCTR {
 
@@ -46,6 +47,9 @@ class PermisoFichaCTR extends CTR implements DCTR {
         Errores::errorVariableNoEncontrada();
       }
     }else{
+      $periodos = PeriodoLectivoBD::getParaCombo();
+      //var_dump($periodos);
+
       require $this->cargarVista('guardar.php');
     }
 

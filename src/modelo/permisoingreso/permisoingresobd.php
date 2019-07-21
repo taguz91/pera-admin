@@ -7,7 +7,7 @@ abstract class PermisoIngresoBD {
         $ct = getCon();
 
         if ($ct != null) {
-            $sentencia = $ct->prepare($this::INSERT);
+            $sentencia = $ct->prepare(self::$INSERT);
             $res = $sentencia->execute([
                 'idPeriodo' => $permisoIngreso->idPeriodo,
                 'idTipoFicha' => $permisoIngreso->idTipoFicha,
@@ -29,7 +29,7 @@ abstract class PermisoIngresoBD {
     static function editar($permisoIngreso) {
         $ct = getCon();
         if ($ct != null) {
-            $sentencia = $ct->prepare($this::UPDATE);
+            $sentencia = $ct->prepare(self::$UPDATE);
             $res = $sentencia->execute([
                 'id' => $permisoIngreso->id,
                 'idPeriodo' => $permisoIngreso->idPeriodo,
@@ -53,7 +53,7 @@ abstract class PermisoIngresoBD {
 
         $ct = getCon();
         if ($ct != null) {
-            $sentencia = $ct->prepare($this::DELETE);
+            $sentencia = $ct->prepare(self::$DELETE);
             $res = $sentencia->execute([
                 'id' => $id
             ]);
@@ -103,12 +103,12 @@ abstract class PermisoIngresoBD {
     }
 
     static function getAll() {
-        $sql = $this::BASEQUERY.' '.$this::ENDQUERY;
+        $sql = self::$BASEQUERY.' '.self::$ENDQUERY;
         $ct = getCon();
         if ($ct != null) {
             $res = $ct->query($sql);
             if ($res != null) {
-                return $this::obtenerParaTbl($res);
+                return self::obtenerParaTbl($res);
             }else{
               return [];
             }
@@ -116,14 +116,14 @@ abstract class PermisoIngresoBD {
     }
 
     static function getPorPeriodo($idPeriodo){
-      $sql = $this::BASEQUERY
+      $sql = self::$BASEQUERY
       ." AND pl.id_prd_lectivo = $idPeriodo "
-      .$this::ENDQUERY;
+      .self::$ENDQUERY;
       $ct = getCon();
       if ($ct != null) {
           $res = $ct->query($sql);
           if ($res != null) {
-              return $this::obtenerParaTbl($res);
+              return self::obtenerParaTbl($res);
           }else{
             return [];
           }
@@ -131,14 +131,14 @@ abstract class PermisoIngresoBD {
     }
 
     static function getPorTipoFicha($idTipoFicha){
-      $sql = $this::BASEQUERY
+      $sql = self::$BASEQUERY
       ." AND tf.id_tipo_ficha = $idTipoFicha "
-      .$this::ENDQUERY;
+      .self::$ENDQUERY;
       $ct = getCon();
       if ($ct != null) {
           $res = $ct->query($sql);
           if ($res != null) {
-              return $this::obtenerParaTbl($res);
+              return self::obtenerParaTbl($res);
           }else{
             return [];
           }
@@ -146,21 +146,21 @@ abstract class PermisoIngresoBD {
     }
 
     static function buscar($aguja){
-      $sql = $this::BASEQUERY
+      $sql = self::$BASEQUERY
       ." AND pl.prd_lectivo_nombre ILIKE '%$aguja%' "
-      .$this::ENDQUERY;
+      .self::$ENDQUERY;
       $ct = getCon();
       if ($ct != null) {
           $res = $ct->query($sql);
           if ($res != null) {
-              return $this::obtenerParaTbl($res);
+              return self::obtenerParaTbl($res);
           }else{
             return [];
           }
       }
     }
 
-    private static function $obtenerParaTbl($res){
+    private static function obtenerParaTbl($res){
       $items = array();
       while($r = $res->fetch(PDO::FETCH_ASSOC)){
         //var_dump($r);
@@ -172,13 +172,13 @@ abstract class PermisoIngresoBD {
         $pi->fechaFin = $r['permiso_ingreso_fecha_fin'];
         array_push($items, $pi);
       }
-      return $res;
+      return $items;
     }
 
-    private static $BASEQUERY = '
+    public static $BASEQUERY = '
     SELECT
     id_permiso_ingreso_ficha,
-    p.prd_lectivo_nombre,
+    pl.prd_lectivo_nombre,
     tf.tipo_ficha,
     pf.permiso_ingreso_fecha_inicio,
     pf.permiso_ingreso_fecha_fin
@@ -191,17 +191,17 @@ abstract class PermisoIngresoBD {
     AND pf.permiso_ingreso_activo = true
     ';
 
-    private static $ENDQUERY = '
+    public static $ENDQUERY = '
     ORDER BY
     pf.permiso_ingreso_fecha_fin DESC,
     pl.prd_lectivo_nombre;';
 
-    private static $INSERT = '
+    public static $INSERT = '
     INSERT INTO public."PermisoIngresoFichas"(
       id_prd_lectivo, id_tipo_ficha, permiso_ingreso_fecha_inicio, permiso_ingreso_fecha_fin)
     VALUES(:idPeriodo, :idTipoFicha, :fechaInicio, :fechaFin)';
 
-    private static $UPDATE = '
+    public static $UPDATE = '
     UPDATE public."PermisoIngresoFichas"
     SET id_prd_lectivo = :idPeriodo,
     id_tipo_ficha = :idTipoFicha,
@@ -209,7 +209,7 @@ abstract class PermisoIngresoBD {
     permiso_ingreso_fecha_fin =: fechaFin
     WHERE id_permiso_ingreso_ficha =: id;';
 
-    private static $DELETE = '
+    public static $DELETE = '
     UPDATE public."PermisoIngresoFichas"
     SET permiso_ingreso_activo = false
     WHERE id_permiso_ingreso_ficha=:id;

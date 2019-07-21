@@ -8,15 +8,22 @@ require 'src/vista/templates/headerform.php';
      <label for="periodo">Seleccione un periodo:</label>
      <select class="" name="periodo">
        <option value="0">Periodos</option>
-       <option value="21">TDS</option>
-       <option value="22">TAS</option>
-       <option value="23">TAF</option>
-       <option value="24">TMI</option>
+
+       <?php
+       //Cargamos todos los periodos de la base de datos
+       if(isset($periodos)){
+         foreach ($periodos as $pl) {
+           echo '<option value="'.$pl->id.'">'.$pl->nombre.'</option>';
+         }
+       }else{
+         echo "<h2>No tenemos el objeto de periodos</h2>";
+       }
+        ?>
      </select>
 
      <label for="">Seleccione un tipo de ficha</label>
      <select class="" name="tipoficha">
-       <option value="0">Periodos</option>
+       <option value="0">Fichas</option>
        <option value="1">Socioeconomica</option>
        <option value="1">Ocupacional</option>
      </select>
