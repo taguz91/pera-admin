@@ -12,7 +12,7 @@ CREATE TABLE "GrupoSocioeconomico" (
   grupo_socioeconomico character varying(50),
   puntaje_minimo numeric(5, 2),
   puntaje_maximo numeric(5, 2),
-  grupo_socioeconomico_activo boolean,
+  grupo_socioeconomico_activo boolean DEFAULT 'true',
   CONSTRAINT grupo_socioeconomico_pk PRIMARY KEY ("id_grupo_socioeconomico")
 ) WITH (OIDS = FALSE);
 
