@@ -15,17 +15,23 @@ require 'src/vista/templates/headerform.php';
          foreach ($periodos as $pl) {
            echo '<option value="'.$pl->id.'">'.$pl->nombre.'</option>';
          }
-       }else{
-         echo "<h2>No tenemos el objeto de periodos</h2>";
        }
         ?>
+
      </select>
 
      <label for="">Seleccione un tipo de ficha</label>
      <select class="" name="tipoficha">
        <option value="0">Fichas</option>
-       <option value="1">Socioeconomica</option>
-       <option value="1">Ocupacional</option>
+       <?php
+       //Cargamos todos los periodos de la base de datos
+       if(isset($tipofichas)){
+         foreach ($tipofichas as $tf) {
+           echo '<option value="'.$tf->id.'">'.$tf->tipoFicha.'</option>';
+         }
+       }
+        ?>
+
      </select>
 
      <label for="">Fecha Inicio</label>

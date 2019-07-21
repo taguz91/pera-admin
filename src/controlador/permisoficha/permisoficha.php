@@ -1,6 +1,7 @@
 <?php
-require_once("src/modelo/permisoingreso/permisoingresobd.php");
-require_once("src/modelo/clases/periodolectivobd.php");
+require_once "src/modelo/permisoingreso/permisoingresobd.php";
+require_once "src/modelo/clases/periodolectivobd.php";
+require_once "src/modelo/tipoficha/tipofichabd.php";
 
 class PermisoFichaCTR extends CTR implements DCTR {
 
@@ -48,7 +49,7 @@ class PermisoFichaCTR extends CTR implements DCTR {
       }
     }else{
       $periodos = PeriodoLectivoBD::getParaCombo();
-      //var_dump($periodos);
+      $tipofichas = TipoFichaBD::getParaCombo();
 
       require $this->cargarVista('guardar.php');
     }
