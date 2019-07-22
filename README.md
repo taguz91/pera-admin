@@ -25,7 +25,6 @@ require_once ("src/modelo/permisoingreso/permisoingreso.php");
 ```
 - Archivos que estan cargados en la pagina desde el inicio, **No se necesitan requerirlas mas**
 ```php
-<?php
 //Si se requieren que mas archivos sean accedidos de manera global deben ser especificados en index.php
 require_once 'config/config.php';
 require_once 'src/utils/dctr.php';
@@ -33,7 +32,6 @@ require_once 'src/utils/controlador.php';
 require_once 'src/utils/error.php';
 require_once 'src/utils/bd.php';
 require_once 'src/controlador/main.php';
-?>
 ```
 - Todos los errores estaran en el archivos errores.php de la carpeta utils, son cargados desde el inicio asi que podran ser accedidos desde cualquier punto. Todos los metodos del mismo deben ser staticos.
 
@@ -43,7 +41,7 @@ require_once 'src/controlador/main.php';
 **Controladores**
 - Todos funcionaran para rutear.
 - Todos deberan terminar con CTR.
-```
+```php
 class PersonaCTR {
 
 }
@@ -66,12 +64,10 @@ class PersonaCTR extends CTR implements DCTR {
 ```
 - Todos los controladores deberan requerir al inicio su correspondiente modelobd.
 ```php
-<?php
 require_once 'src/modelo/personas/personabd.php';
-?>
 ```
 - Todos los links funcionan con el nombre del archivo y el nombre del metodo.
-```
+```php
 -permisoficha
   -permisoficha.php
     -PermisoFichaCTR
@@ -82,26 +78,19 @@ require_once 'src/modelo/personas/personabd.php';
 - Todas las vistas que no sean formulario deberan requerir header.php y footer.php.
 ```php
 //Al inicio del documento
-<?php
 require 'src/vista/templates/header.php';
-?>
 
 //Al final del documento
-<?php
 require 'src/vista/templates/footer.php';
-?>
 ```
 - Todos las vistas que sean formulario deberan requerir headerform.php y footerform.php.
 ```php
 //Al inicio del documento
-<?php
 require 'src/vista/templates/headerform.php';
-?>
 
 //Al final del documento
-<?php
 require 'src/vista/templates/footerform.php';
-?>
+
 ```
 **Modelos**
 Para no tardarnos mucho en la creacion de los modelos no crearemos getters ni setters. (Esto no es obligatorio solo es un consejo para escribir mas rapido el codigo.).
@@ -122,9 +111,7 @@ class ModeloMD {
 - Todos los que se conectan con base de datos deberan ser abstract ya que no las vamos a instanciar, todos sus metodos seran staticos.
 - Todos los modelos bd deberan requerir el modelo correspondiente al inicio.
 ```php
-<?php
 require_once 'src/modelo/modelos/modelo.php';
-?>
 ```
 - Ejemplo de un modelo para base de datos
 ```php
