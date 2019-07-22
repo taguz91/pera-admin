@@ -192,3 +192,120 @@ CREATE TRIGGER audotoria_permiso_ingreso_ficha
 BEFORE UPDATE OF permiso_ingreso_activo
 ON public."PermisoIngresoFichas" FOR EACH ROW
 EXECUTE PROCEDURE permiso_ingreso_ficha_elim();
+
+--PersonaFicha
+CREATE OR REPLACE FUNCTION persona_ficha_elim()
+RETURNS TRIGGER AS $persona_ficha_elim$
+BEGIN
+  IF new.persona_ficha_activa = FALSE THEN
+    INSERT INTO public."HistorialUsuarios"(
+      usu_username, historial_fecha, historial_tipo_accion,
+      historial_nombre_tabla, historial_pk_tabla, historial_ip)
+      VALUES(USER, now(), 'DELETE', TG_TABLE_NAME,
+      old.id_persona_ficha, inet_client_addr());
+  ELSE
+    INSERT INTO public."HistorialUsuarios"(
+      usu_username, historial_fecha, historial_tipo_accion,
+      historial_nombre_tabla, historial_pk_tabla, historial_ip)
+      VALUES(USER, now(), 'ACTIVACION', TG_TABLE_NAME,
+      old.id_persona_ficha, inet_client_addr());
+  END IF;
+  --Tambien actualizamos en las tablas que dependen de esta
+  UPDATE public."AlumnoRespuestaFS"
+  SET respuesta_almn_activo = new.persona_ficha_activa
+  WHERE id_persona_ficha = old.id_persona_ficha;
+
+  UPDATE public."AlumnoRespuestaLibreFS"
+  SET alumno_fs_activo = new.persona_ficha_activa
+  WHERE id_persona_ficha = old.id_persona_ficha;
+
+  UPDATE public."DocenteRespuestaFO"
+  SET docente_fo_activo = new.persona_ficha_activa
+  WHERE id_persona_ficha = old.id_persona_ficha;
+
+  RETURN NEW;
+END;
+$persona_ficha_elim$ LANGUAGE plpgsql;
+
+CREATE TRIGGER audotoria_persona_ficha
+BEFORE UPDATE OF persona_ficha_activa
+ON public."PersonaFicha" FOR EACH ROW
+EXECUTE PROCEDURE persona_ficha_elim();
+
+--DocenteRespuestaFO
+CREATE OR REPLACE FUNCTION docente_respuesta_fo_elim()
+RETURNS TRIGGER AS $docente_respuesta_fo_elim$
+BEGIN
+  IF new.docente_fo_activo = FALSE THEN
+    INSERT INTO public."HistorialUsuarios"(
+      usu_username, historial_fecha, historial_tipo_accion,
+      historial_nombre_tabla, historial_pk_tabla, historial_ip)
+      VALUES(USER, now(), 'DELETE', TG_TABLE_NAME,
+      old.id_docente_respuesta_fo, inet_client_addr());
+  ELSE
+    INSERT INTO public."HistorialUsuarios"(
+      usu_username, historial_fecha, historial_tipo_accion,
+      historial_nombre_tabla, historial_pk_tabla, historial_ip)
+      VALUES(USER, now(), 'ACTIVACION', TG_TABLE_NAME,
+      old.id_docente_respuesta_fo, inet_client_addr());
+  END IF;
+  RETURN NEW;
+END;
+$docente_respuesta_fo_elim$ LANGUAGE plpgsql;
+
+CREATE TRIGGER audotoria_docente_respuesta_fo
+BEFORE UPDATE OF docente_fo_activo
+ON public."DocenteRespuestaFO" FOR EACH ROW
+EXECUTE PROCEDURE docente_respuesta_fo_elim();
+
+--AlumnoRespuestaFS
+CREATE OR REPLACE FUNCTION alumno_respuesta_fs_elim()
+RETURNS TRIGGER AS $alumno_respuesta_fs_elim$
+BEGIN
+  IF new.respuesta_almn_activo = FALSE THEN
+    INSERT INTO public."HistorialUsuarios"(
+      usu_username, historial_fecha, historial_tipo_accion,
+      historial_nombre_tabla, historial_pk_tabla, historial_ip)
+      VALUES(USER, now(), 'DELETE', TG_TABLE_NAME,
+      old.id_almn_respuesta_fs, inet_client_addr());
+  ELSE
+    INSERT INTO public."HistorialUsuarios"(
+      usu_username, historial_fecha, historial_tipo_accion,
+      historial_nombre_tabla, historial_pk_tabla, historial_ip)
+      VALUES(USER, now(), 'ACTIVACION', TG_TABLE_NAME,
+      old.id_almn_respuesta_fs, inet_client_addr());
+  END IF;
+  RETURN NEW;
+END;
+$alumno_respuesta_fs_elim$ LANGUAGE plpgsql;
+
+CREATE TRIGGER audotoria_alumno_respuesta_fs
+BEFORE UPDATE OF respuesta_almn_activo
+ON public."AlumnoRespuestaFS" FOR EACH ROW
+EXECUTE PROCEDURE alumno_respuesta_fs_elim();
+
+--AlumnoRespuestaLibreFS
+CREATE OR REPLACE FUNCTION alumno_respuesta_libre_fs_elim()
+RETURNS TRIGGER AS $alumno_respuesta_libre_fs_elim$
+BEGIN
+  IF new.alumno_fs_activo = FALSE THEN
+    INSERT INTO public."HistorialUsuarios"(
+      usu_username, historial_fecha, historial_tipo_accion,
+      historial_nombre_tabla, historial_pk_tabla, historial_ip)
+      VALUES(USER, now(), 'DELETE', TG_TABLE_NAME,
+      old.id_almn_respuesta_libre_fs, inet_client_addr());
+  ELSE
+    INSERT INTO public."HistorialUsuarios"(
+      usu_username, historial_fecha, historial_tipo_accion,
+      historial_nombre_tabla, historial_pk_tabla, historial_ip)
+      VALUES(USER, now(), 'ACTIVACION', TG_TABLE_NAME,
+      old.id_almn_respuesta_libre_fs, inet_client_addr());
+  END IF;
+  RETURN NEW;
+END;
+$alumno_respuesta_libre_fs_elim$ LANGUAGE plpgsql;
+
+CREATE TRIGGER audotoria_alumno_respuesta_fs
+BEFORE UPDATE OF alumno_fs_activo
+ON public."AlumnoRespuestaLibreFS" FOR EACH ROW
+EXECUTE PROCEDURE alumno_respuesta_libre_fs_elim();

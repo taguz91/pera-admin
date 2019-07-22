@@ -85,11 +85,6 @@ CREATE TABLE "AlumnoRespuestaFS" (
   CONSTRAINT almn_respuesta_fs PRIMARY KEY ("id_almn_respuesta_fs")
 ) WITH (OIDS = FALSE);
 
-ALTER TABLE "GrupoSocioeconomico" ADD CONSTRAINT
-"tipo_ficha_grupo_socioeconomico_fk"
-FOREIGN KEY ("id_tipo_ficha") REFERENCES "TipoFicha"("id_tipo_ficha")
-ON DELETE CASCADE ON UPDATE CASCADE;
-
 --Actualizacion 12/7/2019
 CREATE TABLE "AlumnoRespuestaLibreFS" (
   id_almn_respuesta_libre_fs serial NOT NULL,
@@ -100,6 +95,11 @@ CREATE TABLE "AlumnoRespuestaLibreFS" (
   alumno_fs_activo boolean DEFAULT 'true',
   CONSTRAINT almn_respuesta_libre_fs PRIMARY KEY ("id_almn_respuesta_libre_fs")
 ) WITH (OIDS = FALSE);
+
+ALTER TABLE "GrupoSocioeconomico" ADD CONSTRAINT
+"tipo_ficha_grupo_socioeconomico_fk"
+FOREIGN KEY ("id_tipo_ficha") REFERENCES "TipoFicha"("id_tipo_ficha")
+ON DELETE CASCADE ON UPDATE CASCADE;
 
 ALTER TABLE "SeccionesFicha" ADD CONSTRAINT
 "secciones_ficha_tipo"
