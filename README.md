@@ -12,19 +12,19 @@ Proyecto enfocado en la elaboracion de fichas socioeconomicas y ocupacionales pa
 ### Indicaciones de como funciona
 **General**
 - Al requerir un archivo se debe especificar desde el nivel de la carpeta src.
-```
+```php
 require 'src/vista/templates/header.php';
 require_once ("src/modelo/permisoingreso/permisoingreso.php");
 ```
 - Para usar una accion desde nuestras vistas utilizamos la constante URL
-```
+```php
 //Aqui indicamos una accion que se realizara en un metodo de nuestro controlador
 <form class="" action="<?php echo constant('URL'); ?>permisoficha/guardar" method="post">
 //Aqui utilizaremos archivos de nuestra carpeta publica
 <link rel="stylesheet" href="<?php echo constant('URL') ?>public/css/main.css">
 ```
 - Archivos que estan cargados en la pagina desde el inicio, **No se necesitan requerirlas mas**
-```
+```php
 <?php
 //Si se requieren que mas archivos sean accedidos de manera global deben ser especificados en index.php
 require_once 'config/config.php';
@@ -49,13 +49,13 @@ class PersonaCTR {
 }
 ```
 - Todos deben extender de CTR.
-```
+```php
 class PersonaCTR extends CTR {
 
 }
 ```
 - Deben implementar la interfaz de DCTR e implementar el metodo inicio.
-```
+```php
 class PersonaCTR extends CTR implements DCTR {
 
   //Metodo que debe sobreescribir
@@ -65,7 +65,7 @@ class PersonaCTR extends CTR implements DCTR {
 }
 ```
 - Todos los controladores deberan requerir al inicio su correspondiente modelobd.
-```
+```php
 <?php
 require_once 'src/modelo/personas/personabd.php';
 ?>
@@ -80,7 +80,7 @@ require_once 'src/modelo/personas/personabd.php';
 
 **Vistas**
 - Todas las vistas que no sean formulario deberan requerir header.php y footer.php.
-```
+```php
 //Al inicio del documento
 <?php
 require 'src/vista/templates/header.php';
@@ -92,7 +92,7 @@ require 'src/vista/templates/footer.php';
 ?>
 ```
 - Todos las vistas que sean formulario deberan requerir headerform.php y footerform.php.
-```
+```php
 //Al inicio del documento
 <?php
 require 'src/vista/templates/headerform.php';
@@ -106,13 +106,13 @@ require 'src/vista/templates/footerform.php';
 **Modelos**
 Para no tardarnos mucho en la creacion de los modelos no crearemos getters ni setters. (Esto no es obligatorio solo es un consejo para escribir mas rapido el codigo.).
 - Los modelos deberan estar en su carpeta correspondiente.
-```
+```php
 -permisoingreso
   -permisoingreso.php
   -permisoingresobd.php
 ```
 - Ejemplo de un modelo.
-```
+```php
 class ModeloMD {
   public $nombre;
   public $apellido;
@@ -121,13 +121,13 @@ class ModeloMD {
 ```
 - Todos los que se conectan con base de datos deberan ser abstract ya que no las vamos a instanciar, todos sus metodos seran staticos.
 - Todos los modelos bd deberan requerir el modelo correspondiente al inicio.
-```
+```php
 <?php
 require_once 'src/modelo/modelos/modelo.php';
 ?>
 ```
 - Ejemplo de un modelo para base de datos
-```
+```php
 abstract class ModeloBD {
   static function guadar($modelo) {
     $sql = '
