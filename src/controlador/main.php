@@ -16,7 +16,9 @@ class Main {
       }
 
     }else{
-      echo "<h1>No tenemos url</h1>";
+      //require 'src/vista/static/login.php';
+      require 'src/vista/static/home.php';
+      //echo "<h1>No tenemos url</h1>";
     }
   }
 
@@ -37,6 +39,7 @@ class Main {
     }else{
         Errores::error404();
         echo "<h1>No pudimos obtener la clase</h1>";
+        //header("Location: ".constant('URL'));
     }
 
   }

@@ -16,10 +16,10 @@
         constant('PASS'));
 
       $pdo->setAttribute(PDO::ATTR_ERRMODE, PDO::ERRMODE_EXCEPTION);
-      /*echo "<H1>Nos conectamos satisfactoriamente.</H1>";*/
       return $pdo;
     } catch (\Exception $e) {
-      echo "Oh no: ".$e->getMessage();
+      Errores::errorConectarBD($e->getMessage());
+      //echo "Oh no: ".$e->getMessage();
       return null;
     }
   }

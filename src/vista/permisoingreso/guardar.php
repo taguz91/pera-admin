@@ -1,50 +1,92 @@
 <?php
-require 'src/vista/templates/headerform.php';
+require 'src/vista/templates/header.php';
  ?>
 
- <div class="formulario">
-   <form class="" action="<?php echo constant('URL'); ?>permisoficha/guardar" method="post">
+ <div class="container my-5">
 
-     <label for="periodo">Seleccione un periodo:</label>
-     <select class="" name="periodo">
-       <option value="0">Periodos</option>
+   <div class="col-md-8 col-lg-6 mx-auto border rounded">
 
-       <?php
-       //Cargamos todos los periodos de la base de datos
-       if(isset($periodos)){
-         foreach ($periodos as $pl) {
-           echo '<option value="'.$pl->id.'">'.$pl->nombre.'</option>';
-         }
-       }
-        ?>
+     <h3 class="text-center my-3">
+       Ingreso de Permiso Ficha
+     </h3>
+     <form class="form-horizontal" action="<?php echo constant('URL'); ?>permisoficha/guardar" method="post">
 
-     </select>
+       <div class="form-group">
+         <label for="periodo"
+         class="control-label"
+         >Seleccione un periodo:</label>
+         <select class="form-control" name="periodo">
+           <option value="0">Periodos</option>
 
-     <label for="">Seleccione un tipo de ficha</label>
-     <select class="" name="tipoficha">
-       <option value="0">Fichas</option>
-       <?php
-       //Cargamos todos los periodos de la base de datos
-       if(isset($tipofichas)){
-         foreach ($tipofichas as $tf) {
-           echo '<option value="'.$tf->id.'">'.$tf->tipoFicha.'</option>';
-         }
-       }
-        ?>
+           <?php
+           //Cargamos todos los periodos de la base de datos
+           if(isset($periodos)){
+             foreach ($periodos as $pl) {
+               echo '<option value="'.$pl->id.'">'.$pl->nombre.'</option>';
+             }
+           }
+            ?>
 
-     </select>
+         </select>
+       </div>
 
-     <label for="">Fecha Inicio</label>
-     <input type="date" name="fechaInicio" value="">
-     <label for="">Fecha Fin</label>
-     <input type="date" name="fechaFin" value="">
+       <div class="form-group">
 
-     <input type="submit" name="guardar" value="Guardar">
-   </form>
+         <label for="tipoficha"
+         class="control-label"
+         >Seleccione un tipo de ficha</label>
+         <select name="tipoficha"
+         class="form-control">
+           <option value="0">Fichas</option>
+           <?php
+           //Cargamos todos los periodos de la base de datos
+           if(isset($tipofichas)){
+             foreach ($tipofichas as $tf) {
+               echo '<option value="'.$tf->id.'">'.$tf->tipoFicha.'</option>';
+             }
+           }
+            ?>
 
+         </select>
+
+       </div>
+
+
+       <div class="form-row">
+         <div class="col">
+           <div class="form-group">
+             <label for="fechaInicio"
+             class="control-label"
+             >Fecha Inicio</label>
+             <input type="date" name="fechaInicio" value=""
+             class="form-control">
+           </div>
+         </div>
+
+         <div class="col">
+           <div class="form-group">
+             <label for="fechaFin"
+             class="control-label"
+             >Fecha Fin</label>
+             <input type="date" name="fechaFin" value=""
+             class="form-control">
+           </div>
+         </div>
+       </div>
+
+       <div class="form-group">
+          <input class="btn btn-success btn-block"
+          type="submit" name="guardar" value="Guardar">
+       </div>
+
+     </form>
+
+   </div>
  </div>
 
 
+
+
 <?php
-require 'src/vista/templates/footerform.php';
- ?>
+require 'src/vista/templates/footer.php';
+?>

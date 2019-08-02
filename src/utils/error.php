@@ -16,6 +16,23 @@ abstract class Errores{
   static function errorEliminar($nombre){
     echo "<h1>No podemos eliminar $nombre</h1>";
   }
+
+  static function errorConectarBD($mensaje){
+    echo '<div class="container">
+      <div class="alert alert-danger my-3">
+        '.$mensaje.'
+        </div>
+      </div>';
+  }
+
+  static function errorBuscar($mensaje){
+    echo '<div class="container">
+      <div class="alert alert-info my-3 text-center">
+        '.$mensaje.'
+        </div>
+      </div>';
+  }
+
 }
 
  ?>

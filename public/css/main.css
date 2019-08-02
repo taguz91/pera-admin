@@ -1,15 +1,15 @@
-* {
-  margin: 0;
-  padding: 0;
+.bg-ista-blue {
+  background-color: #546de5;
 }
 
-body {
-  height: 100%;
-  border: solid 5px yellow;
+.bg-ista-yellow {
+  background-color: #fed330;
 }
 
-.ctn {
-  border: solid 1px red;
-  margin: 0 10%;
-  height: 100%;
+.text-ista-blue {
+  color: #546de5;
+}
+
+.text-ista-yellow {
+  color: #fed330;
 }
