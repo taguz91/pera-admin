@@ -34,6 +34,10 @@ require_once 'src/utils/bd.php';
 require_once 'src/controlador/main.php';
 ```
 - Todos los errores estaran en el archivos errores.php de la carpeta utils, son cargados desde el inicio asi que podran ser accedidos desde cualquier punto. Todos los metodos del mismo deben ser staticos.
+- Cualquier archivo esterno requerido en las vistas deberan llamarse, con la constante URL al inicio.
+```php
+<link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/main.css">
+```
 
 **Base de datos**
 - La conexion a la base de datos debe ser modificada en la carpeta config/config.php
@@ -75,7 +79,7 @@ require_once 'src/modelo/personas/personabd.php';
 ```
 
 **Vistas**
-- Todas las vistas que no sean formulario deberan requerir header.php y footer.php.
+- Todas las vistas se deberan requerir header.php y footer.php.
 ```php
 //Al inicio del documento
 require 'src/vista/templates/header.php';
@@ -83,15 +87,7 @@ require 'src/vista/templates/header.php';
 //Al final del documento
 require 'src/vista/templates/footer.php';
 ```
-- Todos las vistas que sean formulario deberan requerir headerform.php y footerform.php.
-```php
-//Al inicio del documento
-require 'src/vista/templates/headerform.php';
 
-//Al final del documento
-require 'src/vista/templates/footerform.php';
-
-```
 **Modelos**
 Para no tardarnos mucho en la creacion de los modelos no crearemos getters ni setters. (Esto no es obligatorio solo es un consejo para escribir mas rapido el codigo.).
 - Los modelos deberan estar en su carpeta correspondiente.
@@ -143,4 +139,5 @@ abstract class ModeloBD {
 }
 ```
 
-#### Sientanse libres de mejorar el codigo que se expone aqui, cualquier mejora debe se documentada detallando la fecha de modificacion y en los lugares en los que fueron implementados (El autor tambien seria importante.).
+### Recomendaciones
+Sientanse libres de mejorar el codigo que se expone aqui, cualquier mejora debe se documentada detallando la fecha de modificacion y en los lugares en los que fueron implementados (El autor tambien seria importante.).
