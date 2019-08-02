@@ -9,18 +9,34 @@ class LoginCTR extends CTR implements DCTR {
   }
 
   public function inicio() {
-    require $this->cargarVista('login.php');
+    global $usuario;
+    if ($usuario == null) {
+      require $this->cargarVista('login.php');
+    } else {
+      require $this->cargarVista('sesion.php');
+    }
+
   }
 
   public function ingresar() {
     if(isset($_POST['ingresar'])){
       var_dump($_POST);
       $user = new UsuarioMD();
-      var_dump($user);
+      $per = new PersonaMD();
+      $user->user = 'PRUEBA';
 
+      $per->primerNombre = 'Johnny';
+      $per->segundoNombre = 'Gustavo';
+      $per->primerApellido = 'Garcia';
+      $per->segundoApellido = 'Inga';
+      $per->identificacion = '0107390270';
+      $per->correo = 'gus199811@gmail.com';
+      $per->celular = '0968796010';
+
+      $user->persona = $per;
+      var_dump($user);
       //Guardamos el usuario en la cookie
       setcookie('usuario', serialize($user), time()+360, '/');
-
       header("Location: ".constant('URL'));
     }
 

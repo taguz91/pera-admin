@@ -41,7 +41,7 @@
               action="<?php echo constant('URL'); ?>login/salir"
               method="post">
               <button type="submit" name="salir"
-              class="btn btn-small btn-danger">
+              class="btn btn-small rounded-pill bg-danger">
                 Salir
               </button>
               </form>

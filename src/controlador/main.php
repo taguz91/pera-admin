@@ -2,19 +2,13 @@
 
 class Main {
 
-  private $usuario;
-
   function __construct(){
-    //Preguntamos si tenemos el usuario para cargarlo
-    if(isset($_COOKIE['usuario'])){
-      $this->usuario = unserialize($_COOKIE['usuario']);
-    } else {
-      $this->usuario = null;
-    }
   }
 
   function obtenerUrl(){
     $url = isset($_GET['url']) ? $_GET['url']: NULL;
+
+    global $usuario;
 
     if($url != null){
       $url = rtrim($url, '/');
@@ -25,29 +19,33 @@ class Main {
       }
 
     }else{
-      //require 'src/vista/static/login.php';
-
-      if($this->usuario != null){
+      //Si ya tenemos el usuario lo enviamos al home
+      if($usuario != null){
           require 'src/vista/static/home.php';
       }else{
           header("Location: ".constant('URL')."login");
       }
 
-      //echo "<h1>No tenemos url</h1>";
     }
   }
 
   function cargarClase($url){
+    global $usuario;
+
+    //Nombre de la clase que llamaremos
     $nombre = $url[0];
 
     $dir = 'src/controlador/'.$nombre.'/'.$nombre.'.php';
+
     if(file_exists($dir)){
       require_once $dir;
+      //Iniciamos el nombre de la clase
       $nombre = $nombre . 'CTR';
+      //Creamos el objeto
       $modelo = new $nombre();
 
       //Validamos si esta iniciado session
-      if ($this->usuario != null OR isset($_POST['ingresar'])) {
+      if ($usuario != null OR isset($_POST['ingresar'])) {
         if(isset($url[1])){
           $this->llamarMetodo($url, $modelo);
         }else{
@@ -57,10 +55,8 @@ class Main {
         require_once 'src/vista/static/login.php';
       }
 
-
     }else{
         Errores::error404();
-        echo "<h1>No pudimos obtener la clase</h1>";
         //header("Location: ".constant('URL'));
     }
 
