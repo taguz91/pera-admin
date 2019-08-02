@@ -41,7 +41,7 @@
                       <div class="col-sm-7">
 
                           <form class="form-horizontal mr-4 mt-3"
-                          action="<?php echo constant('URL'); ?>permisoficha"
+                          action="<?php echo constant('URL'); ?>login/ingresar"
                           method="post">
 
                             <div class="form-group">
@@ -79,11 +79,13 @@
                             <div class="form-group">
 
                                 <button type="submit" class="btn btn-warning btn-block text-white bg-ista-yellow"
+                                name="ingresar"
                                 id="pera-ingresar">
                                     Ingresar
                                 </button>
 
-                                <button type="submit" class="btn btn-link btn-block">
+                                <button type="submit" class="btn btn-link btn-block"
+                                name="olvide">
                                     Olvide la contrasena
                                 </button>
 

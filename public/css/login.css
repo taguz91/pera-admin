@@ -3,7 +3,7 @@ html, body {
 }
 
 .sombra-login {
-  box-shadow: 4px 12px 20px 4px rgba(119, 139, 235, 0.7);
+  box-shadow: 4px 12px 20px 4px rgba(119, 139, 235, 0.6);
   z-index: 1;
 }
 

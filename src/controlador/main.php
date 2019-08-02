@@ -1,7 +1,16 @@
 <?php
 
 class Main {
+
+  private $usuario;
+
   function __construct(){
+    //Preguntamos si tenemos el usuario para cargarlo
+    if(isset($_COOKIE['usuario'])){
+      $this->usuario = unserialize($_COOKIE['usuario']);
+    } else {
+      $this->usuario = null;
+    }
   }
 
   function obtenerUrl(){
@@ -17,7 +26,13 @@ class Main {
 
     }else{
       //require 'src/vista/static/login.php';
-      require 'src/vista/static/home.php';
+
+      if($this->usuario != null){
+          require 'src/vista/static/home.php';
+      }else{
+          header("Location: ".constant('URL')."login");
+      }
+
       //echo "<h1>No tenemos url</h1>";
     }
   }
@@ -31,11 +46,18 @@ class Main {
       $nombre = $nombre . 'CTR';
       $modelo = new $nombre();
 
-      if(isset($url[1])){
-        $this->llamarMetodo($url, $modelo);
-      }else{
-        $modelo->inicio();
+      //Validamos si esta iniciado session
+      if ($this->usuario != null OR isset($_POST['ingresar'])) {
+        if(isset($url[1])){
+          $this->llamarMetodo($url, $modelo);
+        }else{
+          $modelo->inicio();
+        }
+      } else {
+        require_once 'src/vista/static/login.php';
       }
+
+
     }else{
         Errores::error404();
         echo "<h1>No pudimos obtener la clase</h1>";

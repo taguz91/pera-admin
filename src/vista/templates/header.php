@@ -24,9 +24,6 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
-              <li class="nav-item">
-                  <a href="<?php echo constant('URL'); ?>permisoficha" class="nav-link text-light">Permiso Ingreso</a>
-              </li>
 
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Permiso Ingreso</a>
@@ -40,10 +37,13 @@
                   <a href="<?php echo constant('URL'); ?>permisoingreso" class="nav-link text-light">Fichas</a>
               </li>
 
-              <form class="form-inline ml-lg-2">
-                <a href="/login" class="btn btn-small btn-danger">
-                  Salir
-                </a>
+              <form class="form-inline ml-lg-2"
+              action="<?php echo constant('URL'); ?>login/salir"
+              method="post">
+              <button type="submit" name="salir"
+              class="btn btn-small btn-danger">
+                Salir
+              </button>
               </form>
           </ul>
       </div>
