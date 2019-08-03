@@ -1,4 +1,4 @@
-<!DOCTYPE html>
+<!--<!DOCTYPE html>
 <html lang="es" dir="ltr">
   <head>
     <meta charset="utf-8">
@@ -13,8 +13,12 @@
 
       <div class="container h-100">
         <div class="d-flex justify-content-center h-100">
+-->
+<?php
+require_once 'src/vista/templates/headersp.php';
+ ?>
 
-          <div class="row m-auto bordered rounded bg-white sombra-login">
+          <div class="row m-auto border rounded bg-white sombra-login">
 
             <div class="col-12">
               <div class="row  border-bottom border-warning h-25">
@@ -99,6 +103,11 @@
 
 
           </div>
+
+          <?php
+          require_once 'src/vista/templates/footersp.php';
+           ?>
+      <!--
         </div>
       </div>
 
@@ -109,3 +118,4 @@
 
   </body>
 </html>
+-->

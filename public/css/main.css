@@ -13,3 +13,8 @@
 .text-ista-yellow {
   color: #fed330;
 }
+
+.titulo-gigante {
+  font-size: 5.0em;
+  font-family: 'Fira Code', monospace;
+}

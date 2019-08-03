@@ -2,7 +2,7 @@
 abstract class Errores{
 
   static function error404(){
-    echo "<h1>No encontramos esta vista</h1>";
+    require_once 'src/vista/static/errores/404.php';
   }
 
   static function errorVariableNoEncontrada(){
