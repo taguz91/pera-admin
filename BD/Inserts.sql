@@ -25,8 +25,18 @@ VALUES
 (1, 'Cuantos cuartos de bano con ducha de uso exclusivo tiene este hogar?',
 'Duchas que unicamente usan sus familiares.')
 (1, 'El tipo de servicio higienico con que cuenta este hogar es:',
-'')
+'Tipo de servicios')
 
+INSERT INTO public."RespuestasFicha"(
+  id_pregunta_ficha, respuesta_ficha,
+  respuesta_ficha_puntaje)
+VALUES
+(1, 'Suite de lujo', 59)
+(1, 'Departamento en casa o edificio', 59)
+(1, 'Casa/Villa', 59)
+(1, 'Media agua', 40)
+(1, 'Rancho', 4)
+(1, 'Choza/Covacha/Otro', 0)
 
 
 INSERT INTO public."GrupoSocioeconomico"(
