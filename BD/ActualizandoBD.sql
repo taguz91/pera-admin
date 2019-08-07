@@ -10,8 +10,8 @@ CREATE TABLE "GrupoSocioeconomico" (
   id_grupo_socioeconomico serial NOT NULL,
   id_tipo_ficha int NOT NULL,
   grupo_socioeconomico character varying(50),
-  puntaje_minimo numeric(5, 2),
-  puntaje_maximo numeric(5, 2),
+  puntaje_minimo numeric(8, 2),
+  puntaje_maximo numeric(8, 2),
   grupo_socioeconomico_activo boolean DEFAULT 'true',
   CONSTRAINT grupo_socioeconomico_pk PRIMARY KEY ("id_grupo_socioeconomico")
 ) WITH (OIDS = FALSE);
