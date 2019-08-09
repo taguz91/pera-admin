@@ -16,27 +16,27 @@ INSERT INTO public."PreguntasFicha"(
   id_seccion_ficha, pregunta_ficha,
   pregunta_ficha_ayuda)
 VALUES
-(19, 'Cual es el tipo de vivienda?',
+(1, 'Cual es el tipo de vivienda?',
 'Tipo de vivienda.'),
-(19, 'El material predominante de las paredes exteriores de la vivienda es de:',
+(1, 'El material predominante de las paredes exteriores de la vivienda es de:',
 'Material de la vivienda'),
-(19, 'El material predominante al piso de la vivienda es de:',
+(1, 'El material predominante al piso de la vivienda es de:',
 'Material unicamente del piso.'),
-(19, 'Cuantos cuartos de bano con ducha de uso exclusivo tiene este hogar?',
+(1, 'Cuantos cuartos de bano con ducha de uso exclusivo tiene este hogar?',
 'Duchas que unicamente usan sus familiares.'),
-(19, 'El tipo de servicio higienico con que cuenta este hogar es:',
+(1, 'El tipo de servicio higienico con que cuenta este hogar es:',
 'Tipo de servicios');
 
 INSERT INTO public."RespuestaFicha"(
   id_pregunta_ficha, respuesta_ficha,
   respuesta_ficha_puntaje)
 VALUES
-(26, 'Suite de lujo', 59),
-(26, 'Departamento en casa o edificio', 59),
-(26, 'Casa/Villa', 59),
-(26, 'Media agua', 40),
-(26, 'Rancho', 4),
-(26, 'Choza/Covacha/Otro', 0);
+(1, 'Suite de lujo', 59),
+(1, 'Departamento en casa o edificio', 59),
+(1, 'Casa/Villa', 59),
+(1, 'Media agua', 40),
+(1, 'Rancho', 4),
+(1, 'Choza/Covacha/Otro', 0);
 
 
 INSERT INTO public."GrupoSocioeconomico"(
