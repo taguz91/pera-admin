@@ -20,7 +20,7 @@ CREATE TABLE "SeccionesFicha" (
   id_seccion_ficha serial NOT NULL,
   id_tipo_ficha int NOT NULL,
   seccion_ficha_nombre character varying(255),
-  seccion_ficha_activa boolean,
+  seccion_ficha_activa boolean DEFAULT 'true',
   CONSTRAINT seccion_ficha_pk PRIMARY KEY ("id_seccion_ficha")
 ) WITH (OIDS = FALSE);
 
@@ -75,7 +75,7 @@ CREATE TABLE "DocenteRespuestaFO" (
   id_pregunta_ficha int NOT NULL,
   docente_fo_respuesta character varying(255) DEFAULT '',
   docente_fo_fecha_ingreso DATE default now(),
-  docente_fo_activo BOOLEAN NOT NULL,
+  docente_fo_activo BOOLEAN DEFAULT 'true',
   CONSTRAINT docente_respuesta_fo PRIMARY KEY ("id_docente_respuesta_fo")
 ) WITH (OIDS = FALSE);
 
