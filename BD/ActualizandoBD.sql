@@ -33,6 +33,7 @@ CREATE TABLE "PreguntasFicha" (
   -->
   --Actualizacion 8/8/2019
   pregunta_ficha_respuesta_tipo int DEFAULT '0',
+  pregunta_ficha_tipo int DEFAULT '1',
   -->
   pregunta_ficha_activa BOOLEAN NOT NULL DEFAULT 'true',
   CONSTRAINT pregunta_ficha_pk PRIMARY KEY ("id_pregunta_ficha")
