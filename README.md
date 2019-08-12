@@ -56,6 +56,16 @@ class PersonaCTR extends CTR {
 
 }
 ```
+- En el constructor de todos los controladores, se debe especificar la ruta de las vistas.
+```php
+class PersonaCTR extends CTR implements DCTR {
+  //Constructor de la clase
+  function __construct(){
+    //Se le manda la ruta de la vista a la clase padre
+    parent::__construct("src/vista/permisoingreso/");
+  }
+}
+```
 - Deben implementar la interfaz de DCTR e implementar el metodo inicio.
 ```php
 class PersonaCTR extends CTR implements DCTR {
