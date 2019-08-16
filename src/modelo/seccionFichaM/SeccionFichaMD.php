@@ -18,6 +18,7 @@ class SeccionFichaMD{
         $this->seccionFichaNombre=$seccionFichaNombre;
         $this->seccionFichaActiva=$seccionFichaActiva;
     }
+    
 
     
     public function getIdSeccionFicha():int

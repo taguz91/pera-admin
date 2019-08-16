@@ -18,11 +18,11 @@ abstract class SeccionFichaBD{
     static function seleccionarSeccionFicha(SeccionFichaMD $seccion=null, int $key){
 
         $pst=null;
-        if($seccion==null && $key==null){
+        if($seccion==0 && $key==null){
             $pst=getCon()->prepare('SELECT id_seccion_ficha, id_tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa
                                     FROM "SeccionesFicha"');
             $pst->execute();
-        }else if ($seccion!=null && $key!=null){
+        }else if ($seccion!=0 && $key!=null){
             
             switch($key){
 
