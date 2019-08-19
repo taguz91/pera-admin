@@ -76,11 +76,8 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
 </table>
 
 
-<?php
-require 'src/vista/templates/footer.php';
- ?>
+<script type="text/javascript">
 
-<script>
   $(document).ready(function(){
     $('.actualizarBtn').on('click',function(){
       $('#actualizarSeccion').modal('show');
@@ -115,7 +112,10 @@ require 'src/vista/templates/footer.php';
     });
   }
   );
+</script>
 
+
+<script type="text/javascript">
   
 
 $(document).ready(function(){
@@ -153,7 +153,10 @@ $(document).ready(function(){
   );
 
 
+</script>
 
+
+<script type="text/javascript">
 
     var b = document.getElementById("busqueda");
 
@@ -166,7 +169,9 @@ $(document).ready(function(){
       });
     }
     
+</script>
 
+<script type="text/javascript">
 
         var selIn = document.getElementById("listaTiposInsertar"); 
         var dimIn= document.getElementsByClassName("tiposSeccion").length; 
@@ -180,7 +185,10 @@ $(document).ready(function(){
             selIn.appendChild(elIn);
         }
 
+</script>
+   
 
+<script type="text/javascript">
     
         var selAc = document.getElementById("listaTiposActualizar"); 
         var dimAc= document.getElementsByClassName("tiposSeccion").length; 
@@ -194,7 +202,10 @@ $(document).ready(function(){
             selAc.appendChild(elAc);
         }
 
+</script>
 
+
+<script type="text/javascript">
     
     var selEl = document.getElementById("listaTiposEliminar"); 
     var dimEl= document.getElementsByClassName("tiposSeccion").length; 
@@ -209,6 +220,13 @@ $(document).ready(function(){
     }
 
 </script>
+
+
+
+
+<?php
+require 'src/vista/templates/footer.php';
+ ?>
 
 
 
