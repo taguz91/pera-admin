@@ -1,7 +1,4 @@
-<?php
-require 'src/vista/templates/headerform.php';
-require_once 'src/vista/seccionFichaV/index.php';
- ?>
+
   <div class="modal fade" id="insertarSeccion" tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
     <div class="modal-dialog" role="document">
       <div class="modal-content">
@@ -34,6 +31,4 @@ require_once 'src/vista/seccionFichaV/index.php';
 
 
 
-<?php
-require 'src/vista/templates/footerform.php';
- ?>
+

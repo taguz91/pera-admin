@@ -5,10 +5,8 @@ require_once 'src/vista/seccionFichaV/insertar.php';
 require_once 'src/vista/seccionFichaV/eliminar.php';
  ?>
 
+
 <br>
-
-
-
   <div class="row">
       <div class="col-sm-8" >
      
@@ -76,8 +74,19 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
 </table>
 
 
-<script type="text/javascript">
 
+
+
+
+
+<?php
+require 'src/vista/templates/footer.php';
+ ?>
+
+
+<script type="text/javascript">
+    
+  var x=0;
   $(document).ready(function(){
     $('.actualizarBtn').on('click',function(){
       $('#actualizarSeccion').modal('show');
@@ -116,7 +125,6 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
 
 
 <script type="text/javascript">
-  
 
 $(document).ready(function(){
     $('.eliminarBtn').on('click',function(){
@@ -173,6 +181,7 @@ $(document).ready(function(){
 
 <script type="text/javascript">
 
+        
         var selIn = document.getElementById("listaTiposInsertar"); 
         var dimIn= document.getElementsByClassName("tiposSeccion").length; 
       
@@ -220,13 +229,4 @@ $(document).ready(function(){
     }
 
 </script>
-
-
-
-
-<?php
-require 'src/vista/templates/footer.php';
- ?>
-
-
 
