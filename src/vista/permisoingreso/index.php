@@ -35,7 +35,7 @@ require 'src/vista/templates/header.php';
 
    </div>
 
-   <div class="row">
+   <div class="row mt-4">
      <table class="table">
        <thead class="thead-dark bg-ista-blue">
          <tr>

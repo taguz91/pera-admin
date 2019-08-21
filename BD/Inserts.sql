@@ -16,9 +16,15 @@ INSERT INTO public."PreguntasFicha"(
   id_seccion_ficha, pregunta_ficha,
   pregunta_ficha_ayuda)
 VALUES
-(1, 'Cual es el tipo de vivienda?',
+(
+  SELECT id_seccion_ficha FROM public."SeccionesFicha"
+  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda',
+   'Cual es el tipo de vivienda?',
 'Tipo de vivienda.'),
-(1, 'El material predominante de las paredes exteriores de la vivienda es de:',
+(
+  SELECT id_seccion_ficha FROM public."SeccionesFicha"
+  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda',
+  'El material predominante de las paredes exteriores de la vivienda es de:',
 'Material de la vivienda'),
 (1, 'El material predominante al piso de la vivienda es de:',
 'Material unicamente del piso.'),
@@ -31,7 +37,10 @@ INSERT INTO public."RespuestaFicha"(
   id_pregunta_ficha, respuesta_ficha,
   respuesta_ficha_puntaje)
 VALUES
-(1, 'Suite de lujo', 59),
+(
+  SELECT id_pregunta_ficha FROM public."PreguntasFicha"
+  WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:',
+  'Suite de lujo', 59),
 (1, 'Departamento en casa o edificio', 59),
 (1, 'Casa/Villa', 59),
 (1, 'Media agua', 40),
@@ -39,6 +48,8 @@ VALUES
 (1, 'Choza/Covacha/Otro', 0);
 
 
+
+---NO tocan
 INSERT INTO public."GrupoSocioeconomico"(
   id_tipo_ficha, grupo_socioeconomico,
   puntaje_minimo, puntaje_maximo)
