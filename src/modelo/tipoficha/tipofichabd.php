@@ -21,6 +21,48 @@ abstract class TipoFichaBD{
     }
   }
 
+    static function editar($tipoFichas) {
+        $ct = getCon();
+        if ($ct != null) {
+            $sentencia = $ct->prepare(self::$UPDATE);
+            $res = $sentencia->execute([
+                'id' => tipoFichas->id,
+                'tipoFicha' => tipoFichas->tipoFicha,
+                'descripcion' => tipoFichas->descripcion,
+            ]);
+            if ($res != null) {
+                echo "<h1>Editamos correctamente</h1>";
+                return true;
+            }else{
+              return false;
+            }
+        }else {
+          return false;
+        }
+    }
+
+
+    static function eliminar($id) {
+
+        $ct = getCon();
+        if ($ct != null) {
+            $sentencia = $ct->prepare(self::$DELETE);
+            $res = $sentencia->execute([
+                'id' => $id
+            ]);
+            if ($res != null) {
+                echo "<h1>Eliminamos correctamente</h1>";
+                return true;
+            }else{
+              return false;
+            }
+        }else{
+          return false;
+        }
+    }
+
+
+
   public static function getParaCombo(){
     $sql = '
     SELECT
