@@ -10,10 +10,10 @@
         </div>
         <div class="modal-body">
         <form method="post" action="<?php echo constant('URL'); ?>seccionFicha/actualizar">
-            <input type="hidden" name="idSeccion" id="idSeccion">
+            <input type="hidden" name="idSeccion" id="idSeccionA">
             <div class="form-group">
               <label for="nombreSeccion">Nombre de la Sección:</label>
-              <input type="text" class="form-control" id="nombreSeccion" name="nombreSeccion" placeholder="Ingresa un nombre...">
+              <input type="text" class="form-control" id="nombreSeccionA" name="nombreSeccion" placeholder="Ingrese un nombre...">
               </div>   
               <label for="tipoSeccion">Tipo de Sección:</label>
               <select class="browser-default custom-select" id="listaTiposActualizar" name="tipoSeccion">              

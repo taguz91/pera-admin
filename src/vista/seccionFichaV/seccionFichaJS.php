@@ -1,7 +1,7 @@
 
 <script type="text/javascript">
     
-    var x=0;
+ 
     $(document).ready(function(){
       $('.actualizarBtn').on('click',function(){
         $('#actualizarSeccion').modal('show');
@@ -28,8 +28,8 @@
   
           console.log(datos_a);
   
-          $('#nombreSeccion').val(datos_a[2]);
-          $('#idSeccion').val(datos_a[0]);
+          $('#nombreSeccionA').val(datos_a[2]);
+          $('#idSeccionA').val(datos_a[0]);
           $('#listaTiposActualizar').val(datos_a[3]);
           
          

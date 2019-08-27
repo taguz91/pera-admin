@@ -81,7 +81,7 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
 
 <?php
 require 'src/vista/templates/footer.php';
-require_once 'src/vista/seccionFichaV/javascript.php'
+require_once 'src/vista/seccionFichaV/seccionFichaJS.php'
  ?>
 
 

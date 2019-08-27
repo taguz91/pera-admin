@@ -8,7 +8,7 @@ abstract class SeccionFichaBD{
     
     static function insertarSeccionFicha(SeccionFichaMD $nuevaSeccion){
        
-        $pst=getCon()->prepare('INSERT INTO public."SeccionesFicha"(
+        $pst=getCon()->prepare('INSERT INTO "SeccionesFicha"(
                                 id_tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa)
                                 VALUES (?, ?, ?)');
        return $pst->execute(array($nuevaSeccion->getIdTipoFicha(),$nuevaSeccion->getSeccionFichaNombre(),$nuevaSeccion->getSeccionFichaActiva()));
@@ -31,12 +31,11 @@ abstract class SeccionFichaBD{
             switch($op){
 
                 case 1:
-                $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.d_tipo_ficha
+                $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha
                                         FROM "SeccionesFicha" sf JOIN "TipoFicha" tf 
                                         ON tf.id_tipo_ficha=sf.id_tipo_ficha 
                                         WHERE seccion_ficha_activa=true 
-                                        AND id_seccion_ficha=?
-                                        ORDER BY id_seccion_ficha');
+                                        AND id_seccion_ficha=?');
                  $pst->execute($key);
     
                break;
