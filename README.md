@@ -11,14 +11,14 @@ Proyecto enfocado en la elaboracion de fichas socioeconomicas y ocupacionales pa
 
 ### Indicaciones para las preguntas  
 **Tipo de pregunta**
-1: Obligatoria.
-2: No Obligatoria.
+- 1: Obligatoria.
+- 2: No Obligatoria.
 
 **Tipo de respuesta**
-1: Unica.
-2: Multiple.
-3: Libre Unica.
-4: Libre Multiple.
+- 1: Unica.
+- 2: Multiple.
+- 3: Libre Unica.
+- 4: Libre Multiple.
 
 ### Indicaciones de como funciona
 **General**
