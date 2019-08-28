@@ -1,5 +1,5 @@
 INSERT INTO public."TipoFicha"(tipo_ficha, tipo_ficha_descripcion)
-VALUES ('Ficha Socioeconomica', 'Ficha que nos servira para establecer el nivel socieonomico de los estudiantes.');
+VALUES ('Ficha Socioeconomica', 'Nivel socioeconomico.');
 
 --Para las preguntas
 INSERT INTO public."SeccionesFicha"(
@@ -17,35 +17,60 @@ INSERT INTO public."PreguntasFicha"(
   pregunta_ficha_ayuda)
 VALUES
 (
-  SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda',
+  (SELECT id_seccion_ficha FROM public."SeccionesFicha"
+  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda'),
    'Cual es el tipo de vivienda?',
 'Tipo de vivienda.'),
 (
-  SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda',
+  (SELECT id_seccion_ficha FROM public."SeccionesFicha"
+  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda'),
   'El material predominante de las paredes exteriores de la vivienda es de:',
 'Material de la vivienda'),
-(1, 'El material predominante al piso de la vivienda es de:',
+(
+  (SELECT id_seccion_ficha FROM public."SeccionesFicha"
+  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda'),
+  'El material predominante al piso de la vivienda es de:',
 'Material unicamente del piso.'),
-(1, 'Cuantos cuartos de bano con ducha de uso exclusivo tiene este hogar?',
+(
+  (SELECT id_seccion_ficha FROM public."SeccionesFicha"
+  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda'),
+  'Cuantos cuartos de bano con ducha de uso exclusivo tiene este hogar?',
 'Duchas que unicamente usan sus familiares.'),
-(1, 'El tipo de servicio higienico con que cuenta este hogar es:',
+(
+  (SELECT id_seccion_ficha FROM public."SeccionesFicha"
+  WHERE seccion_ficha_nombre = 'Caracteristicas de la vivienda'),
+  'El tipo de servicio higienico con que cuenta este hogar es:',
 'Tipo de servicios');
+
 
 INSERT INTO public."RespuestaFicha"(
   id_pregunta_ficha, respuesta_ficha,
   respuesta_ficha_puntaje)
 VALUES
 (
-  SELECT id_pregunta_ficha FROM public."PreguntasFicha"
-  WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:',
+  (SELECT id_pregunta_ficha FROM public."PreguntasFicha"
+  WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:'),
   'Suite de lujo', 59),
-(1, 'Departamento en casa o edificio', 59),
-(1, 'Casa/Villa', 59),
-(1, 'Media agua', 40),
-(1, 'Rancho', 4),
-(1, 'Choza/Covacha/Otro', 0);
+(
+  (SELECT id_pregunta_ficha FROM public."PreguntasFicha"
+  WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:'),
+  'Departamento en casa o edificio', 59),
+(
+  (SELECT id_pregunta_ficha FROM public."PreguntasFicha"
+  WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:'),
+  'Casa/Villa', 59),
+(
+  (SELECT id_pregunta_ficha FROM public."PreguntasFicha"
+  WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:'),
+  'Media agua', 40),
+(
+  (SELECT id_pregunta_ficha FROM public."PreguntasFicha"
+  WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:'),
+  'Rancho', 4),
+(
+  (SELECT id_pregunta_ficha FROM public."PreguntasFicha"
+  WHERE pregunta_ficha = 'El material predominante de las paredes exteriores de la vivienda es de:'),
+  'Choza/Covacha/Otro', 0);
 
 
 

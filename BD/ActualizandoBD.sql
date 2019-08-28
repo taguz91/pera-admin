@@ -52,8 +52,8 @@ CREATE TABLE "PermisoIngresoFichas" (
   id_permiso_ingreso_ficha serial NOT NULL,
   id_prd_lectivo int NOT NULL,
   id_tipo_ficha int NOT NULL,
-  permiso_ingreso_fecha_inicio date NOT NULL,
-  permiso_ingreso_fecha_fin date NOT NULL,
+  permiso_ingreso_fecha_inicio TIMESTAMP NOT NULL,
+  permiso_ingreso_fecha_fin TIMESTAMP NOT NULL,
   permiso_ingreso_activo BOOLEAN DEFAULT 'true',
   CONSTRAINT permiso_ingreso_ficha_pk PRIMARY KEY ("id_permiso_ingreso_ficha")
 ) WITH (OIDS = FALSE);
@@ -63,8 +63,9 @@ CREATE TABLE "PersonaFicha" (
   id_permiso_ingreso_ficha int NOT NULL,
   id_persona int NOT NULL,
   persona_ficha_clave bytea NOT NULL,
-  persona_ficha_fecha_ingreso date,
-  persona_ficha_fecha_modificacion date,
+  persona_ficha_fecha_ingreso TIMESTAMP,
+  persona_ficha_fecha_modificacion TIMESTAMP,
+  persona_ficha_finalizada BOOLEAN DEFAULT 'false',
   persona_ficha_activa BOOLEAN DEFAULT 'true',
   CONSTRAINT persona_ficha_pk PRIMARY KEY ("id_persona_ficha")
 ) WITH (OIDS = FALSE);
@@ -74,7 +75,7 @@ CREATE TABLE "DocenteRespuestaFO" (
   id_persona_ficha int NOT NULL,
   id_pregunta_ficha int NOT NULL,
   docente_fo_respuesta character varying(255) DEFAULT '',
-  docente_fo_fecha_ingreso DATE default now(),
+  docente_fo_fecha_ingreso TIMESTAMP default now(),
   docente_fo_activo BOOLEAN DEFAULT 'true',
   CONSTRAINT docente_respuesta_fo PRIMARY KEY ("id_docente_respuesta_fo")
 ) WITH (OIDS = FALSE);
@@ -86,7 +87,7 @@ CREATE TABLE "AlumnoRespuestaFS" (
   id_pregunta_ficha INT NOT NULL,
   id_respuesta_ficha int,
   respuesta_almn_puntaje int DEFAULT '0',
-  respuesta_almn_fecha_ingreso date DEFAULT now(),
+  respuesta_almn_fecha_ingreso TIMESTAMP DEFAULT now(),
   respuesta_almn_activo boolean DEFAULT 'true',
   CONSTRAINT almn_respuesta_fs PRIMARY KEY ("id_almn_respuesta_fs")
 ) WITH (OIDS = FALSE);
@@ -97,7 +98,7 @@ CREATE TABLE "AlumnoRespuestaLibreFS" (
   id_persona_ficha int NOT NULL,
   id_pregunta_ficha int NOT NULL,
   alumno_fs_libre int DEFAULT '0',
-  alumno_fs_fecha_ingreso date DEFAULT now(),
+  alumno_fs_fecha_ingreso TIMESTAMP DEFAULT now(),
   alumno_fs_activo boolean DEFAULT 'true',
   CONSTRAINT almn_respuesta_libre_fs PRIMARY KEY ("id_almn_respuesta_libre_fs")
 ) WITH (OIDS = FALSE);
