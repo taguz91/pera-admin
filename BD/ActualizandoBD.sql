@@ -82,7 +82,9 @@ CREATE TABLE "DocenteRespuestaFO" (
 CREATE TABLE "AlumnoRespuestaFS" (
   id_almn_respuesta_fs serial NOT NULL,
   id_persona_ficha int NOT NULL,
-  id_respuesta_ficha int NOT NULL,
+  --Actualizacion 48/8/2019 Porque necesito la pregunta para guardar dinamicamente.
+  id_pregunta_ficha INT NOT NULL,
+  id_respuesta_ficha int,
   respuesta_almn_puntaje int DEFAULT '0',
   respuesta_almn_fecha_ingreso date DEFAULT now(),
   respuesta_almn_activo boolean DEFAULT 'true',
@@ -164,6 +166,12 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "AlumnoRespuestaFS" ADD CONSTRAINT
 "respuesta_alumno_respuesta_fk"
 FOREIGN KEY ("id_respuesta_ficha") REFERENCES "RespuestaFicha"("id_respuesta_ficha")
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+--Actualiazcion 28/8/2019
+ALTER TABLE "AlumnoRespuestaFS" ADD CONSTRAINT
+"pregunta_alumno_respuesta_fk"
+FOREIGN KEY ("id_pregunta_ficha") REFERENCES "PreguntasFicha"("id_pregunta_ficha")
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 
