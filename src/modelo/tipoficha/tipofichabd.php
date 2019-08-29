@@ -3,32 +3,36 @@ require_once 'src/modelo/tipoficha/tipofichamd.php';
 
 abstract class TipoFichaBD{
 
-  public function guardar(){
-    $sql="INSERT INTO public.\"TipoFicha\"(
-        id_tipo_ficha, tipo_ficha, tipo_ficha_descripcion, tipo_ficha_activo)
-        VALUES (1, 'socieconomica', 'ficha socioeconomica', true);";
-    $ct=getCon();
-    try{
-      if($ct != null){
-        $res=$ct->query($sql);
-        echo "<br>"."Datos guardados correctamente"."<br>";
-        var_dump($res);
-      }else{
-        echo "No podemos guardar los datos";
-      }
-    }catch(\Exception $e){
-       echo $e->getMessage();
+  static function guardar($tipoFicha) {
+    $ct = getCon();
+
+    if ($ct != null) {
+        $sentencia = $ct->prepare(self::$INSERT);
+        $res = $sentencia->execute([
+            'id' => $tipoFicha->id,
+            'tipoFicha' => $tipoFicha->tipoFicha,
+            'descripcion' => $tipoFicha->descripcion
+        ]);
+        if ($res != null) {
+            echo "<h1>Guardamos correctamente</h1>";
+            return true;
+        }else{
+          return false;
+        }
+    } else {
+        echo "<h1>No contamos con una conexion</h1>";
+        return false;
     }
-  }
+}
 
     static function editar($tipoFichas) {
         $ct = getCon();
         if ($ct != null) {
             $sentencia = $ct->prepare(self::$UPDATE);
             $res = $sentencia->execute([
-                'id' => tipoFichas->id,
-                'tipoFicha' => tipoFichas->tipoFicha,
-                'descripcion' => tipoFichas->descripcion,
+                'id' => $tipoFichas->id,
+                'tipoFicha' => $tipoFichas->tipoFicha,
+                'descripcion' => $tipoFichas->descripcion,
             ]);
             if ($res != null) {
                 echo "<h1>Editamos correctamente</h1>";
@@ -133,5 +137,23 @@ abstract class TipoFichaBD{
   ORDER BY
   tipo_ficha;
   ';
+
+  public static $INSERT = '
+    INSERT INTO public."TipoFicha"(
+      id_tipo_ficha, tipo_ficha, tipo_ficha_descripcion)
+    VALUES(:id, :tipoFicha, :descripcion)';
+
+    public static $UPDATE = '
+    UPDATE public."TipoFicha"
+    SET id_tipo_ficha = :id,
+    tipo_ficha = :tipoFicha,
+    tipo_ficha_descripcion = :descripcion,
+    WHERE id_tipo_ficha = :id;';
+
+    public static $DELETE = '
+    UPDATE public."TipoFicha"
+    SET tipo_ficha_activo = false
+    WHERE id_tipo_ficha = :id;
+    ';
 }
 ?>
