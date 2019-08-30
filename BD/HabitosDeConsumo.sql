@@ -4,27 +4,27 @@ INSERT INTO public."PreguntasFicha"(
 VALUES
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Habitos de consumo'),
+  WHERE seccion_ficha_nombre = 'Hábitos de Consumo'),
    '¿Alguien en el hogar compra vestimenta en centros comerciales?',
 'Compra de vestimenta.'),
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Habitos de consumo'),
+  WHERE seccion_ficha_nombre = 'Hábitos de Consumo'),
   '¿En el hogar alguien ha usado internet en los últimos 6 meses?',
 'Uso de internet en el hogar.'),
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Habitos de consumo'),
+  WHERE seccion_ficha_nombre = 'Hábitos de Consumo'),
   '¿En el hogar alguien utiliza correo electrónico que no es del trabajo?',
 'Uso de correo electrónico en el hogar.'),
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Habitos de consumo'),
+  WHERE seccion_ficha_nombre = 'Hábitos de Consumo'),
   '¿En el hogar alguien esta registrado en una red social?',
 'Registro red social.'),
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Habitos de consumo'),
+  WHERE seccion_ficha_nombre = 'Hábitos de Consumo'),
   'Exceptuando los libros de textos o manuales de estudio y lectura del trabajo ¿Alguien del hogar ha leído algún libro completo en los últimos 3 meses?',
 'Lectura de libro completo.');
 

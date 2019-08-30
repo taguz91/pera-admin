@@ -4,22 +4,22 @@ INSERT INTO public."PreguntasFicha"(
 VALUES
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Acceso a tecnologia'),
+  WHERE seccion_ficha_nombre = 'Acceso a Tecnología'),
     '¿Tiene este hogar servicio de internet?',
 'Si/No'),
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Acceso a tecnologia'),
+  WHERE seccion_ficha_nombre = 'Acceso a Tecnología'),
   '¿Tiene computadora de escritorio?',
 'Si/No'),
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Acceso a tecnologia'),
+  WHERE seccion_ficha_nombre = 'Acceso a Tecnología'),
   '¿Tiene computadora portátil?',
 'Si/No'),
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Acceso a tecnologia'),
+  WHERE seccion_ficha_nombre = 'Acceso a Tecnología'),
   '¿Cuántos celulares activados tienen en este hogar?',
 'Número de celulares que posee');
 

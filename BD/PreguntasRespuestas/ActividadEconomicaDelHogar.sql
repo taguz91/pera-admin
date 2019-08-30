@@ -2,10 +2,10 @@ INSERT INTO public."PreguntasFicha"(
   id_seccion_ficha, pregunta_ficha,
   pregunta_ficha_ayuda)
 VALUES
-((select id_seccion_ficha from public."SeccionesFicha" where seccion_ficha_nombre='Actividad economica del hogar'), '¿Alguien en el hogar está afiliado o cubierto por el  seguro del IESS (general, voluntario o campesino) y/o seguro del ISSFA o ISSPOL?','Seguro Del IESS.'),
-((select id_seccion_ficha from public."SeccionesFicha" where seccion_ficha_nombre='Actividad economica del hogar'), '¿Alguien en el hogar tiene seguro de salud privada con  hospitalización, seguro de salud privada sin hospitalización, seguro internacional, seguros municipales y de Consejos Provinciales y/o seguro de vida?',
+((select id_seccion_ficha from public."SeccionesFicha" where seccion_ficha_nombre='Actividad Económica del Hogar'), '¿Alguien en el hogar está afiliado o cubierto por el  seguro del IESS (general, voluntario o campesino) y/o seguro del ISSFA o ISSPOL?','Seguro Del IESS.'),
+((select id_seccion_ficha from public."SeccionesFicha" where seccion_ficha_nombre='Actividad Económica del Hogar'), '¿Alguien en el hogar tiene seguro de salud privada con  hospitalización, seguro de salud privada sin hospitalización, seguro internacional, seguros municipales y de Consejos Provinciales y/o seguro de vida?',
 'Seguro privado'),
-((select id_seccion_ficha from public."SeccionesFicha" where seccion_ficha_nombre='Actividad economica del hogar'), '¿Cuál es la ocupación del Jefe del hogar?',
+((select id_seccion_ficha from public."SeccionesFicha" where seccion_ficha_nombre='Actividad Económica del Hogar'), '¿Cuál es la ocupación del Jefe del hogar?',
 'Ocupación del jefe del hogar');
 
 

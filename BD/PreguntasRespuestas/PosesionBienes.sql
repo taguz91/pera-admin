@@ -5,41 +5,41 @@ INSERT INTO public."PreguntasFicha"(
 VALUES
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Posesión de bienes'),
+  WHERE seccion_ficha_nombre = 'Posesión de Bienes'),
    '¿Tiene este hogar servicio de teléfono convencional?',
 'Sí / No'),
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Posesión de bienes'),
+  WHERE seccion_ficha_nombre = 'Posesión de Bienes'),
   '¿Tiene cocina con horno?',
 'Sí / No'),
-( 
+(
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Posesión de bienes'), 
+  WHERE seccion_ficha_nombre = 'Posesión de Bienes'),
   '¿Tiene refrigeradora?',
 'Sí / No'),
 
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Posesión de bienes'),
+  WHERE seccion_ficha_nombre = 'Posesión de Bienes'),
   '¿Tiene lavadora?',
 'Sí / No'),
 
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Posesión de bienes'),
+  WHERE seccion_ficha_nombre = 'Posesión de Bienes'),
   '¿Tiene equipo de sonido?',
 'Sí / No'),
 
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Posesión de bienes'),
+  WHERE seccion_ficha_nombre = 'Posesión de Bienes'),
   '¿Cuántos TV a color tienen en este hogar?',
 'Pertenencia de TVs'),
 
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Posesión de bienes'),
+  WHERE seccion_ficha_nombre = 'Posesión de Bienes'),
   '¿Cuántos vehículos de uso exclusivo tiene este hogar?',
 'Pertenencia de vehículos');
 
@@ -122,4 +122,3 @@ VALUES
   WHERE pregunta_ficha = '¿Cuántos vehículos de uso exclusivo tiene este hogar?'),
   'Tiene 3 ó más vehículos exclusivos', 15)
   ;
-

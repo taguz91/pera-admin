@@ -97,7 +97,7 @@ CREATE TABLE "AlumnoRespuestaLibreFS" (
   id_almn_respuesta_libre_fs serial NOT NULL,
   id_persona_ficha int NOT NULL,
   id_pregunta_ficha int NOT NULL,
-  alumno_fs_libre int DEFAULT '0',
+  alumno_fs_libre character varying(255) DEFAULT '',
   alumno_fs_fecha_ingreso TIMESTAMP DEFAULT now(),
   alumno_fs_activo boolean DEFAULT 'true',
   CONSTRAINT almn_respuesta_libre_fs PRIMARY KEY ("id_almn_respuesta_libre_fs")

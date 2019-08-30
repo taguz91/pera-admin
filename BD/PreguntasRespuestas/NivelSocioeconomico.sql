@@ -4,7 +4,7 @@ INSERT INTO public."PreguntasFicha"(
 VALUES
 (
   (SELECT id_seccion_ficha FROM public."SeccionesFicha"
-  WHERE seccion_ficha_nombre = 'Nivel de educacion'),
+  WHERE seccion_ficha_nombre = 'Nivel de Educación'),
    '¿Cual es el nivel de instruccion del jefe del hogar?',
 'Nivel de intruccion jefe hogar');
 
