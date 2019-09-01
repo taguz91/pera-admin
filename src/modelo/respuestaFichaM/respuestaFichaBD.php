@@ -20,7 +20,7 @@ abstract class RespuestaFichaBD
         $pst=getCon()->prepare('SELECT id_respuesta_ficha, id_pregunta_ficha, respuesta_ficha, respuesta_ficha_puntaje, respuesta_ficha_activa
                                     FROM "RespuestaFicha"
                                     WHERE respuesta_ficha_activa=true AND id_pregunta_ficha=?  
-                                    ORDER BY id_pregunta_ficha');
+                                    ORDER BY id_respuesta_ficha');
         $pst->execute(array($key));
         return $pst->fetchAll();
     }
