@@ -1,5 +1,6 @@
-<br><br>
-
+<?php
+require 'src/vista/templates/header.php';
+ ?>
 <div class="container my-5">
 
    <div class="col-md-8 col-lg-6 mx-auto border rounded">
@@ -73,3 +74,8 @@
 
    </div>
  </div>
+
+
+ <?php
+ require 'src/vista/templates/footer.php';
+ ?>

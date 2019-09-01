@@ -25,6 +25,16 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
 
+            <!--PERSONA FICHA-->
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Personas Ficha </a>
+              <div class="dropdown-menu">
+                <a href="<?php echo constant('URL'); ?>personaficha" class="dropdown-item">Listar</a>
+                <a href="<?php echo constant('URL'); ?>personaficha/guardar" class="dropdown-item">Ingresar</a>
+              </div>
+            </li>
+            <!--/PERSONA FICHA-->
+
             <!--GRUPO SOCIOECONOMICO-->
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Grupo Socioeconomico </a>

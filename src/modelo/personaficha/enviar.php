@@ -3,7 +3,7 @@
 use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
-require 'public/PhpMailer/vendor/autoload.php';
+require 'vendor/autoload.php';
 
 class EnviarCorreo
 {
@@ -33,7 +33,7 @@ class EnviarCorreo
                 // Content
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = 'Ficha Socioeconómica';
-                $mail->Body    = "<h1> Ficha Socioeconímica </h1> \n 
+                $mail->Body    = "<h1> Ficha Socioeconímica </h1> \n
             El motivo de este mensaje es comunicarle sobre el llenado de la Ficha Socioeconómica \n
             El cual lo deberá hacer con su <strong>Usuario</strong> y <strong>Contraseña</strong> \n
             Usuario: Su cédula correspondiente \n
@@ -53,7 +53,7 @@ class EnviarCorreo
         } else{
             return false;
         }
-        
+
     }
 
     static function enviarEditar($correo, $pass){
@@ -79,7 +79,7 @@ class EnviarCorreo
                 // Content
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = 'Ficha Socioeconómica';
-                $mail->Body    = "<h1> Ficha Socioeconímica </h1> \n 
+                $mail->Body    = "<h1> Ficha Socioeconímica </h1> \n
             El motivo de este mensaje es comunicarle sobre el llenado de la Ficha Socioeconómica \n
             El cual lo deberá hacer con su <strong>Usuario</strong> y <strong>Contraseña</strong> \n
             Usuario: Su cédula correspondiente \n
@@ -90,10 +90,10 @@ class EnviarCorreo
                 //echo 'El mensaje ha sido enviado';
                 echo "El correo ha sido enviado";
                 $num++;
-             
+
             } catch (Exception $e) {
                 echo "El mensaje no pudo ser enviado: {$mail->ErrorInfo}";
-              
+
             }
             if($num == 1){
                 return true;
