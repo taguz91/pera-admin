@@ -29,7 +29,7 @@ require 'src/vista/templates/header.php';
      </div>
 
      <div class="col-sm-2">
-       <a href="<?php echo constant('URL'); ?>permisoficha/guardar"
+       <a href="<?php echo constant('URL'); ?>gruposocioeconomico/guardar"
        class="btn btn-success btn-block">Ingresar</a>
      </div>
 
@@ -64,7 +64,7 @@ require 'src/vista/templates/header.php';
              echo "</tr>";
            }
          }else{
-           Errores::errorBuscar("No encontramos a esos grupos socieconómicos");
+           Errores::errorBuscar("No encontramos grupos socieconómicos");
          }
           ?>
 

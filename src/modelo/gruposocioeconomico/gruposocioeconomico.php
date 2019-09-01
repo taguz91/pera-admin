@@ -1,6 +1,6 @@
 <?php
 
-class GrupoSocioEconomicoMD(){
+class GrupoSocioEconomicoMD{
 
 public $id;
 public $idTipoFicha;

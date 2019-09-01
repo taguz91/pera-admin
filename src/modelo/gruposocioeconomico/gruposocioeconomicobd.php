@@ -1,5 +1,5 @@
-<?php 
-require_once("src/modelo/gruposocioeconomico/gruposocioeconomico.php ");
+<?php
+require_once "src/modelo/gruposocioeconomico/gruposocioeconomico.php";
 
 abstract class GrupoSocioEconomicoBD {
 
@@ -80,7 +80,7 @@ abstract class GrupoSocioEconomicoBD {
         WHERE gS.id_tipo_ficha=tF.id_tipo_ficha
         AND gS.grupo_socioeconomico_activo=true
         AND id_grupo_socioeconomico = '.$id.';';
-  
+
         $ct = getCon();
         if ($ct != null) {
             $res = $ct->query($sql);
@@ -92,7 +92,7 @@ abstract class GrupoSocioEconomicoBD {
                   $pi->grupoSocioeconomico = $r['grupo_socioeconomico'];
                   $pi->fechaInicio = $r['puntaje_minimo'];
                   $pi->fechaFin = $r['puntaje_maximo'];
-  
+
                 }
                 return $pi;
             }else{
@@ -101,7 +101,7 @@ abstract class GrupoSocioEconomicoBD {
         }
       }
 
-      
+
     static function getAll() {
         $sql = self::$BASEQUERY.' '.self::$ENDQUERY;
         $ct = getCon();
@@ -185,7 +185,7 @@ abstract class GrupoSocioEconomicoBD {
     VALUES(:idTipoFicha, :grupoSocioecomomo, :puntajeMinimo, :puntajeMaximo )
     ';
 
-   
+
     public static $UPDATE = '
     UPDATE public."GrupoSocioeconomico"
     SET id_tipo_ficha = :idTipoFicha,
