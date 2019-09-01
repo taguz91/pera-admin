@@ -1,7 +1,6 @@
 
 <script type="text/javascript">
     
- 
     $(document).ready(function(){
       $('.actualizarBtn').on('click',function(){
         $('#actualizarSeccion').modal('show');
@@ -9,11 +8,9 @@
           var contador_a=0;
           
           var datos_a1 = $tr_a.children("th").map(function(){
-            
-          
+              
              return $(this).text();
-          
-  
+        
           }).get();
   
           var datos_a2 = $tr_a.children("td").map(function(){
@@ -31,8 +28,7 @@
           $('#nombreSeccionA').val(datos_a[2]);
           $('#idSeccionA').val(datos_a[0]);
           $('#listaTiposActualizar').val(datos_a[3]);
-          
-         
+              
       });
     }
     );
@@ -74,10 +70,8 @@
       });
     }
     );
-  
-  
+   
   </script>
-  
   
   <script type="text/javascript">
   
@@ -111,7 +105,6 @@
   
   </script>
      
-  
   <script type="text/javascript">
       
           var selAc = document.getElementById("listaTiposActualizar"); 
@@ -127,7 +120,6 @@
           }
   
   </script>
-  
   
   <script type="text/javascript">
       

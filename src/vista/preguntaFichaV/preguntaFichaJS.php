@@ -1,50 +1,13 @@
-<script type="text/javascript">
-
-    $(document).ready(function(){
-      $('.actualizarBtn').on('click',function(){
-        $('#actualizarPregunta').modal('show');
-          $tr_a = $(this).closest('tr');
-          var contador_a=0;
-
-          var datos_a1 = $tr_a.children("th").map(function(){
-
-
-             return $(this).text();
-
-
-          }).get();
-
-          var datos_a2 = $tr_a.children("td").map(function(){
-            contador_a++;
-            if(contador_a<4){
-             return $(this).text();
-            }
-
-          }).get();
-
-          var datos_a =datos_a1.concat(datos_a2)
-
-          console.log(datos_a);
-
-          $('#preguntaA').val(datos_a[2]);
-          $('#idPreguntaA').val(datos_a[0]);
-          $('#listaSeccionesActualizar').val(datos_a[3]);
-
-
-      });
-    }
-    );
-  </script>
-
-  <script>
+ <script>
 
   var bar=false;
   var x=1;
-  document.getElementById("tipoPregunta").addEventListener("change", generarRespuestas);
-  
+  document.getElementById("tipoRespuesta").addEventListener("change", generarRespuestas);
+
 
   function generarRespuestas(){
     
+
     if (document.getElementById("respuestasMenu")){
 
       document.getElementById("respuestasMenu").innerHTML="";
@@ -55,14 +18,12 @@
     if (document.getElementById("respuestas")){
 
       document.getElementById("respuestas").innerHTML="";
-      
+
     }
-    
-    console.log(document.getElementById("tipoPregunta").value) ;
 
-    if (document.getElementById("tipoPregunta").value!=1 ) {
+    console.log(document.getElementById("tipoRespuesta").value) ;
 
-    
+    if (document.getElementById("tipoRespuesta").value!=1 ) {
 
         if (!bar){
               var div0 = document.createElement("div");
@@ -71,7 +32,7 @@
               var lbl = document.createElement("label");
 
               div0.setAttribute("class", "btn-group float-right");
-              
+
               btn1.setAttribute("class", "btn btn-outline-info waves-effect" );
               btn2.setAttribute("class", "btn btn-outline-danger waves-effect");
               lbl.setAttribute("for", "listaRespuestas");
@@ -87,7 +48,7 @@
               div0.appendChild(lbl);
               div0.appendChild(btn1);
               div0.appendChild(btn2);
-              
+
               var cont = document.getElementById("respuestasMenu");
               cont.appendChild(lbl);
               cont.appendChild(div0);
@@ -96,26 +57,19 @@
           }
 
     }
-            
-    
+
+
       if (bar){
 
         document.getElementById("crearRespuesta").addEventListener("click", crearRespuesta);
         document.getElementById("eliminarRespuesta").addEventListener("click", eliminarRespuesta);
-     
+
     }
 
 
-  
-
-
-
-
   function crearRespuesta() {
-    
-    console.log(x);
 
-   
+    console.log(x);
 
     var div1 = document.createElement("div");
     var div2 = document.createElement("div");
@@ -123,91 +77,222 @@
     var tpp = document.createElement("input");
     div1.setAttribute("class", "input-group mb-3");
     div2.setAttribute("class", "input-group-prepend");
-    div3.setAttribute("class", "input-group-text");
-    tpp.setAttribute("id","respuesta"+x);
-    tpp.setAttribute("onclick","return false");
-   
+    div3.setAttribute("class", "input-group-text ");
 
-    if (document.getElementById("tipoPregunta").value==3){
-      
-      
+    tpp.setAttribute("onclick","return false");
+
+
+    if (document.getElementById("tipoRespuesta").value==3){
+
+
       tpp.setAttribute("type","radio");
-      
+
     }else{
-      
+
 
       tpp.setAttribute("type","checkbox");
-     
+
     }
-    
-    tpp.setAttribute("id","respuesta"+x);
+
+
     tpp.setAttribute("onclick","return false");
 
     var input = document.createElement("input");
     var peso = document.createElement("input");
 
 
-    input.setAttribute("class", "form-control")
+    input.setAttribute("class", "form-control col-lg-10")
     input.setAttribute("type", "text")
-            
-            
-    peso.setAttribute("class", "form-control")
-    peso.setAttribute("type", "number")              
+    input.setAttribute("id","respuesta"+x);
+    input.setAttribute("name","respuesta"+x);
+
+
+    peso.setAttribute("class", "form-control col-lg-2")
+    peso.setAttribute("type", "number")
     peso.setAttribute("id","peso"+x);
-
-            
-
-  
+    peso.setAttribute("name","peso"+x);
+    peso.setAttribute("value",1);
 
     div1.appendChild(div2);
     div2.appendChild(div3);
-            
+
 
     div3.appendChild(tpp);
-
-          
     div1.appendChild(input);
     div1.appendChild(peso);
 
     var cont = document.getElementById("respuestas");
-            
+
     cont.appendChild(div1);
 
     x=x+1;
     console.log(x);
-
-
-
-
   }
 
   function eliminarRespuesta() {
 
     var res=document.getElementById("respuestas");
 
-    if (res.childElementCount>0){
+    if (res.childElementCount>2){
       res.removeChild(res.lastChild);
+      x=x-1;
     }
-    
+
   }
-
-
 
 }
 
+</script>
+
+<script>
+
+  var bar=false;
+  var x=1;
+  
+  document.getElementById("tipoRespuestaA").addEventListener("change", generarRespuestasA);
+
+  function generarRespuestasA(){
+   
+    if (document.getElementById("respuestasMenuA")){
+
+      document.getElementById("respuestasMenuA").innerHTML="";
+      bar=false;
+    }
+
+    if (document.getElementById("respuestasA")){
+
+      document.getElementById("respuestasA").innerHTML="";
+
+    }
+
+    console.log(document.getElementById("tipoRespuestaA").value) ;
+
+    if (document.getElementById("tipoRespuestaA").value!=1 ) {
+
+        if (!bar){
+              var div0 = document.createElement("div");
+              var btn1 = document.createElement("button");
+              var btn2 = document.createElement("button");
+              var lbl = document.createElement("label");
+
+              div0.setAttribute("class", "btn-group float-right");
+
+              btn1.setAttribute("class", "btn btn-outline-info waves-effect" );
+              btn2.setAttribute("class", "btn btn-outline-danger waves-effect");
+              lbl.setAttribute("for", "listaRespuestasA");
+
+              btn1.setAttribute("type", "button" );
+              btn1.setAttribute("id", "crearRespuestaA" );
+              btn1.innerHTML="Agregar";
+              btn2.setAttribute("type", "button");
+              btn2.setAttribute("id", "eliminarRespuestaA" );
+              btn2.innerHTML="Quitar";
+              lbl.innerHTML="Respuesta | Puntaje:"
+
+              div0.appendChild(lbl);
+              div0.appendChild(btn1);
+              div0.appendChild(btn2);
+
+              var cont = document.getElementById("respuestasMenuA");
+              cont.appendChild(lbl);
+              cont.appendChild(div0);
+
+              bar=true;
+          }
+
+    }
+
+      if (bar){
+
+        document.getElementById("crearRespuestaA").addEventListener("click", crearRespuestaA);
+        document.getElementById("eliminarRespuestaA").addEventListener("click", eliminarRespuestaA);
+
+    }
 
 
+  function crearRespuestaA() {
+
+    console.log(x);
+
+    var div1 = document.createElement("div");
+    var div2 = document.createElement("div");
+    var div3 = document.createElement("div");
+    var tpp = document.createElement("input");
+    div1.setAttribute("class", "input-group mb-3");
+    div2.setAttribute("class", "input-group-prepend");
+    div3.setAttribute("class", "input-group-text ");
+
+    tpp.setAttribute("onclick","return false");
 
 
+    if (document.getElementById("tipoRespuestaA").value==3){
+
+
+      tpp.setAttribute("type","radio");
+
+    }else{
+
+
+      tpp.setAttribute("type","checkbox");
+
+    }
+
+    tpp.setAttribute("onclick","return false");
+
+    var input = document.createElement("input");
+    var peso = document.createElement("input");
+
+    input.setAttribute("class", "form-control col-lg-10")
+    input.setAttribute("type", "text")
+    input.setAttribute("id","respuesta"+x);
+    input.setAttribute("name","respuesta"+x);
+
+    peso.setAttribute("class", "form-control col-lg-2")
+    peso.setAttribute("type", "number")
+    peso.setAttribute("id","peso"+x);
+    peso.setAttribute("name","peso"+x);
+    peso.setAttribute("value",1);
+
+    div1.appendChild(div2);
+    div2.appendChild(div3);
+    div3.appendChild(tpp);
+    div1.appendChild(input);
+    div1.appendChild(peso);
+
+    var cont = document.getElementById("respuestasA");
+
+    cont.appendChild(div1);
+
+    x=x+1;
+    console.log(x);
+
+  }
+
+  function eliminarRespuestaA() {
+
+    var res=document.getElementById("respuestasA");
+
+    if (res.childElementCount>2){
+      res.removeChild(res.lastChild);
+      x=x-1;
+    }
+
+  }
+
+}
 
 </script>
 
 
 <script>
 
-document.getElementById("cancelar").addEventListener("click", quitarRespuestas);
+document.getElementById("cancelar").addEventListener("click", limpiar);
+document.getElementById("cancelarA").addEventListener("click", limpiar);
+document.getElementById("cancelarE").addEventListener("click", limpiar);
 
-function quitarRespuestas() {
+
+function limpiar() {
+
 
 var respuestasMenu=document.getElementById("respuestasMenu");
 
@@ -217,9 +302,192 @@ var respuestas=document.getElementById("respuestas");
 
 respuestas.innerHTML="";
 
-document.getElementById("tipoPregunta").value=1;
+var respuestasMenuA=document.getElementById("respuestasMenuA");
+
+respuestasMenuA.innerHTML="";
+
+var respuestasA=document.getElementById("respuestasA");
+
+respuestasA.innerHTML="";
+
+var respuestasA=document.getElementById("respuestasE");
+
+respuestasA.innerHTML="";
+
+document.getElementById("tipoRespuesta").value=1;
+document.getElementById("pregunta").value='';
+document.getElementById("ayudaPregunta").value='';
+document.getElementById("tipoPregunta").checked = false;
+document.getElementById("listaSeccionesInsertar").selectedIndex=0;
+console.log(document.cookie);
+// location.reload();
 
 }
 
+</script>
 
+
+<script type="text/javascript">
+
+    
+    $(document).ready(function(){
+      $('.actualizarBtnP').on('click',function(){
+        
+         var element= $(this)[0].parentElement.parentElement;
+        var id = $(element).attr('idQuiz');
+        var dataString ='id='+id;
+        console.log(id);
+        // document.cookie = 'idQuiz='+id;
+        $('#actualizarPregunta').modal('show');
+          
+
+          $tr_a = $(this).closest('tr');
+          var contador_a=0;
+
+          var datos_a1 = $tr_a.children("th").map(function(){
+
+             return $(this).text();
+
+          }).get();
+
+          var datos_a2 = $tr_a.children("td").map(function(){
+            contador_a++;
+            if(contador_a<7){
+             return $(this).text();
+            }
+
+          }).get();
+
+          var datos_a =datos_a1.concat(datos_a2)
+
+          console.log(datos_a);
+
+          $('#idPreguntaA').val(datos_a[0]);
+          $('#preguntaA').val(datos_a[2]);
+          $('textarea#ayudaPreguntaA').val(datos_a[3]);
+          $('#listaSeccionesActualizar').val(datos_a[4]);
+          $('select#tipoRespuestaA').val(datos_a[5]);
+
+          if(datos_a[6]=="1"){
+
+            $('#tipoPreguntaA').prop('checked', true);
+          }else{
+            $('#tipoPreguntaA').prop('checked', false);
+          }
+
+          
+      });
+    }
+    );
+  </script>
+
+<script type="text/javascript">
+
+    
+$(document).ready(function(){
+  $('.eliminarBtnP').on('click',function(){
+    
+     var element_e= $(this)[0].parentElement.parentElement;
+    var id_e = $(element_e).attr('idQuiz');
+    // var dataString ='id='+id_ed;
+    console.log(id_e);
+    // document.cookie = 'idQuiz='+id;
+    $('#eliminarPregunta').modal('show');
+      
+
+      $tr_e = $(this).closest('tr');
+      var contador_e=0;
+
+      var datos_e1 = $tr_e.children("th").map(function(){
+
+         return $(this).text();
+
+      }).get();
+
+      var datos_e2 = $tr_e.children("td").map(function(){
+        contador_e++;
+        if(contador_e<7){
+         return $(this).text();
+        }
+
+      }).get();
+
+      var datos_e =datos_e1.concat(datos_e2)
+
+      console.log(datos_e);
+
+      $('#idPreguntaE').val(datos_e[0]);
+      $('#preguntaE').val(datos_e[2]);
+      $('textarea#ayudaPreguntaE').val(datos_e[3]);
+      $('#listaSeccionesEliminar').val(datos_e[4]);
+      $('select#tipoRespuestaE').val(datos_e[5]);
+
+      if(datos_e[6]=="1"){
+
+        $('#tipoPreguntaE').prop('checked', true);
+      }else{
+        $('#tipoPreguntaE').prop('checked', false);
+      }
+
+      
+  });
+}
+);
+</script> 
+
+
+  <script>
+  $(document).ready(function(){
+      $('.actualizarBtnP').on('click',function(){
+      var element= $(this)[0].parentElement.parentElement;
+      var id = $(element).attr('idQuiz');
+      
+      console.log(id);
+     $.ajax({
+      type: 'post',
+      data: {ajax: 1,id_A: id},
+      success: function(response){
+        generarRespuestasA();
+       $('#respuestasA').append(response);
+      
+      },
+    
+     });
+    });
+  });
+  </script>
+
+<script>
+  $(document).ready(function(){
+      $('.eliminarBtnP').on('click',function(){
+      var element= $(this)[0].parentElement.parentElement;
+      var id = $(element).attr('idQuiz');
+      
+      console.log(id);
+     $.ajax({
+      type: 'post',
+      data: {ajax: 1,id_E: id},
+      success: function(response){
+       $('#respuestasE').append(response);
+      
+      },
+    
+     });
+    });
+  });
+  </script>
+
+<script type="text/javascript">
+  
+  var b = document.getElementById("busquedaP");
+
+  if (b){
+      b.addEventListener("keydown", function (e) {
+        if (String(b.value).trim() !="" && e.keyCode === 13) {  
+          window.location.href = "<?php echo constant('URL'); ?>preguntaFicha/buscar?key="+b.value;
+          
+        }
+    });
+  }
+  
 </script>
