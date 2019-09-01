@@ -8,7 +8,7 @@ class SeccionFichaMD{
     private $seccionFichaNombre;
     private $seccionFichaActiva;
 
-    function __construct(int $idSeccionFicha=null, int $idTipoFicha, string $seccionFichaNombre, bool $seccionFichaActiva=true)
+    function __construct(int $idSeccionFicha=null, int $idTipoFicha=null, string $seccionFichaNombre=null, bool $seccionFichaActiva=true)
     {
         if($idSeccionFicha!=null){
             
@@ -18,6 +18,10 @@ class SeccionFichaMD{
         $this->seccionFichaNombre=$seccionFichaNombre;
         $this->seccionFichaActiva=$seccionFichaActiva;
     }
+
+
+    
+    
 
     
     public function getIdSeccionFicha():int
@@ -73,3 +77,6 @@ class SeccionFichaMD{
         return $this;
     }
 }
+
+
+
