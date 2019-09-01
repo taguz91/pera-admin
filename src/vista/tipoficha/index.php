@@ -29,7 +29,7 @@ require 'src/vista/templates/header.php';
      </div>
 
      <div class="col-sm-2">
-       <a href="<?php echo constant('URL'); ?>permisoficha/guardar"
+       <a href="<?php echo constant('URL'); ?>tipoficha/guardar"
        class="btn btn-success btn-block">Ingresar</a>
      </div>
 

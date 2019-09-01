@@ -9,18 +9,19 @@ require 'src/vista/templates/header.php';
      <h3 class="text-center my-3">
        Ingreso de Permiso Ficha
      </h3>
-     <form class="form-horizontal" action="<?php echo constant('URL') . isset($tf) ? 'tipoFicha/editar' : 'tipoFicha/guardar'; ?>" method="post">
+     <form class="form-horizontal" action="<?php echo constant('URL') . 'tipoficha/editar'; ?>" method="post">
 
        <div class="form-group">
          <label for="">Nombre Ficha:</label>
-         <input type="text" class="form-control" name="nombreficha" value="<?php echo isset($tf->tipoFicha) ? $tf->tipoFicha : ''; ?>"
+         <input type="text" class="form-control" name="nombreficha"
+         value="<?php echo $tf->tipoFicha; ?>"
          placeholder="Ingrese el nombre de la ficha.">
        </div>
 
        <div class="form-group">
          <label for="">Descripcion:</label>
-         <textarea name="descripcionficha" class="form-control" rows="5" cols="5" value="<?php echo isset($tf->descripcion) ? $tf->descripcion : ''; ?>"
-         placeholder="Ingrese una breve descripcion de la ficha que creara."></textarea>
+         <textarea name="descripcionficha" class="form-control" rows="5" cols="5"
+         placeholder="Ingrese una breve descripcion de la ficha que creara."><?php echo $tf->descripcion; ?></textarea>
        </div>
 
        <div class="form-group">

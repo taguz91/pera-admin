@@ -121,7 +121,7 @@ abstract class TipoFichaBD{
       while($r = $res->fetch(PDO::FETCH_ASSOC)){
         $tf = new TipoFichaMD();
         $tf->id = $r['id_tipo_ficha'];
-        $tf->tipoficha = $r['tipo_ficha'];
+        $tf->tipoFicha = $r['tipo_ficha'];
         $tf->descripcion = $r['tipo_ficha_descripcion'];
       }
       return $tf;
@@ -133,7 +133,7 @@ abstract class TipoFichaBD{
     while($r = $res->fetch(PDO::FETCH_ASSOC)){
       $tf = new TipoFichaMD();
       $tf->id = $r['id_tipo_ficha'];
-      $tf->tipoficha = $r['tipo_ficha'];
+      $tf->tipoFicha = $r['tipo_ficha'];
       $tf->descripcion = $r['tipo_ficha_descripcion'];
 
       array_push($items, $tf);

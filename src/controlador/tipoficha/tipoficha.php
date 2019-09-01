@@ -15,10 +15,10 @@ class TipoFichaCTR extends CTR implements DCTR {
   function guardar() {
     $tf = $this->tipoFichaFromPOST();
     if($tf == null){
-      include $this->cargarVista('form.php');
+      include $this->cargarVista('guardar.php');
     } else {
-      //guardamos
-      $res = TipoFichaBD::guardar($tf);
+        var_dump($tf);
+      //$res = TipoFichaBD::guardar($tf);
     }
 
   }
@@ -26,7 +26,7 @@ class TipoFichaCTR extends CTR implements DCTR {
   function editar() {
     if(isset($_GET['editar'])){
       $tf = TipoFichaBD::getPorId($_GET['editar']);
-      include $this->cargarVista('form.php');
+      include $this->cargarVista('editar.php');
     } else {
       $tf = $this->tipoFichaFromPOST();
     }
@@ -45,10 +45,15 @@ class TipoFichaCTR extends CTR implements DCTR {
       isset($_POST['nombreficha']) &&
       isset($_POST['descripcionficha'])
     ){
-      $tf = new TipoFichaMD();
-      $tf->tipoFicha = $_POST['nombreficha'];
-      $tf->descripcion = $_POST['descripcionficha'];
-      return $tf;
+
+      $tipo = $_POST['nombreficha'];
+      $des = $_POST['descripcionficha'];
+      if($tipo != '' && $des != ''){
+        $tf = new TipoFichaMD();
+        $tf->tipoFicha = $tipo;
+        $tf->descripcion = $des;
+        return $tf;
+      }
     }
   }
 
