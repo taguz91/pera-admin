@@ -13,7 +13,7 @@
               <div class="form-group">
               <label for="tipoSeccion">Sección de la Pregunta:</label>
 
-                <select class="browser-default custom-select" id="listaSeccionesEliminar" name="seccionPregunta">
+                <select class="browser-default custom-select" id="listaSeccionesEliminar" name="seccionPregunta" disabled>
                 <?php
                 if (isset($seccionesFicha)) {
                     foreach ($seccionesFicha as $seccionFicha) {
@@ -28,17 +28,17 @@
 
               <div class="form-group">
               <label for="pregunta">Pregunta:</label>
-              <input type="text" class="form-control" id="preguntaE" name="pregunta" placeholder="Ingrese una pregunta...">
+              <input type="text" class="form-control" id="preguntaE" name="pregunta" placeholder="Ingrese una pregunta..." readonly>
               </div>
 
               <div class="form-group">
                 <label for="ayudaPregunta">Descripción para la Pregunta:</label>
-                <textarea class="form-control rounded-0" id="ayudaPreguntaE" name="ayudaPregunta" rows="3"></textarea>
+                <textarea class="form-control rounded-0" id="ayudaPreguntaE" name="ayudaPregunta" rows="3" readonly></textarea>
               </div>
 
               <div class="form-group">
                 <label for="tipoRespuesta">Tipo de Respuestas:</label>
-                <select class="browser-default custom-select" id="tipoRespuestaE" name="tipoRespuesta">
+                <select class="browser-default custom-select" id="tipoRespuestaE" name="tipoRespuesta" disabled>
                   <option value="1">Única</option>
                   <option value="2">Múltiple</option>
                   <option value="3">Libre Única</option>
@@ -59,7 +59,7 @@
              <div></div>
 
              <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input" id="tipoPreguntaE" name="tipoPregunta">
+                    <input type="checkbox" class="custom-control-input" id="tipoPreguntaE" name="tipoPregunta" disabled>
                     <label class="custom-control-label" for="tipoPreguntaA">Pregunta Obligatoria</label>
             </div>
 
