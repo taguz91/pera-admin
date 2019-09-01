@@ -25,6 +25,27 @@
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
 
+            <!--PERSONA FICHA-->
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Personas Ficha </a>
+              <div class="dropdown-menu">
+                <a href="<?php echo constant('URL'); ?>personaficha" class="dropdown-item">Listar</a>
+                <a href="<?php echo constant('URL'); ?>personaficha/guardar" class="dropdown-item">Ingresar</a>
+              </div>
+            </li>
+            <!--/PERSONA FICHA-->
+
+            <!--GRUPO SOCIOECONOMICO-->
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Grupo Socioeconomico </a>
+                <div class="dropdown-menu">
+                  <a href="<?php echo constant('URL'); ?>gruposocioeconomico" class="dropdown-item">Listar</a>
+                  <a href="<?php echo constant('URL'); ?>gruposocioeconomico/guardar" class="dropdown-item">Ingresar</a>
+                </div>
+              </li>
+              <!--/GRUPO SOCIOECONOMICO-->
+
+              <!--PERMISO INGRESO-->
               <li class="nav-item dropdown">
                 <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Permiso Ingreso</a>
                 <div class="dropdown-menu">
@@ -32,6 +53,17 @@
                   <a href="<?php echo constant('URL'); ?>permisoficha/guardar" class="dropdown-item">Ingresar</a>
                 </div>
               </li>
+              <!--/PERMISO INGRESO-->
+
+              <!--TIPO FICHA-->
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Tipo ficha </a>
+                <div class="dropdown-menu">
+                  <a href="<?php echo constant('URL'); ?>tipoficha" class="dropdown-item">Listar</a>
+                  <a href="<?php echo constant('URL'); ?>tipoficha/guardar" class="dropdown-item">Ingresar</a>
+                </div>
+              </li>
+              <!--/TIPO FICHA-->
 
               <li class="nav-item">
                   <a href="<?php echo constant('URL'); ?>permisoingreso" class="nav-link text-light">Fichas</a>

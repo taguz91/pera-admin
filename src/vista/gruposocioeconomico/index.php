@@ -14,7 +14,7 @@ require 'src/vista/templates/header.php';
           <label for="txtBuscar">Buscar:</label>
 
           <div class="input-group mx-md-2">
-            <input type="text" id="query" name="txtBuscar" class="form-control" placeholder="Ingreso lo que buscara">
+            <input type="text" id="query" name="txtBuscar" class="form-control" placeholder="Ingreso lo que buscará">
             <div class="input-group-append">
               <button type="button" name="button" class="btn btn-primary btn-sm">BU</button>
             </div>
@@ -29,7 +29,7 @@ require 'src/vista/templates/header.php';
      </div>
 
      <div class="col-sm-2">
-       <a href="<?php echo constant('URL'); ?>permisoficha/guardar"
+       <a href="<?php echo constant('URL'); ?>gruposocioeconomico/guardar"
        class="btn btn-success btn-block">Ingresar</a>
      </div>
 
@@ -40,30 +40,31 @@ require 'src/vista/templates/header.php';
        <thead class="thead-dark bg-ista-blue">
          <tr>
            <th scope="col">ID</th>
-           <th scope="col">IDPeriodo</th>
            <th scope="col">IDTipoFicha</th>
-           <th scope="col">Fecha Inicio</th>
-           <th scope="col">Fecha Fin</th>
+           <th scope="col">GrupoSocienomico</th>
+           <th scope="col">Puntaje Mínimo</th>
+           <th scope="col">Puntaje Máximo</th>
            <th scope="col">Editar</th>
            <th scope="col">Eliminar</th>
          </tr>
        </thead>
        <tbody>
+           <!-- Aquí tienes que cambiar los atributos de $pi correspondientes con los de tu clase -->
          <?php
-         if(isset($permisoingresos)){
-           foreach ($permisoingresos as $pi) {
+         if(isset($gruposocioeconomico)){
+           foreach ($gruposocioeconomico as $pi) {
              echo '<tr scope="row">';
              echo "<td>".$pi->id."</td>";
-             echo "<td>".$pi->idPeriodo."</td>";
              echo "<td>".$pi->idTipoFicha."</td>";
-             echo "<td>".$pi->fechaInicio."</td>";
-             echo "<td>".$pi->fechaFin."</td>";
-             echo '<td> <a href="'.constant('URL').'permisoficha/editar?id='.$pi->id.'">Editar</a> </td>';
-             echo '<td> <a href="'.constant('URL').'permisoficha/eliminar?id='.$pi->id.'">Eliminar</a> </td>';
+             echo "<td>".$pi->grupoSocionomico."</td>";
+             echo "<td>".$pi->puntajeMinimo."</td>";
+             echo "<td>".$pi->puntajeMaximo."</td>";
+             echo '<td> <a href="'.constant('URL').'gruposocioeconomico/editar?id='.$pi->id.'">Editar</a> </td>';
+             echo '<td> <a href="'.constant('URL').'gruposocioeconomico/eliminar?id='.$pi->id.'">Eliminar</a> </td>';
              echo "</tr>";
            }
          }else{
-           Errores::errorBuscar("No encontramos tipos de fichas");
+           Errores::errorBuscar("No encontramos grupos socieconómicos");
          }
           ?>
 

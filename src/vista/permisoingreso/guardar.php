@@ -85,8 +85,6 @@ require 'src/vista/templates/header.php';
  </div>
 
 
-
-
 <?php
 require 'src/vista/templates/footer.php';
 ?>
