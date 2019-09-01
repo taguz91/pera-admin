@@ -9,7 +9,6 @@ abstract class TipoFichaBD{
     if ($ct != null) {
         $sentencia = $ct->prepare(self::$INSERT);
         $res = $sentencia->execute([
-            'id' => $tipoFicha->id,
             'tipoFicha' => $tipoFicha->tipoFicha,
             'descripcion' => $tipoFicha->descripcion
         ]);
@@ -109,6 +108,26 @@ abstract class TipoFichaBD{
     }
   }
 
+  static function getPorId($idTipoFicha) {
+    $sql = self::$BASEQUERY
+    . ' AND id_tipo_ficha = :id ';
+    $ct = getCon();
+    if($ct != null){
+      $res = $ct->prepare($sql);
+      $res->execute([
+        'id' => $idTipoFicha
+      ]);
+      $tf = null;
+      while($r = $res->fetch(PDO::FETCH_ASSOC)){
+        $tf = new TipoFichaMD();
+        $tf->id = $r['id_tipo_ficha'];
+        $tf->tipoficha = $r['tipo_ficha'];
+        $tf->descripcion = $r['tipo_ficha_descripcion'];
+      }
+      return $tf;
+    }
+  }
+
   private static function obtenerParaTbl($res){
     $items = array();
     while($r = $res->fetch(PDO::FETCH_ASSOC)){
@@ -139,14 +158,13 @@ abstract class TipoFichaBD{
   ';
 
   public static $INSERT = '
-    INSERT INTO public."TipoFicha"(
-      id_tipo_ficha, tipo_ficha, tipo_ficha_descripcion)
-    VALUES(:id, :tipoFicha, :descripcion)';
+  INSERT INTO public."TipoFicha"(
+  tipo_ficha, tipo_ficha_descripcion)
+  VALUES(:tipoFicha, :descripcion)';
 
     public static $UPDATE = '
     UPDATE public."TipoFicha"
-    SET id_tipo_ficha = :id,
-    tipo_ficha = :tipoFicha,
+    SET tipo_ficha = :tipoFicha,
     tipo_ficha_descripcion = :descripcion,
     WHERE id_tipo_ficha = :id;';
 

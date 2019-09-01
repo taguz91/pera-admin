@@ -33,6 +33,14 @@
                 </div>
               </li>
 
+              <li class="nav-item dropdown">
+                <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Tipo ficha </a>
+                <div class="dropdown-menu">
+                  <a href="<?php echo constant('URL'); ?>tipoficha" class="dropdown-item">Listar</a>
+                  <a href="<?php echo constant('URL'); ?>tipoficha/guardar" class="dropdown-item">Ingresar</a>
+                </div>
+              </li>
+
               <li class="nav-item">
                   <a href="<?php echo constant('URL'); ?>permisoingreso" class="nav-link text-light">Fichas</a>
               </li>
