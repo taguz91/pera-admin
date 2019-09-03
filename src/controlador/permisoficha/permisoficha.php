@@ -21,6 +21,7 @@ class PermisoFichaCTR extends CTR implements DCTR {
   }
 
   public function guardar(){
+    //Validarrrr
     if(isset($_POST['guardar'])){
 
       if(
@@ -80,6 +81,12 @@ class PermisoFichaCTR extends CTR implements DCTR {
         isset($_POST['id'])
       ){
         //var_dump($_POST);
+        //Validamos que el perioo no sea nulo o '' 
+        //Validamos que las fechas sea fecha 
+        //Validamos que tengamos una id 
+        //Validamos que todos no tengan codigo HTML JS o SQL  
+        //XSS InyeccionSQL PHP 
+
 
         $pf = new PermisoIngresoMD();
         $pf->id = $_POST['id'];
@@ -118,4 +125,6 @@ class PermisoFichaCTR extends CTR implements DCTR {
   }
 }
 
+
  ?>
+
