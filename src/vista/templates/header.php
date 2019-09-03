@@ -6,8 +6,6 @@
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/main.css">
     <link rel="stylesheet" href="<?php echo constant('URL'); ?>public/css/bootstrap.css">
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-   
-  
   </head>
   <body>
 
@@ -27,6 +25,16 @@
 
       <div class="collapse navbar-collapse" id="navbarSupportedContent">
           <ul class="navbar-nav ml-auto">
+
+            <!--FORMULARIO -->
+            <li class="nav-item dropdown">
+              <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Formulario Ficha </a>
+              <div class="dropdown-menu">
+                <a href="<?php echo constant('URL'); ?>seccionficha" class="dropdown-item">Seccion Ficha</a>
+                <a href="<?php echo constant('URL'); ?>preguntaficha" class="dropdown-item">Preguntas Ficha</a>
+              </div>
+            </li>
+            <!--/FORMULARIO -->
 
             <!--PERSONA FICHA-->
             <li class="nav-item dropdown">
