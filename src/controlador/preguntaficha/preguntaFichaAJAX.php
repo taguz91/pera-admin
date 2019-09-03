@@ -1,13 +1,13 @@
 <?php
-require_once "src/modelo/respuestaFichaM/RespuestaFichaBD.php";
+require_once "src/modelo/respuestaFichaM/respuestaFichaBD.php";
 
 if( isset($_POST['ajax']) && isset($_POST['id_A']) ){
    $k= $_POST['id_A'];
-   
+
    $respuestas = RespuestaFichaBD::seleccionarRespuestaFicha((int) $k );
 
    if (isset($respuestas)) {
-      
+
         foreach ($respuestas as $respuesta) {
             echo "<div class='input-group mb-3'>
             <div class='input-group-prepend'>
@@ -24,11 +24,11 @@ if( isset($_POST['ajax']) && isset($_POST['id_A']) ){
 
 if( isset($_POST['ajax']) && isset($_POST['id_E']) ){
    $k= $_POST['id_E'];
-   
+
    $respuestas = RespuestaFichaBD::seleccionarRespuestaFicha((int) $k );
 
    if (isset($respuestas)) {
-      
+
         foreach ($respuestas as $respuesta) {
             echo "<div class='input-group mb-3'>
             <div class='input-group-prepend'>
@@ -42,5 +42,5 @@ if( isset($_POST['ajax']) && isset($_POST['id_E']) ){
     }
     exit;
    }
-      
+
 ?>
