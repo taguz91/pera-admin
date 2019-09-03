@@ -33,6 +33,8 @@ CREATE TABLE "PreguntasFicha" (
   -->
   --Actualizacion 8/8/2019
   pregunta_ficha_respuesta_tipo int DEFAULT '1',
+  --Actualizacion 3/09/2019
+  pregunta_ficha_respuesta_campo character varying(10) NOT NULL DEFAULT 'text',
   pregunta_ficha_tipo int DEFAULT '1',
   -->
   pregunta_ficha_activa BOOLEAN NOT NULL DEFAULT 'true',
