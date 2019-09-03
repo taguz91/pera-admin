@@ -1,6 +1,6 @@
 <?php
 declare (strict_types = 1);
-require_once 'src/modelo/respuestaFichaM/RespuestaFichaMD.php';
+require_once 'src/modelo/respuestaFichaM/respuestaFichaMD.php';
 
 abstract class RespuestaFichaBD
 {
@@ -19,7 +19,7 @@ abstract class RespuestaFichaBD
     static function seleccionarRespuestaFicha($key){
         $pst=getCon()->prepare('SELECT id_respuesta_ficha, id_pregunta_ficha, respuesta_ficha, respuesta_ficha_puntaje, respuesta_ficha_activa
                                     FROM "RespuestaFicha"
-                                    WHERE respuesta_ficha_activa=true AND id_pregunta_ficha=?  
+                                    WHERE respuesta_ficha_activa=true AND id_pregunta_ficha=?
                                     ORDER BY id_respuesta_ficha');
         $pst->execute(array($key));
         return $pst->fetchAll();
@@ -44,11 +44,11 @@ abstract class RespuestaFichaBD
                                 WHERE id_respuesta_ficha=?');
 
         return $pst->execute(array($respuesta->getIdRespuestaFicha()));
-  
+
     }
 
 
 
-        
+
 
 }
