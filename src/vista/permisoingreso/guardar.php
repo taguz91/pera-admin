@@ -15,8 +15,8 @@ require 'src/vista/templates/header.php';
          <label for="periodo"
          class="control-label"
          >Seleccione un periodo:</label>
-         <select class="form-control" name="periodo">
-           <option value="0">Periodos</option>
+         <select class="form-control" name="periodo" id="cmbPeriodos">
+           <option value="0" >Periodos</option>
 
            <?php
            //Cargamos todos los periodos de la base de datos
@@ -36,7 +36,7 @@ require 'src/vista/templates/header.php';
          class="control-label"
          >Seleccione un tipo de ficha</label>
          <select name="tipoficha"
-         class="form-control">
+         class="form-control" id="cmbFichas">
            <option value="0">Fichas</option>
            <?php
            //Cargamos todos los periodos de la base de datos
@@ -59,7 +59,7 @@ require 'src/vista/templates/header.php';
              class="control-label"
              >Fecha Inicio</label>
              <input type="date" name="fechaInicio" value=""
-             class="form-control">
+             class="form-control" id="inInicio">
            </div>
          </div>
 
@@ -69,14 +69,14 @@ require 'src/vista/templates/header.php';
              class="control-label"
              >Fecha Fin</label>
              <input type="date" name="fechaFin" value=""
-             class="form-control">
+             class="form-control" id="inFin">
            </div>
          </div>
        </div>
 
        <div class="form-group">
           <input class="btn btn-success btn-block"
-          type="submit" name="guardar" value="Guardar">
+          type="submit" name="guardar" value="Guardar" disabled id="btnGuardar">
        </div>
 
      </form>
@@ -88,3 +88,93 @@ require 'src/vista/templates/header.php';
 <?php
 require 'src/vista/templates/footer.php';
 ?>
+<script src="<?php echo constant('URL'); ?>public/js/jquery.js"></script>
+<script src="<?php echo constant('URL'); ?>public/js/popper.js"></script>
+<script src="<?php echo constant('URL'); ?>public/js/jquery.js"></script>
+
+<script>
+//Validamos 
+//Validamos campo periodos  
+//Validamos campo tipo de ficha  
+//Validamos fechas  
+// Fecha cieerre debe ser mayor a la de inicio
+console.log("VALIDACION GUARDA.PHP");
+
+var valPeriodos = false;
+var valFichas = false;
+var valFechas = false;
+
+
+
+
+
+$("#cmbPeriodos").change(function(event) {
+  const cmb = $(this)
+
+  if (cmb.val() == 0) {
+    cmb.val(1)
+    alert("SELECCIONE UN PERIODO")
+    valPeriodos = false;
+  } else {
+    valPeriodos = true;
+  }
+  if (valPeriodos && !valFichas && valFechas ) {
+    $("#btnGuardar").attr("disabled", false)
+  }
+  
+})
+
+$("#cmbFichas").change(function(event) {
+  const cmb = $(this)
+
+  if (cmb.val() == 0) {
+    cmb.val(1)
+    alert("SELECCIONE UNA FICHA")
+    valFichas = false;
+  } else{
+    valFichas = true;
+  } 
+  if (valPeriodos && !valFichas && valFechas ) {
+    $("#btnGuardar").attr("disabled", false)
+  }
+  
+})
+
+
+function validarFechas()  {
+  const fInicio = $("#inInicio").val()
+  const fFin = $("#inFin").val()
+
+  if (fFin != "") {
+    const fechaInicio = new Date(fInicio)
+    const fechaFin = new Date(fFin)
+    if (fechaInicio > fechaFin) {
+      console.log("FECHA INICIO ES MAYOR!!");
+      $(this).val("")
+      $("#inFin").val("")
+      alert("LA FECHA DE INICIO NO PUEDE SER MAYOR A LA FECHA DE FIN")
+      valFechas = false;
+    }else{
+      valFechas = true;
+    }
+    if (valPeriodos && !valFichas && valFechas ) {
+    $("#btnGuardar").attr("disabled", false)
+  }
+  }
+  
+}
+
+$("#inInicio").change(function(event){
+  validarFechas();
+})
+
+$("#inFin").change(function(event){
+  validarFechas();
+})
+
+
+
+
+
+
+</script>
