@@ -60,7 +60,7 @@
              <div></div>
 
              <div class="custom-control custom-switch">
-                    <input type="checkbox" class="custom-control-input"  id="tipoPregunta" name="tipoPregunta">
+                    <input type="checkbox" class="custom-control-input"  id="tipoPregunta" name="tipoPregunta" checked>
                     <label class="custom-control-label" for="tipoPregunta">Pregunta Obligatoria</label>
             </div>
 

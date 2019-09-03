@@ -15,7 +15,7 @@ require_once 'src/vista/preguntaFichaV/eliminar.php';
           <input class="form-control" type="text" placeholder="Buscar..." aria-label="Search" id="busquedaP" name="busqueda" value="<?php if(isset($key)){echo $key;} ?>" ></div>
         </div>
       <div class="col-sm-4"> 
-        <button type="button" class="btn btn-success insertarBtn" data-toggle='modal' data-target='#insertarPregunta'>Nuevo</button>
+        <button type="button" class="btn btn-success insertarBtn" data-toggle='modal' data-target='#insertarPregunta' id="insertarPregunta">Nuevo</button>
       </div>
     
     </div>

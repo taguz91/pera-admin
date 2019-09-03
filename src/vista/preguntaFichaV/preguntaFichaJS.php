@@ -1,8 +1,9 @@
  <script>
-
+  generarRespuestas();
   var bar=false;
   var x=1;
   document.getElementById("tipoRespuesta").addEventListener("change", generarRespuestas);
+ 
 
 
   function generarRespuestas(){
@@ -23,7 +24,7 @@
 
     console.log(document.getElementById("tipoRespuesta").value) ;
 
-    if (document.getElementById("tipoRespuesta").value!=1 ) {
+    if (document.getElementById("tipoRespuesta").value!=3 && document.getElementById("tipoRespuesta").value!=4  ) {
 
         if (!bar){
               var div0 = document.createElement("div");
@@ -82,7 +83,7 @@
     tpp.setAttribute("onclick","return false");
 
 
-    if (document.getElementById("tipoRespuesta").value==3){
+    if (document.getElementById("tipoRespuesta").value==1){
 
 
       tpp.setAttribute("type","radio");
@@ -167,7 +168,7 @@
 
     console.log(document.getElementById("tipoRespuestaA").value) ;
 
-    if (document.getElementById("tipoRespuestaA").value!=1 ) {
+    if (document.getElementById("tipoRespuesta").value!=3 && document.getElementById("tipoRespuesta").value!=4) {
 
         if (!bar){
               var div0 = document.createElement("div");
@@ -225,7 +226,7 @@
     tpp.setAttribute("onclick","return false");
 
 
-    if (document.getElementById("tipoRespuestaA").value==3){
+    if (document.getElementById("tipoRespuestaA").value==1){
 
 
       tpp.setAttribute("type","radio");
@@ -317,8 +318,9 @@ respuestasA.innerHTML="";
 document.getElementById("tipoRespuesta").value=1;
 document.getElementById("pregunta").value='';
 document.getElementById("ayudaPregunta").value='';
-document.getElementById("tipoPregunta").checked = false;
+document.getElementById("tipoPregunta").checked = true;
 document.getElementById("listaSeccionesInsertar").selectedIndex=0;
+generarRespuestas();
 console.log(document.cookie);
 // location.reload();
 

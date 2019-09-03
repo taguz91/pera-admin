@@ -38,7 +38,7 @@
 
               <div class="form-group">
                 <label for="tipoRespuesta">Tipo de Respuestas:</label>
-                <select class="browser-default custom-select" id="tipoRespuestaE" name="tipoRespuesta" disabled>
+                <select class="browser-default custom-select" id="tipoRespuestaE" name="tipoRespuesta"  disabled>
                   <option value="1">Única</option>
                   <option value="2">Múltiple</option>
                   <option value="3">Libre Única</option>
