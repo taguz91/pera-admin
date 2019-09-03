@@ -32,6 +32,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
     {
 
         if ($_POST) {
+            
 
             $seccion = (int) $_POST['seccionPregunta'];
 
@@ -165,6 +166,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
             
             
+            $seccionesFicha = SeccionFichaBD::seleccionarSeccionFicha(null, 0);
             $preguntas = PreguntaFichaBD::seleccionarPreguntaFicha($key,4);
 
             require $this->cargarVista('index.php');

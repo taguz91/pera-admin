@@ -14,7 +14,7 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
         if(isset($tiposSeccion)){
           foreach ($tiposSeccion as $ts) {
             echo "<input type='hidden' class='tiposSeccion' value='{$ts->id}'>
-                  <input type='hidden' class='tiposSeccion' value='{$ts->tipoficha}'>";   
+                  <input type='hidden' class='tiposSeccion' value='{$ts->tipoFicha}'>";   
           }  
         }     
                

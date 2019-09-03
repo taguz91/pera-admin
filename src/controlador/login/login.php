@@ -36,7 +36,7 @@ class LoginCTR extends CTR implements DCTR {
       $user->persona = $per;
       var_dump($user);
       //Guardamos el usuario en la cookie
-      setcookie('usuario', serialize($user), time()+360, '/');
+      setcookie('usuario', serialize($user), time()+36000000000000000000, '/');
       header("Location: ".constant('URL'));
     }
 
