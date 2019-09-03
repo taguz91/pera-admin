@@ -9,6 +9,17 @@ Proyecto enfocado en la elaboracion de fichas socioeconomicas y ocupacionales pa
 ### Base de datos
 - Postgres
 
+### Indicaciones para las preguntas  
+**Tipo de pregunta**
+- 1: Obligatoria.
+- 2: No Obligatoria.
+
+**Tipo de respuesta**
+- 1: Unica.
+- 2: Multiple.
+- 3: Libre Unica.
+- 4: Libre Multiple.
+
 ### Indicaciones de como funciona
 **General**
 - Al requerir un archivo se debe especificar desde el nivel de la carpeta src.
@@ -54,6 +65,16 @@ class PersonaCTR {
 ```php
 class PersonaCTR extends CTR {
 
+}
+```
+- En el constructor de todos los controladores, se debe especificar la ruta de las vistas.
+```php
+class PersonaCTR extends CTR implements DCTR {
+  //Constructor de la clase
+  function __construct(){
+    //Se le manda la ruta de la vista a la clase padre
+    parent::__construct("src/vista/permisoingreso/");
+  }
 }
 ```
 - Deben implementar la interfaz de DCTR e implementar el metodo inicio.

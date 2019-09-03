@@ -10,8 +10,8 @@ CREATE TABLE "GrupoSocioeconomico" (
   id_grupo_socioeconomico serial NOT NULL,
   id_tipo_ficha int NOT NULL,
   grupo_socioeconomico character varying(50),
-  puntaje_minimo numeric(5, 2),
-  puntaje_maximo numeric(5, 2),
+  puntaje_minimo numeric(8, 2),
+  puntaje_maximo numeric(8, 2),
   grupo_socioeconomico_activo boolean DEFAULT 'true',
   CONSTRAINT grupo_socioeconomico_pk PRIMARY KEY ("id_grupo_socioeconomico")
 ) WITH (OIDS = FALSE);
@@ -20,7 +20,7 @@ CREATE TABLE "SeccionesFicha" (
   id_seccion_ficha serial NOT NULL,
   id_tipo_ficha int NOT NULL,
   seccion_ficha_nombre character varying(255),
-  seccion_ficha_activa boolean,
+  seccion_ficha_activa boolean DEFAULT 'true',
   CONSTRAINT seccion_ficha_pk PRIMARY KEY ("id_seccion_ficha")
 ) WITH (OIDS = FALSE);
 
@@ -30,6 +30,10 @@ CREATE TABLE "PreguntasFicha" (
   pregunta_ficha character varying(255) NOT NULL,
   --Actualizacion 12/7/2019
   pregunta_ficha_ayuda TEXT NOT NULL DEFAULT 'Sin ayuda',
+  -->
+  --Actualizacion 8/8/2019
+  pregunta_ficha_respuesta_tipo int DEFAULT '1',
+  pregunta_ficha_tipo int DEFAULT '1',
   -->
   pregunta_ficha_activa BOOLEAN NOT NULL DEFAULT 'true',
   CONSTRAINT pregunta_ficha_pk PRIMARY KEY ("id_pregunta_ficha")
@@ -48,8 +52,8 @@ CREATE TABLE "PermisoIngresoFichas" (
   id_permiso_ingreso_ficha serial NOT NULL,
   id_prd_lectivo int NOT NULL,
   id_tipo_ficha int NOT NULL,
-  permiso_ingreso_fecha_inicio date NOT NULL,
-  permiso_ingreso_fecha_fin date NOT NULL,
+  permiso_ingreso_fecha_inicio TIMESTAMP NOT NULL,
+  permiso_ingreso_fecha_fin TIMESTAMP NOT NULL,
   permiso_ingreso_activo BOOLEAN DEFAULT 'true',
   CONSTRAINT permiso_ingreso_ficha_pk PRIMARY KEY ("id_permiso_ingreso_ficha")
 ) WITH (OIDS = FALSE);
@@ -59,8 +63,9 @@ CREATE TABLE "PersonaFicha" (
   id_permiso_ingreso_ficha int NOT NULL,
   id_persona int NOT NULL,
   persona_ficha_clave bytea NOT NULL,
-  persona_ficha_fecha_ingreso date,
-  persona_ficha_fecha_modificacion date,
+  persona_ficha_fecha_ingreso TIMESTAMP,
+  persona_ficha_fecha_modificacion TIMESTAMP,
+  persona_ficha_finalizada BOOLEAN DEFAULT 'false',
   persona_ficha_activa BOOLEAN DEFAULT 'true',
   CONSTRAINT persona_ficha_pk PRIMARY KEY ("id_persona_ficha")
 ) WITH (OIDS = FALSE);
@@ -70,17 +75,19 @@ CREATE TABLE "DocenteRespuestaFO" (
   id_persona_ficha int NOT NULL,
   id_pregunta_ficha int NOT NULL,
   docente_fo_respuesta character varying(255) DEFAULT '',
-  docente_fo_fecha_ingreso DATE default now(),
-  docente_fo_activo BOOLEAN NOT NULL,
+  docente_fo_fecha_ingreso TIMESTAMP default now(),
+  docente_fo_activo BOOLEAN DEFAULT 'true',
   CONSTRAINT docente_respuesta_fo PRIMARY KEY ("id_docente_respuesta_fo")
 ) WITH (OIDS = FALSE);
 
 CREATE TABLE "AlumnoRespuestaFS" (
   id_almn_respuesta_fs serial NOT NULL,
   id_persona_ficha int NOT NULL,
-  id_respuesta_ficha int NOT NULL,
+  --Actualizacion 48/8/2019 Porque necesito la pregunta para guardar dinamicamente.
+  id_pregunta_ficha INT NOT NULL,
+  id_respuesta_ficha int,
   respuesta_almn_puntaje int DEFAULT '0',
-  respuesta_almn_fecha_ingreso date DEFAULT now(),
+  respuesta_almn_fecha_ingreso TIMESTAMP DEFAULT now(),
   respuesta_almn_activo boolean DEFAULT 'true',
   CONSTRAINT almn_respuesta_fs PRIMARY KEY ("id_almn_respuesta_fs")
 ) WITH (OIDS = FALSE);
@@ -90,8 +97,8 @@ CREATE TABLE "AlumnoRespuestaLibreFS" (
   id_almn_respuesta_libre_fs serial NOT NULL,
   id_persona_ficha int NOT NULL,
   id_pregunta_ficha int NOT NULL,
-  alumno_fs_libre int DEFAULT '0',
-  alumno_fs_fecha_ingreso date DEFAULT now(),
+  alumno_fs_libre character varying(255) DEFAULT '',
+  alumno_fs_fecha_ingreso TIMESTAMP DEFAULT now(),
   alumno_fs_activo boolean DEFAULT 'true',
   CONSTRAINT almn_respuesta_libre_fs PRIMARY KEY ("id_almn_respuesta_libre_fs")
 ) WITH (OIDS = FALSE);
@@ -160,6 +167,12 @@ ON DELETE CASCADE ON UPDATE CASCADE;
 ALTER TABLE "AlumnoRespuestaFS" ADD CONSTRAINT
 "respuesta_alumno_respuesta_fk"
 FOREIGN KEY ("id_respuesta_ficha") REFERENCES "RespuestaFicha"("id_respuesta_ficha")
+ON DELETE CASCADE ON UPDATE CASCADE;
+
+--Actualiazcion 28/8/2019
+ALTER TABLE "AlumnoRespuestaFS" ADD CONSTRAINT
+"pregunta_alumno_respuesta_fk"
+FOREIGN KEY ("id_pregunta_ficha") REFERENCES "PreguntasFicha"("id_pregunta_ficha")
 ON DELETE CASCADE ON UPDATE CASCADE;
 
 
