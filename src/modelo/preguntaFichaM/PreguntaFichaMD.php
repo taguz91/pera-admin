@@ -10,10 +10,12 @@ class PreguntaFichaMD{
     private $preguntaFichaTipo;
     private $preguntaFichaRespuestaTipo;
     private $preguntaFichaActiva;
+    private $preguntaFichaRespuestaCampo; 
 
 
     function __construct(int $idPreguntaFicha=null, int $idSeccionFicha=null, string $preguntaFicha=null,string $preguntaFichaAyuda=null,
-                             int $preguntaFichaTipo=null, int $preguntaFichaRespuestaTipo=null ,bool $preguntaFichaActiva=true)
+                             int $preguntaFichaTipo=null, int $preguntaFichaRespuestaTipo=null , string $preguntaFichaRespuestaCampo=null, 
+                             bool $preguntaFichaActiva=true)
     {
         
         if($idPreguntaFicha!=null){
@@ -26,6 +28,7 @@ class PreguntaFichaMD{
         $this->preguntaFichaTipo=$preguntaFichaTipo;
         $this->preguntaFichaRespuestaTipo=$preguntaFichaRespuestaTipo;
         $this->preguntaFichaActiva=$preguntaFichaActiva;
+        $this->preguntaFichaRespuestaCampo=$preguntaFichaRespuestaCampo;
 
     }
 
@@ -126,4 +129,17 @@ class PreguntaFichaMD{
         return $this;
     }
 
+
+    public function getPreguntaFichaRespuestaCampo():string
+    {
+        return $this->preguntaFichaRespuestaCampo;
+    }
+
+
+    public function setPreguntaFichaRespuestaCampo($preguntaFichaRespuestaCampo)
+    {
+        $this->preguntaFichaRespuestaCampo = $preguntaFichaRespuestaCampo;
+
+        return $this;
+    }
 }

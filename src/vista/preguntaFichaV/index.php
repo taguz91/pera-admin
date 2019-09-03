@@ -45,6 +45,7 @@ require_once 'src/vista/preguntaFichaV/eliminar.php';
               <td style='display:none;'>{$pregunta[4]}</td>
               <td style='display:none;'>{$pregunta[6]}</td>
               <td style='display:none;'>{$pregunta[7]}</td>
+              <td style='display:none;'>{$pregunta[8]}</td>
               <td><button type='submit' class='btn btn-primary actualizarBtnP'
               data-toggle='modal' data-target='#actualizarPregunta'>Actualizar</button>
               <button type='button' class='btn btn-danger eliminarBtnP' 

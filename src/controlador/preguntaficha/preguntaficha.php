@@ -42,7 +42,15 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
             $tipoRespuesta = (int) $_POST["tipoRespuesta"];
 
+            $tipoCampo = "text";
+            if (isset($_POST["tipoCampo"])) {
+                $tipoCampo =$_POST["tipoCampo"];
+            }
+          
+
             $tipoPregunta = null;
+
+            
             if (isset($_POST["tipoPregunta"])) {
 
                 $tipoPregunta = 1;
@@ -51,7 +59,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
                 $tipoPregunta = 0;
             }
 
-            $nuevaPregunta = new PreguntaFichaMD(null, $seccion, $pregunta, $ayudaPregunta, $tipoPregunta, $tipoRespuesta);
+            $nuevaPregunta = new PreguntaFichaMD(null, $seccion, $pregunta, $ayudaPregunta, $tipoPregunta, $tipoRespuesta,$tipoCampo);
 
             $quiz = PreguntaFichaBD::insertarPreguntaFicha($nuevaPregunta);
 
@@ -96,6 +104,12 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
             $tipoRespuesta = (int) $_POST["tipoRespuesta"];
 
+            $tipoCampo = "text";
+            if (isset($_POST["tipoCampo"])) {
+                $tipoCampo =$_POST["tipoCampo"];
+            }
+          
+
             $tipoPregunta = null;
             if (isset($_POST["tipoPregunta"])) {
 
@@ -105,7 +119,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
                 $tipoPregunta = 0;
             }
 
-            $pregunta = new PreguntaFichaMD($id, $seccion, $pregunta, $ayudaPregunta, $tipoPregunta, $tipoRespuesta);
+            $pregunta = new PreguntaFichaMD($id, $seccion, $pregunta, $ayudaPregunta, $tipoPregunta, $tipoRespuesta, $tipoCampo);
 
              PreguntaFichaBD::actualizarPreguntaFicha($pregunta);
 
@@ -191,7 +205,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
            
              
              
-             $pregunta = new PreguntaFichaMD($id, null, null ,null, null, null, false);
+             $pregunta = new PreguntaFichaMD($id, null, null ,null, null, null, null, false);
             $ok = PreguntaFichaBD::eliminarPreguntaFicha($pregunta);
              $ruta=constant('URL');
              

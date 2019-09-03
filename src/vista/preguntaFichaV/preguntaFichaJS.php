@@ -59,15 +59,40 @@
 
     }
 
-    if (document.getElementById("tipoRespuesta").value==1 && document.getElementById("tipoRespuesta").value==2){
+    if (document.getElementById("tipoRespuesta").value==3 || document.getElementById("tipoRespuesta").value==4){
 
-        <select class="browser-default custom-select">
-        <option selected>Open this select menu</option>
-        <option value="1">One</option>
-        <option value="2">Two</option>
-        <option value="3">Three</option>
-        </select>
+      
+        var _div = document.createElement("div");
+        var _lbl = document.createElement("label")
+        var sel = document.createElement("select");
+        var opt1 = document.createElement("option");
+        var opt2 = document.createElement("option");
+        var opt3 = document.createElement("option");
 
+        sel.setAttribute("class", "browser-default custom-select");
+        sel.setAttribute("id", "tipoCampo");
+        sel.setAttribute("name", "tipoCampo");
+        _div.setAttribute("class", "form-group");
+        opt1.setAttribute("value", "text")
+        opt2.setAttribute("value", "number")
+        opt3.setAttribute("value", "date")
+
+        _lbl.innerHTML="Tipo de Dato Admitido por el Campo:";
+        opt1.innerHTML="Texto";
+        opt2.innerHTML="Numérico";
+        opt3.innerHTML="Fecha";
+
+        sel.appendChild(opt1);
+        sel.appendChild(opt2);
+        sel.appendChild(opt3);
+
+        _div.appendChild(_lbl);
+        _div.appendChild(sel);
+
+        var _cont = document.getElementById("respuestasMenu");
+        _cont.appendChild(_div);
+
+        
         
     }
 
@@ -159,6 +184,7 @@
 
 <script>
 
+  
   var bar=false;
   var x=1;
   
@@ -180,7 +206,7 @@
 
     console.log(document.getElementById("tipoRespuestaA").value) ;
 
-    if (document.getElementById("tipoRespuesta").value!=3 && document.getElementById("tipoRespuesta").value!=4) {
+    if (document.getElementById("tipoRespuestaA").value!=3 && document.getElementById("tipoRespuestaA").value!=4) {
 
         if (!bar){
               var div0 = document.createElement("div");
@@ -213,6 +239,12 @@
               bar=true;
           }
 
+    }
+
+    if (document.getElementById("tipoRespuestaA").value==3 || document.getElementById("tipoRespuestaA").value==4){
+
+      document.getElementById('tipoCampoA').style.display = "block";
+       
     }
 
       if (bar){
@@ -366,7 +398,7 @@ console.log(document.cookie);
 
           var datos_a2 = $tr_a.children("td").map(function(){
             contador_a++;
-            if(contador_a<7){
+            if(contador_a<8){
              return $(this).text();
             }
 
@@ -376,11 +408,13 @@ console.log(document.cookie);
 
           console.log(datos_a);
 
+         
           $('#idPreguntaA').val(datos_a[0]);
           $('#preguntaA').val(datos_a[2]);
           $('textarea#ayudaPreguntaA').val(datos_a[3]);
           $('#listaSeccionesActualizar').val(datos_a[4]);
           $('select#tipoRespuestaA').val(datos_a[5]);
+          $('select#tipoCampoA').val(datos_a[7]);
 
           if(datos_a[6]=="1"){
 
@@ -420,7 +454,7 @@ $(document).ready(function(){
 
       var datos_e2 = $tr_e.children("td").map(function(){
         contador_e++;
-        if(contador_e<7){
+        if(contador_e<8){
          return $(this).text();
         }
 
@@ -435,6 +469,8 @@ $(document).ready(function(){
       $('textarea#ayudaPreguntaE').val(datos_e[3]);
       $('#listaSeccionesEliminar').val(datos_e[4]);
       $('select#tipoRespuestaE').val(datos_e[5]);
+     
+      
 
       if(datos_e[6]=="1"){
 
