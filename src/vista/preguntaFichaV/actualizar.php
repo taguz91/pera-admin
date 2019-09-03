@@ -58,7 +58,7 @@
                 </div>
 
                 <div class="form-group" id="respuestasA">
-                <label for="pregunta">Tipo de Dato Admitido por el Campo:</label>
+                <label for="pregunta" style="display:none" id="etiquetaCampo">Tipo de Dato Admitido por el Campo:</label>
                   <select class="browser-default custom-select" id="tipoCampoA" style="display:none" name="tipoCampo">
                     <option value="text">Texto</option>
                     <option value="number">Númerico</option>

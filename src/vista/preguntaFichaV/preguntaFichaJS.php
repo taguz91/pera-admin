@@ -208,6 +208,8 @@
 
     if (document.getElementById("tipoRespuestaA").value!=3 && document.getElementById("tipoRespuestaA").value!=4) {
 
+      document.getElementById('tipoCampoA').style.display = "none";
+      document.getElementById('etiquetaCampo').style.display = "none";
         if (!bar){
               var div0 = document.createElement("div");
               var btn1 = document.createElement("button");
@@ -244,6 +246,7 @@
     if (document.getElementById("tipoRespuestaA").value==3 || document.getElementById("tipoRespuestaA").value==4){
 
       document.getElementById('tipoCampoA').style.display = "block";
+      document.getElementById('etiquetaCampo').style.display = "block";
        
     }
 
