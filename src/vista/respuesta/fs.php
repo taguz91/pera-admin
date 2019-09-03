@@ -93,21 +93,21 @@ require 'src/vista/templates/footer.php';
     $(document).ready(function() {
 
       $('#tblexport').DataTable( {
-        dom: 'Bfrtip',
+        dom: "B",
         buttons: [
             //'copy', 'csv', 'excel', 'pdf', 'print'
             {
               extend: 'print',
               text: 'Imprimir',
               titleAttr: 'Print',
-              className: 'btn btn-primary',
+              className: 'btn btn-info my-2',
               title: 'Imprimir Respuestas'
             },
             {
               extend: 'excelHtml5',
               text: 'Exportar a Excel',
               titleAttr: 'Excel',
-              className: 'btn btn-info btn-sm',
+              className: 'btn btn-info my-2',
               title: 'Reporte de Respuestas'
             }
         ]
