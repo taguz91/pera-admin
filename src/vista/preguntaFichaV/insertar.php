@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <form method="post" action="<?php echo constant('URL'); ?>preguntaFicha/insertar" >
+        <form method="post" action="<?php echo constant('URL'); ?>preguntaficha/insertar" >
 
               <div class="form-group">
               <label for="tipoSeccion">Sección de la Pregunta:</label>

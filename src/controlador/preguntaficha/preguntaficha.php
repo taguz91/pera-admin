@@ -46,11 +46,11 @@ class PreguntaFichaCTR extends CTR implements DCTR
             if (isset($_POST["tipoCampo"])) {
                 $tipoCampo =$_POST["tipoCampo"];
             }
-          
+
 
             $tipoPregunta = null;
 
-            
+
             if (isset($_POST["tipoPregunta"])) {
 
                 $tipoPregunta = 1;
@@ -81,7 +81,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
             $ruta = constant('URL');
 
-            echo "<script>window.location='{$ruta}/preguntaFicha'</script>";
+            echo "<script>window.location='{$ruta}/preguntaficha'</script>";
 
             $this->inicio();
 
@@ -108,7 +108,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
             if (isset($_POST["tipoCampo"])) {
                 $tipoCampo =$_POST["tipoCampo"];
             }
-          
+
 
             $tipoPregunta = null;
             if (isset($_POST["tipoPregunta"])) {
@@ -201,11 +201,11 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
             $id = (int) $_POST["idPregunta"];
 
-             
-             
-           
-             
-             
+
+
+
+
+
              $pregunta = new PreguntaFichaMD($id, null, null ,null, null, null, null, false);
 
 

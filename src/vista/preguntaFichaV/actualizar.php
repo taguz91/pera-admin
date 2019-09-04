@@ -9,7 +9,7 @@
           </button>
         </div>
         <div class="modal-body">
-        <form method="post" action="<?php echo constant('URL'); ?>preguntaFicha/actualizar" >
+        <form method="post" action="<?php echo constant('URL'); ?>preguntaficha/actualizar" >
               <input type="hidden" name="idPregunta" id="idPreguntaA">
               <div class="form-group">
               <label for="tipoSeccion">Sección de la Pregunta:</label>
@@ -53,7 +53,7 @@
 
 
                 <div class="form-group" id="respuestasA">
-                
+
 
                 </div>
 
@@ -67,7 +67,7 @@
 
                 </div>
 
-            
+
 
              <div></div>
 
