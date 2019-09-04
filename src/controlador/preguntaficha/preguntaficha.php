@@ -81,7 +81,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
             $ruta = constant('URL');
 
-            echo "<script>window.location='{$ruta}/preguntaficha'</script>";
+            echo "<script>window.location='{$ruta}preguntaficha'</script>";
 
             $this->inicio();
 
@@ -161,7 +161,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
             $ruta = constant('URL');
 
-            echo "<script>window.location='{$ruta}/preguntaFicha'</script>";
+            echo "<script>window.location='{$ruta}preguntaficha'</script>";
 
             $this->inicio();
 
@@ -215,7 +215,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
             $ok = PreguntaFichaBD::eliminarPreguntaFicha($pregunta);
              $ruta=constant('URL');
 
-             echo "<script>window.location='{$ruta}/preguntaFicha'</script>";
+             echo "<script>window.location='{$ruta}preguntaficha'</script>";
 
              $this->inicio();
         }
