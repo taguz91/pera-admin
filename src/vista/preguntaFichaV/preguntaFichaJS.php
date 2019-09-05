@@ -3,11 +3,11 @@
   var bar=false;
   var x=1;
   document.getElementById("tipoRespuesta").addEventListener("change", generarRespuestas);
- 
+
 
 
   function generarRespuestas(){
-    
+
 
     if (document.getElementById("respuestasMenu")){
 
@@ -61,7 +61,7 @@
 
     if (document.getElementById("tipoRespuesta").value==3 || document.getElementById("tipoRespuesta").value==4){
 
-      
+
         var _div = document.createElement("div");
         var _lbl = document.createElement("label")
         var sel = document.createElement("select");
@@ -92,8 +92,8 @@
         var _cont = document.getElementById("respuestasMenu");
         _cont.appendChild(_div);
 
-        
-        
+
+
     }
 
 
@@ -184,14 +184,14 @@
 
 <script>
 
-  
+
   var bar=false;
   var x=1;
-  
+
   document.getElementById("tipoRespuestaA").addEventListener("change", generarRespuestasA);
 
   function generarRespuestasA(){
-   
+
     if (document.getElementById("respuestasMenuA")){
 
       document.getElementById("respuestasMenuA").innerHTML="";
@@ -247,7 +247,7 @@
 
       document.getElementById('tipoCampoA').style.display = "block";
       document.getElementById('etiquetaCampo').style.display = "block";
-       
+
     }
 
       if (bar){
@@ -378,17 +378,17 @@ console.log(document.cookie);
 
 <script type="text/javascript">
 
-    
+
     $(document).ready(function(){
       $('.actualizarBtnP').on('click',function(){
-        
+
          var element= $(this)[0].parentElement.parentElement;
         var id = $(element).attr('idQuiz');
         var dataString ='id='+id;
         console.log(id);
         // document.cookie = 'idQuiz='+id;
         $('#actualizarPregunta').modal('show');
-          
+
 
           $tr_a = $(this).closest('tr');
           var contador_a=0;
@@ -411,7 +411,7 @@ console.log(document.cookie);
 
           console.log(datos_a);
 
-         
+
           $('#idPreguntaA').val(datos_a[0]);
           $('#preguntaA').val(datos_a[2]);
           $('textarea#ayudaPreguntaA').val(datos_a[3]);
@@ -426,7 +426,7 @@ console.log(document.cookie);
             $('#tipoPreguntaA').prop('checked', false);
           }
 
-          
+
       });
     }
     );
@@ -434,17 +434,17 @@ console.log(document.cookie);
 
 <script type="text/javascript">
 
-    
+
 $(document).ready(function(){
   $('.eliminarBtnP').on('click',function(){
-    
+
      var element_e= $(this)[0].parentElement.parentElement;
     var id_e = $(element_e).attr('idQuiz');
     // var dataString ='id='+id_ed;
     console.log(id_e);
     // document.cookie = 'idQuiz='+id;
     $('#eliminarPregunta').modal('show');
-      
+
 
       $tr_e = $(this).closest('tr');
       var contador_e=0;
@@ -472,8 +472,8 @@ $(document).ready(function(){
       $('textarea#ayudaPreguntaE').val(datos_e[3]);
       $('#listaSeccionesEliminar').val(datos_e[4]);
       $('select#tipoRespuestaE').val(datos_e[5]);
-     
-      
+
+
 
       if(datos_e[6]=="1"){
 
@@ -482,11 +482,11 @@ $(document).ready(function(){
         $('#tipoPreguntaE').prop('checked', false);
       }
 
-      
+
   });
 }
 );
-</script> 
+</script>
 
 
   <script>
@@ -494,7 +494,7 @@ $(document).ready(function(){
       $('.actualizarBtnP').on('click',function(){
       var element= $(this)[0].parentElement.parentElement;
       var id = $(element).attr('idQuiz');
-      
+
       console.log(id);
      $.ajax({
       type: 'post',
@@ -502,9 +502,9 @@ $(document).ready(function(){
       success: function(response){
         generarRespuestasA();
        $('#respuestasA').append(response);
-      
+
       },
-    
+
      });
     });
   });
@@ -515,32 +515,32 @@ $(document).ready(function(){
       $('.eliminarBtnP').on('click',function(){
       var element= $(this)[0].parentElement.parentElement;
       var id = $(element).attr('idQuiz');
-      
+
       console.log(id);
      $.ajax({
       type: 'post',
       data: {ajax: 1,id_E: id},
       success: function(response){
        $('#respuestasE').append(response);
-      
+
       },
-    
+
      });
     });
   });
   </script>
 
 <script type="text/javascript">
-  
+
   var b = document.getElementById("busquedaP");
 
   if (b){
       b.addEventListener("keydown", function (e) {
-        if (String(b.value).trim() !="" && e.keyCode === 13) {  
-          window.location.href = "<?php echo constant('URL'); ?>preguntaFicha/buscar?key="+b.value;
-          
+        if (String(b.value).trim() !="" && e.keyCode === 13) {
+          window.location.href = "<?php echo constant('URL'); ?>preguntaficha/buscar?key="+b.value;
+
         }
     });
   }
-  
+
 </script>
