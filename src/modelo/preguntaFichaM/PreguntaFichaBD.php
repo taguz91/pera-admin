@@ -75,7 +75,7 @@ abstract class PreguntaFichaBD
                                         FROM \"PreguntasFicha\" pf JOIN \"SeccionesFicha\" sf
                                         ON pf.id_seccion_ficha = sf.id_seccion_ficha
                                         WHERE pregunta_ficha_activa=true
-                                        AND pregunta_ficha ILIKE '%{$key}%' OR sf.seccion_ficha_nombre ILIKE '%{$key}%' ");
+                                        AND (pregunta_ficha ILIKE '%{$key}%' OR sf.seccion_ficha_nombre ILIKE '%{$key}%')");
 
                     $pst->execute();
 
