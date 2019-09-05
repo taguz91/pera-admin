@@ -23,7 +23,7 @@ require 'src/vista/templates/header.php';
     </div>
 
     <div class="col-sm-2">
-      <a href="<?php echo constant('URL') ?>personaficha/guardar" class="btn btn-success btn-block">Ingresar </a>
+      <a href="<?php echo constant('URL') ?>personaficha/guardarpersona" class="btn btn-success btn-block">Ingresar </a>
     </div>
 
   </div>
@@ -36,7 +36,7 @@ require 'src/vista/templates/header.php';
           <th scope="col">ID</th>
           <th scope="col">IDPermiso</th>
           <th scope="col">IDPersona</th>
-          <th scope="col">ClavePersona</th>
+          <th scope="col">Nombre Persona</th>
           <th scope="col">Fecha Inicio</th>
           <th scope="col">Fecha Modificación</th>
           <th scope="col">Editar</th>
@@ -51,7 +51,7 @@ require 'src/vista/templates/header.php';
             echo "<td>".$pf->idPersonaFicha."</td>";
             echo "<td>".$pf->idPermisoIngFicha."</td>";
             echo "<td>".$pf->idPersona."</td>";
-            echo "<td>".$pf->clave."</td>";
+            echo "<td>".$pf->persona->primerNombre." ".$pf->persona->primerApellido."</td>";
             echo "<td>".$pf->fechaIngreso."</td>";
             echo "<td>".$pf->fechaModificacion."</td>";
             echo '<td> <a href="'.constant('URL').'personaFicha/editarpersona?id='.$pf->idPersonaFicha.'">Editar</a> </td>';

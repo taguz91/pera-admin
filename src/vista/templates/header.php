@@ -42,7 +42,7 @@
               <a href="#" class="nav-link dropdown-toggle text-light" data-toggle="dropdown">Personas Ficha </a>
               <div class="dropdown-menu">
                 <a href="<?php echo constant('URL'); ?>personaficha" class="dropdown-item">Listar</a>
-                <a href="<?php echo constant('URL'); ?>personaficha/guardar" class="dropdown-item">Ingresar</a>
+                <a href="<?php echo constant('URL'); ?>personaficha/guardarpersona" class="dropdown-item">Ingresar</a>
               </div>
             </li>
             <!--/PERSONA FICHA-->

@@ -1,5 +1,7 @@
 <?php
 require_once("src/modelo/permisoingreso/permisoingreso.php");
+require_once("src/modelo/tipoficha/tipofichamd.php");
+require_once("src/modelo/clases/periodolectivomd.php");
 
 abstract class PermisoIngresoBD {
 
@@ -165,11 +167,17 @@ abstract class PermisoIngresoBD {
       while($r = $res->fetch(PDO::FETCH_ASSOC)){
         //var_dump($r);
         $pi = new PermisoIngresoMD();
+        $tf = new TipoFichaMD();
+        $pe = new PeriodoLectivoMD();
         $pi->id = $r['id_permiso_ingreso_ficha'];
-        $pi->idPeriodo = $r['prd_lectivo_nombre'];
+        $pi->idPeriodo = $r['id_prd_lectivo'];
         $pi->idTipoFicha = $r['tipo_ficha'];
         $pi->fechaInicio = $r['permiso_ingreso_fecha_inicio'];
         $pi->fechaFin = $r['permiso_ingreso_fecha_fin'];
+        $tf->tipoFicha = $r['tipo_ficha'];
+        $pi->tipoFicha = $tf;
+        $pe->nombre = $r['prd_lectivo_nombre'];
+        $pi->periodo = $pe;
         array_push($items, $pi);
       }
       return $items;
@@ -181,7 +189,9 @@ abstract class PermisoIngresoBD {
     pl.prd_lectivo_nombre,
     tf.tipo_ficha,
     pf.permiso_ingreso_fecha_inicio,
-    pf.permiso_ingreso_fecha_fin
+    pf.permiso_ingreso_fecha_fin,
+    tf.tipo_ficha,
+    pl.id_prd_lectivo
     FROM
     public."PermisoIngresoFichas" pf,
     public."PeriodoLectivo" pl,

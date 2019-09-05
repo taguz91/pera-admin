@@ -7,7 +7,7 @@ define('HOST', 'localhost');
 define('DB', 'IstaBDWEB');
 define('PORT', '5432');
 define('USER', 'postgres');
-define('PASS', 'qwerty79');
+define('PASS', 'NuEvOsErVeR1997');
 define('CHARSET', 'utf8mb4');
 
 ?>

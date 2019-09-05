@@ -240,12 +240,16 @@ abstract class PersonaFichaBD
     while ($r = $res->fetch(PDO::FETCH_ASSOC)) {
       //var_dump($r);
       $pi = new PersonaFichaMD();
+      $pe = new PersonaFichaMD();
       $pi->idPersonaFicha = $r['id_persona_ficha'];
       $pi->idPermisoIngFicha = $r['id_permiso_ingreso_ficha'];
       $pi->idPersona = $r['id_persona'];
       $pi->clave = $r['persona_ficha_clave'];
       $pi->fechaIngreso = $r['persona_ficha_fecha_ingreso'];
       $pi->fechaModificacion = $r['persona_ficha_fecha_modificacion'];
+      $pe->primerNombre = $r['persona_primer_nombre'];
+      $pe->primerApellido = $r['persona_primer_apellido'];
+      $pi->persona = $pe;
       array_push($items, $pi);
     }
     return $items;
@@ -270,7 +274,9 @@ abstract class PersonaFichaBD
       p.id_persona,
       pr.persona_ficha_clave,
       pr.persona_ficha_fecha_ingreso,
-      pr.persona_ficha_fecha_modificacion
+      pr.persona_ficha_fecha_modificacion,
+      p.persona_primer_nombre,
+      p.persona_primer_apellido
       FROM
       public."PersonaFicha" pr,
       public."PermisoIngresoFichas" pi,
@@ -286,9 +292,9 @@ abstract class PersonaFichaBD
 
   public static $INSERT = '
       INSERT INTO public."PersonaFicha"(
-        id_persona_ficha, id_permiso_ingreso_ficha, id_persona, persona_ficha_clave, persona_ficha_fecha_ingreso,
-        persona_ficha_fecha_modificacion)
-      VALUES(:id_permiso_ingreso_ficha, :id_persona, bytea(md5(:persona_ficha_clave)), :persona_ficha_fecha_ingreso, :persona_ficha_fecha_modificacion)';
+        id_permiso_ingreso_ficha, id_persona, persona_ficha_clave, persona_ficha_fecha_ingreso,
+        persona_ficha_fecha_modificacion, persona_ficha_activa)
+      VALUES(:id_permiso_ingreso_ficha, :id_persona, bytea(md5(:persona_ficha_clave)), :persona_ficha_fecha_ingreso, :persona_ficha_fecha_modificacion, true)';
 
   public static $UPDATE = '
       UPDATE public."PersonaFicha"

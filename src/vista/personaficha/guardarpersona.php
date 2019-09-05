@@ -21,11 +21,10 @@ require 'src/vista/templates/header.php';
            //Cargamos todos los permisos de la base de datos
            if(isset($permisos)){
              foreach ($permisos as $pf) {
-               echo '<option value="'.$pf->id.'"> Id - Período: '.$pl->idPeriodo.'</option>';
+               echo '<option value="'.$pf->id.'">Tipo de Ficha:'.$pf->tipoFicha->tipoFicha.' - '.$pf->periodo->nombre.'</option>';
              }
            }
             ?>
-
          </select>
        </div>
 
@@ -58,7 +57,7 @@ require 'src/vista/templates/header.php';
            <div class="form-group">
              <label for="fechaModificación"
              class="control-label"
-             >Fecha Fin</label>
+             >Fecha Modificación</label>
              <input type="date" name="fechaModificación" value=""
              class="form-control">
            </div>

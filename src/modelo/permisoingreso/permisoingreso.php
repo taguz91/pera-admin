@@ -6,6 +6,8 @@ class PermisoIngresoMD {
     public $activo;
     public $idPeriodo;
     public $idTipoFicha;
+    public $tipoFicha;
+    public $periodo;
 }
 
 ?>

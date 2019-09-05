@@ -9,4 +9,5 @@ class PersonaFichaMD{
     public $fechaIngreso;
     public $fechaModificacion;
     public $personaFichaActivo;
+    public $persona;
 }
