@@ -35,9 +35,12 @@ class EnviarCorreo
                 $mail->Subject = 'Ficha Socioecon&oacute;mica';
                 $mail->Body    = "<h1> Ficha Socioecon&oacute;mica </h1>  \n
             El motivo de este mensaje es comunicarle sobre el llenado de la Ficha Socioecon&oacute;mica<br> \n
-            El cual lo deber&aacute; hacer con su Usuario y Contrase&ntilde;a, los cuales se le presentará a continuación<br><br> \n
-            <strong>Usuario: </strong>Su c&eacute;dula correspondiente <br> \n
-            <strong>Contrase&ntilde;a:</strong> ".$pass;
+            El cual lo deber&aacute; hacer con su Usuario y Contrase&ntilde;a, los cuales son su Cédula de Identidad <br>
+            Adem&aacute;s de esto necesita una Contrase&ntilde;a que para el llenado de la ficha antes mencionada <br> 
+            La contrase&ntilde;a es la siguiente <br><br>\n
+            <strong>Contrase&ntilde;a:</strong> ".$pass." <br>
+            A continuación se le presenta un enlace el cual le redireccionar&aacute; a la p&oacute;gina donde llenar&aacute; la Ficha Socioecon&oacute;mica <br>
+            Enlace: <u>http://ubi.tecazuay.edu.ec</u>";
 
                 $mail->send();
 
