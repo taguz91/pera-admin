@@ -9,6 +9,8 @@ $resficha = $reportes['respuestas'];
 
  <div class="m-5">
 
+   <button type="button" name="button" onclick="exportar()">Exportar</button>
+
    <div class="row mt-4">
      <table class="table" id="tblexport" >
        <thead class="thead-dark bg-ista-blue">
@@ -135,59 +137,45 @@ require 'src/vista/templates/footerform.php';
   }
 
  </script>
- 
-<!--
+
+
+ <!--EXPORTARR-->
+
+ <script lang="javascript" src="<?php echo constant('URL'); ?>public/Libs/FileSaver/FileSaver.min.js"></script>
+ <script lang="javascript" src="<?php echo constant('URL') ?>public/Libs/xlsx/xlsx.full.min.js"></script>
+
  <script type="text/javascript">
+ var wb = XLSX.utils.table_to_book(
+   document.querySelector('#tblexport'),
+   {
+     sheet: "EJEMPLOOOOOOO"
+   }
+ );
 
-  $(document).ready(function() {
+ var wbout = XLSX.write(
+   wb, {
+     bookType:'xlsx',
+     bookSST:true,
+     type: 'binary'
+   }
+ );
 
-    $('#tblexport').DataTable( {
-      dom: "B",
-      buttons: [
-          //'copy', 'csv', 'excel', 'pdf', 'print'
-          {
-            extend: 'print',
-            text: 'Imprimir',
-            titleAttr: 'Print',
-            className: 'btn btn-info my-2',
-            title: 'Imprimir Respuestas'
-          },
-          {
-            extend: 'excelHtml5',
-            text: 'Exportar a Excel',
-            titleAttr: 'Excel',
-            className: 'btn btn-info my-2',
-            title: 'Reporte de Respuestas'
-          }
-      ]
-    });
+ function s2ab(a) {
+   var buf = new ArrayBuffer(a.length);
+   var view = new Uint8Array(buf);
+   for(var i = 0; i < a.length; i++){
+     view[i] = a.charCodeAt(i) & 0xFF;
+   }
+   return buf;
+ }
 
-  });
+ function exportar(){
+   saveAs(new Blob(
+     [s2ab(wbout)], {
+       type: "application/octet-stream"
+     }),
+     'test.xlsx'
+   );
+ }
+
  </script>
-
-  <script type="text/javascript" src="https://code.jquery.com/jquery-3.3.1.js">
-
-  </script>
-
-  <script type="text/javascript" src="https://cdn.datatables.net/1.10.19/js/jquery.dataTables.min.js">
-
-  </script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/dataTables.buttons.min.js">
-
-  </script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/jszip/3.1.3/jszip.min.js">
-
-  </script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/pdfmake.min.js">
-
-  </script>
-  <script type="text/javascript" src="https://cdnjs.cloudflare.com/ajax/libs/pdfmake/0.1.53/vfs_fonts.js">
-
-  </script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.html5.min.js">
-
-  </script>
-  <script type="text/javascript" src="https://cdn.datatables.net/buttons/1.5.6/js/buttons.print.min.js">
-
-  </script>
--->
