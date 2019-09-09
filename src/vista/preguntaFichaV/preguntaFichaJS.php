@@ -401,7 +401,7 @@ console.log(document.cookie);
 
           var datos_a2 = $tr_a.children("td").map(function(){
             contador_a++;
-            if(contador_a<8){
+            if(contador_a<9){
              return $(this).text();
             }
 
@@ -418,6 +418,7 @@ console.log(document.cookie);
           $('#listaSeccionesActualizar').val(datos_a[4]);
           $('select#tipoRespuestaA').val(datos_a[5]);
           $('select#tipoCampoA').val(datos_a[7]);
+          $('#posicionPreguntaA').val(datos_a[8]);
 
           if(datos_a[6]=="1"){
 

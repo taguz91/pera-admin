@@ -55,6 +55,7 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
               <td>{$seccion[1]}</td>
               <td>{$seccion[2]}</td>
               <td style='display:none;'>{$seccion[4]}</td>
+              <td style='display:none;'>{$seccion[5]}</td>
               <td><button type='button' class='btn btn-primary actualizarBtn'
               data-toggle='modal' data-target='#actualizarSeccion'>Actualizar</button>
               <button type='button' class='btn btn-danger eliminarBtn' 

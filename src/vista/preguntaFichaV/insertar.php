@@ -32,6 +32,11 @@
               <input type="text" class="form-control"  id="pregunta" name="pregunta" placeholder="Ingrese una pregunta...">
               </div>
 
+              <div class="form-group"> 
+              <label for="posicionSeccion">Posición de la Pregunta:</label>
+              <input type="number" class="form-control"  name="posicionPregunta" id="posicionPregunta" value="1" min="1">
+              </div>  
+
               <div class="form-group">
                 <label for="ayudaPregunta">Descripción para la Pregunta:</label>
                 <textarea class="form-control rounded-0" id="ayudaPregunta" name="ayudaPregunta" rows="3"></textarea>

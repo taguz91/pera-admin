@@ -15,7 +15,7 @@
   
           var datos_a2 = $tr_a.children("td").map(function(){
             contador_a++;
-            if(contador_a<4){
+            if(contador_a<5){
              return $(this).text();
             }
   
@@ -28,6 +28,7 @@
           $('#nombreSeccionA').val(datos_a[2]);
           $('#idSeccionA').val(datos_a[0]);
           $('#listaTiposActualizar').val(datos_a[3]);
+          $('#posicionSeccionA').val(datos_a[4]);
               
       });
     }
@@ -136,3 +137,5 @@
       }
   
   </script>
+
+

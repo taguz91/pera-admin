@@ -7,8 +7,10 @@ class SeccionFichaMD{
     private $idTipoFicha;
     private $seccionFichaNombre;
     private $seccionFichaActiva;
+    private $seccionFichaPosicion;
 
-    function __construct(int $idSeccionFicha=null, int $idTipoFicha=null, string $seccionFichaNombre=null, bool $seccionFichaActiva=true)
+    function __construct(int $idSeccionFicha=null, int $idTipoFicha=null, string $seccionFichaNombre=null,
+                          int $seccionFichaPosicion=null, bool $seccionFichaActiva=true)
     {
         if($idSeccionFicha!=null){
             
@@ -17,6 +19,7 @@ class SeccionFichaMD{
         $this->idTipoFicha=$idTipoFicha;
         $this->seccionFichaNombre=$seccionFichaNombre;
         $this->seccionFichaActiva=$seccionFichaActiva;
+        $this->seccionFichaPosicion=$seccionFichaPosicion;
     }
 
 
@@ -73,6 +76,20 @@ class SeccionFichaMD{
     public function setSeccionFichaActiva(bool $seccionFichaActiva)
     {
         $this->seccionFichaActiva = $seccionFichaActiva;
+
+        return $this;
+    }
+
+
+    public function getSeccionFichaPosicion():int
+    {
+        return $this->seccionFichaPosicion;
+    }
+
+
+    public function setSeccionFichaPosicion($seccionFichaPosicion)
+    {
+        $this->seccionFichaPosicion = $seccionFichaPosicion;
 
         return $this;
     }

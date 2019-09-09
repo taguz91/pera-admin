@@ -60,10 +60,13 @@ class SeccionFichaCTR extends CTR implements DCTR {
 
             
             $tipo=(int)$_POST['tipoSeccion'];
+
+            $posicionSeccion=(int)$_POST['posicionSeccion'];
+            
             $nombre=$_POST["nombreSeccion"];
           
             
-            $nuevaSeccion = new SeccionFichaMD(null,$tipo,$nombre);
+            $nuevaSeccion = new SeccionFichaMD(null,$tipo,$nombre,$posicionSeccion);
             $ok = SeccionFichaBD::insertarSeccionFicha($nuevaSeccion);
             
             $ruta=constant('URL');
@@ -87,10 +90,11 @@ class SeccionFichaCTR extends CTR implements DCTR {
 
             $id=(int)$_POST["idSeccion"];
             $tipo=(int)$_POST['tipoSeccion'];
+            $posicionSeccion=(int)$_POST['posicionSeccion'];
             $nombre=$_POST["nombreSeccion"];
         
 
-            $seccion = new SeccionFichaMD($id,$tipo,$nombre);
+            $seccion = new SeccionFichaMD($id,$tipo,$nombre,$posicionSeccion);
 
             $ok = SeccionFichaBD::actualizarSeccionFicha($seccion);
             
@@ -114,7 +118,7 @@ class SeccionFichaCTR extends CTR implements DCTR {
             
           
             
-            $seccion = new SeccionFichaMD($id,null,null,false);
+            $seccion = new SeccionFichaMD($id,null,null,null,false);
             $ok = SeccionFichaBD::eliminarSeccionFicha($seccion);
        
             $ruta=constant('URL');

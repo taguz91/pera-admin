@@ -14,10 +14,16 @@
             <div class="form-group">
               <label for="nombreSeccion">Nombre de la Sección:</label>
               <input type="text" class="form-control" id="nombreSeccionA" name="nombreSeccion" placeholder="Ingrese un nombre...">
-              </div>   
+              </div>  
+              <div class="form-group">  
               <label for="tipoSeccion">Tipo de Sección:</label>
               <select class="browser-default custom-select" id="listaTiposActualizar" name="tipoSeccion">              
-            </select>   
+            </select>
+              </div>     
+            <div class="form-group"> 
+              <label for="posicionSeccion">Posición de la Sección:</label>
+              <input type="number" class="form-control"  name="posicionSeccion" id="posicionSeccionA"  min="1">
+              </div>  
               <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-primary">Guardar</button>
