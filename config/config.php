@@ -4,10 +4,10 @@ define('URL', 'http://localhost/pera-admin/');
 
 //Constantes de conexion a la base de datos
 define('HOST', 'localhost');
-define('DB', 'IstaBDWEB');
+define('DB', 'BDIstaJulio2019');
 define('PORT', '5432');
 define('USER', 'postgres');
-define('PASS', 'qwerty79');
+define('PASS', 'Holapostgres');
 define('CHARSET', 'utf8mb4');
 
 ?>

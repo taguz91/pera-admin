@@ -9,32 +9,27 @@
           </button>
         </div>
         <div class="modal-body">
-        <form method="post" action="<?php echo constant('URL'); ?>seccionFicha/insertar" >
+        <form method="post" action="<?php echo constant('URL'); ?>seccionficha/insertar" >
             <div class="form-group">
               <label for="nombreSeccion">Nombre de la Sección:</label>
               <input type="text" class="form-control"  name="nombreSeccion" placeholder="Ingrese un nombre...">
-              </div>  
-              <div class="form-group">  
+              </div>
+              <div class="form-group">
               <label for="tipoSeccion">Tipo de Sección:</label>
-              <select class="browser-default custom-select" id="listaTiposInsertar" name="tipoSeccion">              
-            </select>  
+              <select class="browser-default custom-select" id="listaTiposInsertar" name="tipoSeccion">
+            </select>
             </div>
-            <div class="form-group"> 
+            <div class="form-group">
               <label for="posicionSeccion">Posición de la Sección:</label>
               <input type="number" class="form-control"  name="posicionSeccion" id="posicionSeccion" value="1" min="1">
-              </div>  
+              </div>
               <div class="modal-footer">
               <button type="button" class="btn btn-secondary" data-dismiss="modal">Cancelar</button>
               <button type="submit" class="btn btn-primary" >Guardar</button>
-        </div> 
+        </div>
         </form>
         </div>
-        
+
       </div>
     </div>
   </div>
-
-
-
-
-
