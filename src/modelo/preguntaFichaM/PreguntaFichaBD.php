@@ -28,7 +28,7 @@ abstract class PreguntaFichaBD
         $pst = null;
         if ($key == null) {
             $pst = getCon()->prepare('SELECT id_pregunta_ficha, sf.seccion_ficha_nombre, pregunta_ficha, pregunta_ficha_ayuda, pf.id_seccion_ficha,
-                                         pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo,pregunta_ficha_respuesta_campo, pregunta_ficha_posicion 
+                                         pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo,pregunta_ficha_respuesta_campo, pregunta_ficha_posicion
                                     FROM "PreguntasFicha" pf JOIN "SeccionesFicha" sf
                                     ON pf.id_seccion_ficha = sf.id_seccion_ficha
                                     WHERE pregunta_ficha_activa=true
@@ -40,7 +40,7 @@ abstract class PreguntaFichaBD
 
                 case 1:
                     $pst = getCon()->prepare('SELECT id_pregunta_ficha, sf.seccion_ficha_nombre, pregunta_ficha, pregunta_ficha_ayuda, pf.id_seccion_ficha,
-                                         pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo, pregunta_ficha_respuesta_campo, pregunta_ficha_posicion 
+                                         pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo, pregunta_ficha_respuesta_campo, pregunta_ficha_posicion
                                         FROM "PreguntasFicha" pf JOIN "SeccionesFicha" sf
                                         ON pf.id_seccion_ficha = sf.id_seccion_ficha
                                         WHERE pregunta_ficha_activa=true
@@ -51,7 +51,7 @@ abstract class PreguntaFichaBD
 
                 case 2:
                     $pst = getCon()->prepare('SELECT id_pregunta_ficha, sf.seccion_ficha_nombre, pregunta_ficha, pregunta_ficha_ayuda, pf.id_seccion_ficha,
-                                         pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo, pregunta_ficha_respuesta_campo, pregunta_ficha_posicion 
+                                         pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo, pregunta_ficha_respuesta_campo, pregunta_ficha_posicion
                                         FROM "PreguntasFicha" pf JOIN "SeccionesFicha" sf
                                         ON pf.id_seccion_ficha = sf.id_seccion_ficha
                                         WHERE pregunta_ficha_activa=true
@@ -61,7 +61,7 @@ abstract class PreguntaFichaBD
 
                 case 3:
                     $pst = getCon()->prepare('SELECT id_pregunta_ficha, sf.seccion_ficha_nombre, pregunta_ficha, pregunta_ficha_ayuda, pf.id_seccion_ficha,
-                                         pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo, pregunta_ficha_respuesta_campo, pregunta_ficha_posicion 
+                                         pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo, pregunta_ficha_respuesta_campo, pregunta_ficha_posicion
                                         FROM "PreguntasFicha" pf JOIN "SeccionesFicha" sf
                                         ON pf.id_seccion_ficha = sf.id_seccion_ficha
                                         WHERE pregunta_ficha_activa=true
@@ -72,11 +72,11 @@ abstract class PreguntaFichaBD
                 case 4:
 
                     $pst = getCon()->prepare("SELECT id_pregunta_ficha, sf.seccion_ficha_nombre, pregunta_ficha, pregunta_ficha_ayuda, pf.id_seccion_ficha,
-                                        pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo, pregunta_ficha_respuesta_campo, pregunta_ficha_posicion 
+                                        pregunta_ficha_activa, pregunta_ficha_respuesta_tipo, pregunta_ficha_tipo, pregunta_ficha_respuesta_campo, pregunta_ficha_posicion
                                         FROM \"PreguntasFicha\" pf JOIN \"SeccionesFicha\" sf
                                         ON pf.id_seccion_ficha = sf.id_seccion_ficha
                                         WHERE pregunta_ficha_activa=true
-                                        AND pregunta_ficha ILIKE '%{$key}%' OR sf.seccion_ficha_nombre ILIKE '%{$key}%')");
+                                        AND (pregunta_ficha ILIKE '%{$key}%' OR sf.seccion_ficha_nombre ILIKE '%{$key}%')");
 
                     $pst->execute();
 
@@ -98,11 +98,11 @@ abstract class PreguntaFichaBD
         $pst = getCon()->prepare('UPDATE "PreguntasFicha"
                                 SET id_seccion_ficha=?, pregunta_ficha=?, pregunta_ficha_ayuda=?,
                                  pregunta_ficha_activa=?, pregunta_ficha_respuesta_tipo=?, pregunta_ficha_tipo=?,
-                                 pregunta_ficha_respuesta_campo=?, pregunta_ficha_posicion=? 
+                                 pregunta_ficha_respuesta_campo=?, pregunta_ficha_posicion=?
                                 WHERE id_pregunta_ficha=?' );
         return $pst->execute(array($pregunta->getIdSeccionFicha(), $pregunta->getPreguntaFicha(),
             $pregunta->getPreguntaFichaAyuda(),  $pregunta->getPreguntaFichaActiva(),
-             $pregunta->getPreguntaFichaRespuestaTipo(),$pregunta->getPreguntaFichaTipo(), 
+             $pregunta->getPreguntaFichaRespuestaTipo(),$pregunta->getPreguntaFichaTipo(),
              $pregunta->getPreguntaFichaRespuestaCampo(),$pregunta->getPreguntaFichaPosicion(),
              $pregunta->getIdPreguntaFicha()));
 

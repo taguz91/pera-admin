@@ -68,30 +68,44 @@ $resficha = $reportes['respuestas'];
 
          <?php foreach ($resficha as $rf): ?>
            <tr>
-           <?php $per = $rf['persona'] ?>
+           <?php $per = $rf['persona'];
+
+
+           ?>
            <?php foreach ($per[0] as $p): ?>
              <td><?php echo $p; ?></td>
+           <?php endforeach;
+
+             $pr = $rf['preguntas'];
+           ?>
+
+           <?php foreach ($pr as $pfa): ?>
+
+            <?php  $resu = $pfa['pre_unica'];?>
+
+            <?php if ($resu != null): ?>
+              <?php foreach ($resu as $rp): ?>
+                <td class="res--<?php echo $pfa['id_pregunta_ficha'] ?>">
+                  <?php echo $rp['respuesta_ficha'] ?>
+                </td>
+              <?php endforeach; ?>
+            <?php endif; ?>
+
+            <?php $resl = $pfa['res_libre'];?>
+
+             <?php if ($resl != null): ?>
+               <td class="res--<?php echo $pfa['id_pregunta_ficha'] ?>">
+                <?php foreach ($resl as $rl): ?>
+                    <?php echo $rl['alumno_fs_libre'] . ' <br> ';?>
+                <?php endforeach; ?>
+                </td>
+             <?php endif;?>
+
+             <?php if ($resu == null && $resl == null): ?>
+               <td class="res--<?php echo $pfa['id_pregunta_ficha'] ?>"></td>
+             <?php endif; ?>
+
            <?php endforeach; ?>
-           <?php $resu = $rf['pre_unica']; ?>
-
-           <?php if ($resu != null): ?>
-             <?php $rper = $rf['pre_unica']; ?>
-             <?php foreach ($rper as $rp): ?>
-               <td class="res-<?php echo $rp['id_pregunta_ficha'] ?>"><?php echo $rp['respuesta_ficha'] ?></td>
-             <?php endforeach; ?>
-          <?php endif; ?>
-
-          <?php $resl = $rf['pre_libre']; ?>
-
-          <?php if ($resl != null): ?>
-             <?php foreach ($resl as $rl): ?>
-               <td class="res--<?php echo $rl['id_pregunta_ficha'] ?>">
-                 <?php foreach ($rl['res_libre'] as $r): ?>
-                   <?php echo $r['alumno_fs_libre'] . ' <br> ';?>
-                 <?php endforeach; ?>
-               </td>
-             <?php endforeach; ?>
-          <?php endif; ?>
 
            </tr>
          <?php endforeach; ?>
