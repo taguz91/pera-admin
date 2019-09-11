@@ -23,13 +23,15 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
               isset($_POST['puntajeMinimo']) &&
               isset($_POST['puntajeMaximo'])
             ){
+
+              //Sin datos vacios y que el puntaje maximo sea mayor al minimo
               $gS = new GrupoSocioEconomicoMD();
               $gS->idTipoFicha = $_POST['tipoficha'];
               $gS->grupoSocioeconomico = $_POST['gruposocioeconomico'];
               $gS->puntajeMinimo = $_POST['puntajeMinimo'];
               $gS->puntajeMaximo = $_POST['puntajeMaximo'];
 
-              $res = GrupoSocioEconomicoBD::guardar($gS);
+              //$res = GrupoSocioEconomicoBD::guardar($gS);
               if($res){
               echo "<h3>Guardamos correctamente a {$gS->grupoSocioeconomico}</h3>";
 
