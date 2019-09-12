@@ -9,7 +9,7 @@ require_once "src/modelo/clases/personamd.php";
 class EnviarCorreo
 {
 
-    static function enviar($persona, $pass)
+    static function enviar($persona, $pass, $mensaje)
     {
         $num = 0;
 
@@ -56,7 +56,7 @@ class EnviarCorreo
 
     }
 
-    static function enviarEditar($correo, $pass){
+    static function enviarEditar($correo, $pass, $mensaje){
 
         $num = 0;
         $mail = new PHPMailer(true);
@@ -79,14 +79,11 @@ class EnviarCorreo
                 // Content
                 $mail->isHTML(true);                                  // Set email format to HTML
                 $mail->Subject = 'Ficha Socioecon&oacute;mica';
-                $mail->Body    = "<h1> Ficha Socioecon&oacute;mica </h1> \n
-                El motivo de este mensaje es comunicarle sobre el llenado de la Ficha Socioecon&oacute;mica<br> \n
-                El cual lo deber&aacute; hacer con su Usuario y Contrase&ntilde;a, los cuales serán su Cédula de Ciudadanía<br> \n
-                Adem&aacute;s de esto necesita una Contraseña para el llenado de la Ficha antes mencionada, la cual es la siguiente: <br> <br>
-                <strong>Contrase&ntilde;a:</strong> pass<br>
+                $mail->Body    = "<p> $mensaje 
                 A continuación se presenta un enlace el cual le redirecciona a la página de ingreso de las Fichas Socioecon&oacute;micas<br>
-                <a href=\"htttp://ubi.tecazuay.edu.ec\" target=\"_blank\">Click para Ir al Ingreso de Fichas Socioecon&oacute;micas</a>"; 
-
+                <a href=\"htttp://ubi.tecazuay.edu.ec\" target=\"_blank\">Click para Ir al Ingreso de Fichas Socioecon&oacute;micas</a>
+                </p>";
+                
                 $mail->send();
 
                 echo "El correo ha sido enviado";
