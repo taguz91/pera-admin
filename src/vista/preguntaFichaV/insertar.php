@@ -48,7 +48,8 @@
                   <option value="1">Única</option>
                   <option value="2">Múltiple</option>
                   <option value="3">Libre Única</option>
-                  <option value="4">Libre Múltiple</option>
+                  <option value="4">Libre Múltiple</option>                  
+                  <option value="5">Selección</option>
                 </select>
                 </div>
 
