@@ -41,6 +41,10 @@ class PreguntaFichaCTR extends CTR implements DCTR
             $ayudaPregunta = $_POST["ayudaPregunta"];
 
             $tipoRespuesta = (int) $_POST["tipoRespuesta"];
+            
+            
+            $posicionPregunta = (int) $_POST["posicionPregunta"];
+
 
             $tipoCampo = "text";
             if (isset($_POST["tipoCampo"])) {
@@ -59,7 +63,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
                 $tipoPregunta = 0;
             }
 
-            $nuevaPregunta = new PreguntaFichaMD(null, $seccion, $pregunta, $ayudaPregunta, $tipoPregunta, $tipoRespuesta,$tipoCampo);
+            $nuevaPregunta = new PreguntaFichaMD(null, $seccion, $pregunta, $ayudaPregunta, $tipoPregunta, $tipoRespuesta,$tipoCampo, $posicionPregunta);
 
             $quiz = PreguntaFichaBD::insertarPreguntaFicha($nuevaPregunta);
 
@@ -104,6 +108,8 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
             $tipoRespuesta = (int) $_POST["tipoRespuesta"];
 
+            $posicionPregunta = (int) $_POST["posicionPregunta"];
+
             $tipoCampo = "text";
             if (isset($_POST["tipoCampo"])) {
                 $tipoCampo =$_POST["tipoCampo"];
@@ -119,7 +125,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
                 $tipoPregunta = 0;
             }
 
-            $pregunta = new PreguntaFichaMD($id, $seccion, $pregunta, $ayudaPregunta, $tipoPregunta, $tipoRespuesta, $tipoCampo);
+            $pregunta = new PreguntaFichaMD($id, $seccion, $pregunta, $ayudaPregunta, $tipoPregunta, $tipoRespuesta, $tipoCampo, $posicionPregunta);
 
              PreguntaFichaBD::actualizarPreguntaFicha($pregunta);
 
@@ -206,7 +212,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
 
 
 
-             $pregunta = new PreguntaFichaMD($id, null, null ,null, null, null, null, false);
+             $pregunta = new PreguntaFichaMD($id, null, null ,null, null, null, null, null,  false);
 
 
 

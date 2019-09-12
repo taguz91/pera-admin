@@ -11,11 +11,12 @@ class PreguntaFichaMD{
     private $preguntaFichaRespuestaTipo;
     private $preguntaFichaActiva;
     private $preguntaFichaRespuestaCampo; 
+    private $preguntaFichaPosicion;
 
 
     function __construct(int $idPreguntaFicha=null, int $idSeccionFicha=null, string $preguntaFicha=null,string $preguntaFichaAyuda=null,
                              int $preguntaFichaTipo=null, int $preguntaFichaRespuestaTipo=null , string $preguntaFichaRespuestaCampo=null, 
-                             bool $preguntaFichaActiva=true)
+                             int $preguntaFichaPosicion=null, bool $preguntaFichaActiva=true)
     {
         
         if($idPreguntaFicha!=null){
@@ -29,6 +30,7 @@ class PreguntaFichaMD{
         $this->preguntaFichaRespuestaTipo=$preguntaFichaRespuestaTipo;
         $this->preguntaFichaActiva=$preguntaFichaActiva;
         $this->preguntaFichaRespuestaCampo=$preguntaFichaRespuestaCampo;
+        $this->preguntaFichaPosicion=$preguntaFichaPosicion;
 
     }
 
@@ -139,6 +141,20 @@ class PreguntaFichaMD{
     public function setPreguntaFichaRespuestaCampo($preguntaFichaRespuestaCampo)
     {
         $this->preguntaFichaRespuestaCampo = $preguntaFichaRespuestaCampo;
+
+        return $this;
+    }
+
+ 
+    public function getPreguntaFichaPosicion():int
+    {
+        return $this->preguntaFichaPosicion;
+    }
+
+ 
+    public function setPreguntaFichaPosicion($preguntaFichaPosicion)
+    {
+        $this->preguntaFichaPosicion = $preguntaFichaPosicion;
 
         return $this;
     }

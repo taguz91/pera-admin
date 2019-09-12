@@ -277,6 +277,8 @@ class PersonaFichaCTR extends CTR implements DCTR
       isset($_POST['correo'])
     ) {
 
+      //No vengan datos vaciossss y que no tenga XSS
+
       $passDoc = self::generarContrasena(1);
       $personaFicha = new PersonaFichaMD();
       $personaFicha->idPermisoIngFicha = $_POST['permiso'];

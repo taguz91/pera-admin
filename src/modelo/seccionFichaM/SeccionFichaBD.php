@@ -9,9 +9,10 @@ abstract class SeccionFichaBD{
     static function insertarSeccionFicha(SeccionFichaMD $nuevaSeccion){
        
         $pst=getCon()->prepare('INSERT INTO "SeccionesFicha"(
-                                id_tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa)
-                                VALUES (?, ?, ?)');
-       return $pst->execute(array($nuevaSeccion->getIdTipoFicha(),$nuevaSeccion->getSeccionFichaNombre(),$nuevaSeccion->getSeccionFichaActiva()));
+                                id_tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa, seccion_ficha_posicion)
+                                VALUES (?, ?, ?, ?)');
+       return $pst->execute(array($nuevaSeccion->getIdTipoFicha(),$nuevaSeccion->getSeccionFichaNombre(),
+                                    $nuevaSeccion->getSeccionFichaActiva(), $nuevaSeccion->getSeccionFichaPosicion()));
     
     }
 
@@ -20,7 +21,7 @@ abstract class SeccionFichaBD{
 
         $pst=null;
         if($key==null){
-            $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha
+            $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha, seccion_ficha_posicion
                                     FROM "SeccionesFicha" sf JOIN "TipoFicha" tf 
                                     ON tf.id_tipo_ficha=sf.id_tipo_ficha 
                                     WHERE seccion_ficha_activa=true 
@@ -31,7 +32,7 @@ abstract class SeccionFichaBD{
             switch($op){
 
                 case 1:
-                $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha
+                $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha, seccion_ficha_posicion
                                         FROM "SeccionesFicha" sf JOIN "TipoFicha" tf 
                                         ON tf.id_tipo_ficha=sf.id_tipo_ficha 
                                         WHERE seccion_ficha_activa=true 
@@ -41,7 +42,7 @@ abstract class SeccionFichaBD{
                break;
 
                 case 2:
-                $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha
+                $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha, seccion_ficha_posicion
                                         FROM "SeccionesFicha" sf JOIN "TipoFicha" tf 
                                         ON tf.id_tipo_ficha=sf.id_tipo_ficha 
                                         WHERE seccion_ficha_activa=true 
@@ -50,7 +51,7 @@ abstract class SeccionFichaBD{
                 break;
 
                 case 3:
-                $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha
+                $pst=getCon()->prepare('SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha, seccion_ficha_posicion
                                         FROM "SeccionesFicha" sf JOIN "TipoFicha" tf 
                                         ON tf.id_tipo_ficha=sf.id_tipo_ficha 
                                         WHERE seccion_ficha_activa=true
@@ -61,11 +62,11 @@ abstract class SeccionFichaBD{
     
                 case 4:
             
-                $pst=getCon()->prepare("SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha
+                $pst=getCon()->prepare("SELECT id_seccion_ficha, tf.tipo_ficha, seccion_ficha_nombre, seccion_ficha_activa,sf.id_tipo_ficha, seccion_ficha_posicion
                                         FROM \"SeccionesFicha\" sf JOIN \"TipoFicha\" tf 
                                         ON tf.id_tipo_ficha=sf.id_tipo_ficha
                                         WHERE seccion_ficha_activa=true 
-                                        AND seccion_ficha_nombre ILIKE '%{$key}%'");
+                                        AND seccion_ficha_nombre  ILIKE '%{$key}%'");
                                         
                 $pst->execute();
     
@@ -84,9 +85,10 @@ abstract class SeccionFichaBD{
     static function actualizarSeccionFicha(SeccionFichaMD $seccion){
 
         $pst=getCon()->prepare('UPDATE "SeccionesFicha"
-                                SET  id_tipo_ficha=?, seccion_ficha_nombre=?, seccion_ficha_activa=?
+                                SET  id_tipo_ficha=?, seccion_ficha_nombre=?, seccion_ficha_activa=?, seccion_ficha_posicion=?
                                 WHERE id_seccion_ficha=?');
-        return $pst->execute(array($seccion->getIdTipoFicha(),$seccion->getSeccionFichaNombre(),$seccion->getSeccionFichaActiva(),$seccion->getIdSeccionFicha()));
+        return $pst->execute(array($seccion->getIdTipoFicha(),$seccion->getSeccionFichaNombre(),$seccion->getSeccionFichaActiva(),
+                                    $seccion->getSeccionFichaPosicion(), $seccion->getIdSeccionFicha()));
  
     }
 
