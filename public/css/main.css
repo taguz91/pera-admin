@@ -18,3 +18,12 @@
   font-size: 5.0em;
   font-family: 'Fira Code', monospace;
 }
+
+
+.bg-gradient-blue {
+
+  background-color: #0a3d62;
+  background-image: -webkit-gradient(linear, left top, left bottom, color-stop(100%, #0a3d62), to(#60a3bc));
+  background-image: linear-gradient(180deg, #0a3d62 100%, #60a3bc 100%);
+  background-size: cover;
+}

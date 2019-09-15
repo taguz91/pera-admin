@@ -12,8 +12,8 @@ class PersonaFichaCTR extends CTR implements DCTR
 
   private $mensaje = "
       <h1> Ficha Socioecon&oacute;mica </h1>
-      El motivo de este mensaje es comunicarle sobre el llenado de la Ficha Socioecon&oacute;mica <br> 
-      El cual lo deber&aacute; hacer con su Usuario y Contrase&ntilde;a, los cuales serán su Cédula de Ciudadanía <br> 
+      El motivo de este mensaje es comunicarle sobre el llenado de la Ficha Socioecon&oacute;mica <br>
+      El cual lo deber&aacute; hacer con su Usuario y Contrase&ntilde;a, los cuales serán su Cédula de Ciudadanía <br>
       Adem&aacute;s de esto necesita una Contraseña para el llenado de la Ficha antes mencionada, la cual es la siguiente: <br> <br>
       <strong>Contrase&ntilde;a:</strong> pass<br>";
 
@@ -28,7 +28,7 @@ class PersonaFichaCTR extends CTR implements DCTR
     require $this->cargarVista('index.php');
   }
 
-  public function guardarpersona()
+  public function guardar()
   {
     if (isset($_POST['guardar'])) {
 
@@ -41,7 +41,7 @@ class PersonaFichaCTR extends CTR implements DCTR
         //var_dump($_POST);
         $pf = new PersonaFichaMD();
         $pf->idPermisoIngFicha = $_POST['permiso'];
-      
+
         $numCiclo = $_POST['ciclo'];
         $idTipoFicha = PermisoIngresoBD::getPorId($pf->idPermisoIngFicha);
 
@@ -74,7 +74,7 @@ class PersonaFichaCTR extends CTR implements DCTR
                     echo "<h3>Guardamos correctamente a {$pf->fechaIngreso}</h3>";
                     $val = true;
                     //$this->inicio();
-                   
+
                   } else {
                     echo "<h3>No se puedo guardar correctamente a {$pf->idPersonaFicha}</h3>";
                     $val = false;
@@ -83,7 +83,7 @@ class PersonaFichaCTR extends CTR implements DCTR
                   $mensaje = "No se pudo enviar corectamente todos los correos, se enviaron a" . count($correosEst) . " estudiantes";
                   echo $mensaje;
                 }
-              } 
+              }
               if(val == true){
                 $this->inicio();
               }
@@ -162,10 +162,10 @@ class PersonaFichaCTR extends CTR implements DCTR
               // } else {
               //   $mensaje = "No se pudo enviar corectamente todos los correos, se enviaron a count($correosDoc) estudiantes";
               // }
-            
+
             }
           }
-        
+
       } else {
         Errores::errorVariableNoEncontrada();
       }
@@ -176,7 +176,7 @@ class PersonaFichaCTR extends CTR implements DCTR
     }
   }
 
- 
+
 
   private function generarContrasena($num)
   {
@@ -231,7 +231,7 @@ class PersonaFichaCTR extends CTR implements DCTR
         var_dump($_POST);
       }
     } else{
-      
+
     }
   }
 
@@ -283,7 +283,7 @@ class PersonaFichaCTR extends CTR implements DCTR
       $personaFicha = new PersonaFichaMD();
       $personaFicha->idPermisoIngFicha = $_POST['permiso'];
       $personaFicha->idPersona = $idPersona;
-      
+
       if (EnviarCorreo::enviarEditar($correo, $passDoc[0], $mensajePersonalizado)) {
         $mensaje = "Se envío correctamente el correo";
         echo $mensaje;

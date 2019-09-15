@@ -46,19 +46,11 @@ class LoginCTR extends CTR implements DCTR {
   }
 
   public function salir() {
-    echo "NO borramos";
-    if(isset($_POST['salir'])){
-      //Borramos la cookie
-      if(isset($_COOKIE['usuario'])){
-        setcookie('usuario', null , time() - 360, '/');
-        echo "borramos la cookie<br>";
-        var_dump($_COOKIE['usuario']);
-        header("Location: ".constant('URL'));
-      }else{
-        header("Location: ".constant('URL'));
-      }
-
+    //Borramos la cookie
+    if(isset($_COOKIE['usuario'])){
+      setcookie('usuario', null , time() - 360, '/');
     }
+    header("Location: ".constant('URL'));
   }
 
 }

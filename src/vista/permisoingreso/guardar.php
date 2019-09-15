@@ -1,10 +1,11 @@
 <?php
+$pagina = 'Permiso Ingreso Ficha | Ingresar';
 require 'src/vista/templates/header.php';
 ?>
 
-<div class="container my-5">
+<div class="my-5">
 
-    <div class="col-md-8 col-lg-6 mx-auto border rounded">
+    <div class="col-md-8 col-lg-6 mx-auto border rounded shadow">
 
         <h3 class="text-center my-3">
             Ingreso de Permiso Ficha
@@ -24,7 +25,6 @@ require 'src/vista/templates/header.php';
                         }
                     }
                     ?>
-                    <!--                     <option value="1">test</option> -->
                 </select>
             </div>
 
@@ -41,7 +41,6 @@ require 'src/vista/templates/header.php';
                         }
                     }
                     ?>
-                    <!--                     <option value="1">test</option> -->
                 </select>
 
             </div>
@@ -72,22 +71,11 @@ require 'src/vista/templates/header.php';
     </div>
 </div>
 
-
 <?php
 require 'src/vista/templates/footer.php';
 ?>
-<script src="<?php echo constant('URL'); ?>public/js/jquery.js"></script>
-<script src="<?php echo constant('URL'); ?>public/js/popper.js"></script>
-<script src="<?php echo constant('URL'); ?>public/js/jquery.js"></script>
 
 <script>
-    //Validamos
-    //Validamos campo periodos
-    //Validamos campo tipo de ficha
-    //Validamos fechas
-    // Fecha cierre debe ser mayor a la de inicio
-    console.log("VALIDACION GUARDA.PHP");
-
     let valPeriodos = false;
     let valFichas = false;
     let valFechas = false;

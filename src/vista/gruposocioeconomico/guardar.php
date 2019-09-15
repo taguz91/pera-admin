@@ -1,14 +1,16 @@
 <?php
+$pagina = 'Grupo socioeconómico | Ingresar';
 require 'src/vista/templates/header.php';
 ?>
 
-<div class="container my-5">
+<div class="my-5">
 
-  <div class="col-md-8 col-lg-6 mx-auto border rounded">
+  <div class="col-md-8 col-lg-6 mx-auto border rounded shadow">
 
     <h3 class="text-center my-3">
       Ingreso de un grupo socieconómico
     </h3>
+
     <form class="form-horizontal" id="form-gp" action="<?php echo constant('URL'); ?>gruposocienomico/guardar" method="post">
 
       <div class="form-group">
@@ -23,29 +25,28 @@ require 'src/vista/templates/header.php';
             }
           }
           ?>
-         <!--  <option value="1">TestFichas</option> -->
         </select>
 
       </div>
 
       <div class="form-group">
-        <label for="nombreGrupo" class="control-label">Grupo Socioeconomico</label>
-        <input type="text" name="nombreGrupo" value="" class="form-control" placeholder="Ingrese el nuevo nombre del Grupo Socieconómico" id="inGrupo">
+        <label for="nombreGrupo" class="control-label">Grupo socioeconomico</label>
+        <input type="text" name="nombreGrupo" value="" class="form-control" placeholder="Ingrese el nuevo nombre del grupo socieconómico" id="inGrupo">
       </div>
 
       <div class="form-row">
 
         <div class="col">
           <div class="form-group">
-            <label for="puntajeMin" class="control-label">Puntaje Minimo</label>
-            <input type="number" name="puntajeMin" value="" min="1" class="form-control" placeholder="Ingrese el nuevo Puntaje Mínimo" id="inMinimo">
+            <label for="puntajeMin" class="control-label">Puntaje mínimo</label>
+            <input type="number" name="puntajeMin" value="" min="1" class="form-control" placeholder="Ingrese el nuevo puntaje mínimo" id="inMinimo">
           </div>
         </div>
 
         <div class="col">
           <div class="form-group">
-            <label for="puntajeMax" class="control-label">Puntaje Máximo</label>
-            <input type="number" name="puntajeMax" value="" class="form-control" min="2" placeholder="Ingrese el nuevo Puntaje Máximo" id="inMaximo">
+            <label for="puntajeMax" class="control-label">Puntaje máximo</label>
+            <input type="number" name="puntajeMax" value="" class="form-control" min="2" placeholder="Ingrese el nuevo puntaje máximo" id="inMaximo">
           </div>
         </div>
       </div>
@@ -67,34 +68,7 @@ require 'src/vista/templates/header.php';
 require 'src/vista/templates/footer.php';
 ?>
 
-
 <script>
-  //Validaciones que el valor maximo mayor al valo minimo minimo  
-
-  /* const FGP = document.querySelector('#form-gp');
-  FGP.addEventListener('submit', (e) => {
-    e.preventDefault();
-  });
-  function guardarGP() {
-    console.log("GUARDANDOOOOO");
-
-    var form = new FormData(FGP); 
-    let valido  = true; 
-    if(form.get("nombreGrupo") == "") {
-      valido = false; 
-    }
-
-    let vmin = form.get("puntajeMin");
-
-    console.log("MIN: "+vmin);
-
-
-
-    if(valido){
-      FGP.submit();
-    } 
-  }*/
-
   const cmbFicha = $("#cmbFichas");
   const inGrupo = $("#inGrupo");
   const inMinimo = $("#inMinimo");

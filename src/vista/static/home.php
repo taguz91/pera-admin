@@ -1,33 +1,35 @@
 <?php
+$pagina = 'Home';
 require 'src/vista/templates/header.php';
  ?>
 
-<div class="h-100 my-5">
-  <div class="container">
+ <!-- Content Row -->
+ <div class="row">
 
-    <div class="card mx-auto">
-        <h1 class="text-center m-3">
-          Bienvenido
-        </h1>
-    </div>
 
-    <div class="card mx-auto my-3">
-      <h1 class="text-center bg-ista-yellow py-2 text-white">
-        <?php
-        echo "$usuario->user";
-         ?>
-      </h1>
-      <h2 class="text-center my-2">
-        <?php
-        //echo $usuario->persona->primerNombre;
-        echo $usuario->persona->primerNombre
-        ." ". $usuario->persona->primerApellido;
-        ?>
-      </h2>
-    </div>
+   <div class="col-xl-3 col-md-6 mb-4">
+     <div class="card border-left-primary shadow h-100 py-2">
+       <div class="card-body">
+         <div class="row no-gutters align-items-center">
+           <div class="col mr-2">
+             <div class="text-xs font-weight-bold text-primary text-uppercase mb-1">
+               <a class="link"
+               href="#">Permiso Ingreso Fichas</a>
+             </div>
+             <div class="h5 mb-0 font-weight-bold text-gray-800">
+               2132
+             </div>
+           </div>
+           <div class="col-auto">
+             <i class="fas fa-calendar fa-2x text-gray-300"></i>
+           </div>
+         </div>
+       </div>
+     </div>
+   </div>
 
-  </div>
-</div>
+ </div>
+
 
 <?php
 require 'src/vista/templates/footer.php';
