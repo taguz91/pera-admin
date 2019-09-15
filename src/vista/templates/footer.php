@@ -10,6 +10,7 @@
       <div class="container my-auto">
         <div class="copyright text-center my-auto">
           <span>Copyright &copy; Team Zero</span>
+          <a class="" href="<?php echo constant('URL'); ?>dev/">Devs</a>
         </div>
       </div>
     </footer>

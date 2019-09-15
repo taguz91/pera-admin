@@ -1,12 +1,13 @@
 <?php
+$pagina = 'Envío de correos';
 require 'src/vista/templates/header.php';
 ?>
-<div class="container my-5">
+<div class="my-5">
 
-  <div class="col-md-8 col-lg-6 mx-auto border rounded">
+  <div class="col-md-8 col-lg-6 mx-auto border rounded shadow">
 
     <h3 class="text-center my-3">
-      Ingreso de Persona Ficha
+      Envío de correos
     </h3>
     <form class="form-horizontal" action="<?php echo constant('URL'); ?>personaficha/guardarpersona" method="post">
 
@@ -16,10 +17,9 @@ require 'src/vista/templates/header.php';
           <option value="0">Permisos</option>
 
           <?php
-          //Cargamos todos los permisos de la base de datos
           if (isset($permisos)) {
             foreach ($permisos as $pf) {
-              echo '<option value="' . $pf->id . '">Tipo de Ficha:' . $pf->tipoFicha->tipoFicha . ' - ' . $pf->periodo->nombre . '</option>';
+              echo '<option value="' . $pf->id . '">' . $pf->tipoFicha->tipoFicha . ' - ' . $pf->periodo->nombre . '</option>';
             }
           }
           ?>
@@ -38,20 +38,9 @@ require 'src/vista/templates/header.php';
         </select>
       </div>
 
-      <div class="form-row">
-        <div class="col">
-          <div class="form-group">
-            <label for="fechaInicio" class="control-label">Fecha Inicio</label>
-            <input type="date" name="fechaInicio" value="" class="form-control" id="inFechaInicio">
-          </div>
-        </div>
-
-        <div class="col">
-          <div class="form-group">
-            <label for="fechaModificación" class="control-label">Fecha Modificación</label>
-            <input type="date" name="fechaModificación" value="" class="form-control" id="inFechaFin">
-          </div>
-        </div>
+      <div class="form-group">
+        <label for="">Correo:</label>
+        <textarea name="correo" class="form-control" rows="5" cols="5" placeholder="Escriba el correo que enviara." required></textarea>
       </div>
 
       <div class="form-group">

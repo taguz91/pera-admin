@@ -27,7 +27,7 @@ abstract class Errores{
 
   static function errorBuscar($mensaje){
     echo '<div class="container">
-      <div class="alert alert-info my-3 text-center">
+      <div class="alert alert-info my-2 text-center">
         '.$mensaje.'
         </div>
       </div>';

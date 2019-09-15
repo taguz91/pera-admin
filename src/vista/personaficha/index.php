@@ -17,6 +17,17 @@ require 'src/vista/templates/header.php';
       </div>
 
     </div>
+
+    <?php if (isset($mensaje)): ?>
+      <div class="row">
+        <div class="col-10 mx-auto">
+          <div class="alert alert-info my-2 text-center">
+            <?php echo $mensaje; ?>
+          </div>
+        </div>
+      </div>
+    <?php endif; ?>
+
   </div>
 
   <div class="card-body">
@@ -31,7 +42,7 @@ require 'src/vista/templates/header.php';
             <th scope="col">Nombre Persona</th>
             <th scope="col">Fecha Inicio</th>
             <th scope="col">Fecha Modificación</th>
-            <th scope="col">Editar</th>
+            <th scope="col">Reenviar</th>
             <th scope="col">Eliminar</th>
           </tr>
         </thead>
@@ -47,8 +58,8 @@ require 'src/vista/templates/header.php';
               echo "<td>".$pf->persona->primerNombre." ".$pf->persona->primerApellido."</td>";
               echo "<td>".$pf->fechaIngreso."</td>";
               echo "<td>".$pf->fechaModificacion."</td>";
-              echo '<td> <a href="'.constant('URL').'personaFicha/editarpersona?id='.$pf->idPersonaFicha.'">Editar</a> </td>';
-              echo '<td> <a href="'.constant('URL').'personaFicha/eliminarpersona?id='.$pf->idPersonaFicha.'">Eliminar</a> </td>';
+              echo '<td> <a href="'.constant('URL').'personaficha/reenviar?id='.$pf->idPersonaFicha.'">Reenviar</a> </td>';
+              echo '<td> <a href="'.constant('URL').'personaficha/eliminarpersona?id='.$pf->idPersonaFicha.'">Eliminar</a> </td>';
               echo "</tr>";
             }
           }else{

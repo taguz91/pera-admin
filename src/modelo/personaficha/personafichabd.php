@@ -2,61 +2,41 @@
 require_once "src/modelo/personaficha/personaficha.php";
 require_once "src/modelo/clases/personamd.php";
 
-abstract class PersonaFichaBD
-{
+abstract class PersonaFichaBD {
 
-  static function guardarPersonaFicha($personaFicha)
-  {
+  static function guardarPersonaFicha($personaFicha) {
     $ct = getCon();
     if ($ct != null) {
       $sentencia = $ct->prepare(self::$INSERT);
       $res = $sentencia->execute([
         'id_permiso_ingreso_ficha' => $personaFicha->idPermisoIngFicha,
         'id_persona' => $personaFicha->idPersona,
-        'persona_ficha_clave' => $personaFicha->clave,
-        'persona_ficha_fecha_ingreso' => $personaFicha->fechaIngreso,
-        'persona_ficha_fecha_modificacion' => $personaFicha->fechaModificacion
-      ]);
-      if ($res != null) {
-        echo "<h1>Guardamos correctamente</h1>";
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      echo "<h1>No contamos con una conexion</h1>";
-      return false;
-    }
-  }
-
-  static function editarPersonaFicha($personaFicha)
-  {
-    $ct = getCon();
-    if ($ct != null) {
-      $id = $personaFicha->idPersonaFicha;
-      $sentencia = $ct->prepare(self::$UPDATE." "." WHERE id_persona_ficha =: $id;");
-      $res = $sentencia->execute([
         'persona_ficha_clave' => $personaFicha->clave
       ]);
       if ($res != null) {
-        echo "<h1>Editamos correctamente</h1>";
         return true;
       } else {
-        echo "<h1>No se pudo editar correctamente</h1>";
         return false;
       }
     } else {
       return false;
     }
   }
-  
-  static function editarPersona(){
 
+  static function editarPersonaFicha($id, $clave){
+    $ct = getCon();
+    if ($ct != null) {
+      $sentencia = $ct->prepare(self::$UPDATE);
+      return $sentencia->execute([
+        'id' => $id,
+        'persona_ficha_clave' => $clave
+      ]);
+    } else {
+      return false;
+    }
   }
 
-  static function eliminarPersonaFicha($id)
-  {
-
+  static function eliminarPersonaFicha($id){
     $ct = getCon();
     if ($ct != null) {
       $sentencia = $ct->prepare(self::$DELETE);
@@ -64,10 +44,8 @@ abstract class PersonaFichaBD
         'id_persona_ficha' => $id
       ]);
       if ($res != null) {
-        echo "<h1>Eliminamos correctamente</h1>";
         return true;
       } else {
-        echo "<h1>No se pudo elminiar correctamente</h1>";
         return false;
       }
     } else {
@@ -133,7 +111,7 @@ abstract class PersonaFichaBD
   static function getCorreosEst($numCiclo, $idPermiso)
   {
     $sql = self::$ESTUDIANTE . " (SELECT id_prd_lectivo FROM public.\"PermisoIngresoFichas\" WHERE id_permiso_ingreso_ficha = $idPermiso)  AND
-    curso_ciclo = $numCiclo))) AND id_persona NOT IN 
+    curso_ciclo = $numCiclo))) AND id_persona NOT IN
     (SELECT id_persona FROM public.\"PersonaFicha\" WHERE id_permiso_ingreso_ficha = $idPermiso) ORDER BY id_persona;";
     $ct = getCon();
     if ($ct != null) {
@@ -149,7 +127,7 @@ abstract class PersonaFichaBD
   static function getCorreosDoc($numCiclo, $idPermiso)
   {
     $sql = self::$DOCENTE . " (SELECT id_prd_lectivo FROM public.\"PermisoIngresoFichas\" WHERE id_permiso_ingreso_ficha = $idPermiso) AND
-    curso_ciclo = $numCiclo)) AND id_persona NOT IN 
+    curso_ciclo = $numCiclo)) AND id_persona NOT IN
     (SELECT id_persona FROM public.\"PersonaFicha\" WHERE id_permiso_ingreso_ficha = $idPermiso) ORDER BY id_persona;";
     $ct = getCon();
     if ($ct != null) {
@@ -292,13 +270,16 @@ abstract class PersonaFichaBD
 
   public static $INSERT = '
       INSERT INTO public."PersonaFicha"(
-        id_permiso_ingreso_ficha, id_persona, persona_ficha_clave, persona_ficha_fecha_ingreso,
-        persona_ficha_fecha_modificacion, persona_ficha_activa)
-      VALUES(:id_permiso_ingreso_ficha, :id_persona, bytea(md5(:persona_ficha_clave)), :persona_ficha_fecha_ingreso, :persona_ficha_fecha_modificacion, true)';
+        id_permiso_ingreso_ficha, id_persona, persona_ficha_clave, persona_ficha_activa)
+      VALUES(
+        :id_permiso_ingreso_ficha,
+        :id_persona, bytea(md5(:persona_ficha_clave)),
+        true)';
 
   public static $UPDATE = '
       UPDATE public."PersonaFicha"
-      SET persona_ficha_clave =: persona_ficha_clave';
+      SET persona_ficha_clave =  bytea(md5(:persona_ficha_clave))
+      WHERE id_persona_ficha = :id;';
 
   public static $DELETE = '
       UPDATE public."PersonaFicha"
@@ -307,13 +288,13 @@ abstract class PersonaFichaBD
       ';
 
   public static $ESTUDIANTE = '
-      SELECT id_persona, persona_correo FROM public."Personas" WHERE 
-      id_persona IN (SELECT id_persona FROM public."Alumnos" WHERE id_alumno IN 
-      (SELECT id_alumno FROM public."AlumnoCurso" WHERE id_curso IN 
+      SELECT id_persona, persona_correo FROM public."Personas" WHERE
+      id_persona IN (SELECT id_persona FROM public."Alumnos" WHERE id_alumno IN
+      (SELECT id_alumno FROM public."AlumnoCurso" WHERE id_curso IN
         (SELECT DISTINCT id_curso FROM public."Cursos" WHERE id_prd_lectivo =';
 
   public static $DOCENTE = '
   SELECT id_persona, persona_correo FROM public."Personas" WHERE
-  id_persona IN (SELECT id_persona FROM public."Docentes" WHERE id_docente IN 
+  id_persona IN (SELECT id_persona FROM public."Docentes" WHERE id_docente IN
    (SELECT DISTINCT id_docente FROM public."Cursos" WHERE id_prd_lectivo =';
 }

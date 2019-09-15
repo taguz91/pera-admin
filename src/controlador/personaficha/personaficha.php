@@ -17,46 +17,40 @@ class PersonaFichaCTR extends CTR implements DCTR
       Adem&aacute;s de esto necesita una Contraseña para el llenado de la Ficha antes mencionada, la cual es la siguiente: <br> <br>
       <strong>Contrase&ntilde;a:</strong> pass<br>";
 
-  function __construct()
-  {
+  function __construct() {
     parent::__construct("src/vista/personaficha/");
   }
 
-  public function inicio()
-  {
+  public function inicio($mensaje = null) {
     $personaFichas = PersonaFichaBD::getAll();
     require $this->cargarVista('index.php');
   }
 
-  public function guardar()
-  {
+  public function guardar() {
     if (isset($_POST['guardar'])) {
 
       if (
         isset($_POST['permiso']) &&
         isset($_POST['ciclo']) &&
-        isset($_POST['fechaInicio']) &&
-        isset($_POST['fechaModificación'])
+        isset($_POST['correo'])
       ) {
-        //var_dump($_POST);
         $pf = new PersonaFichaMD();
         $pf->idPermisoIngFicha = $_POST['permiso'];
-
         $numCiclo = $_POST['ciclo'];
-        $idTipoFicha = PermisoIngresoBD::getPorId($pf->idPermisoIngFicha);
+        $tipoFicha = PermisoIngresoBD::getPorId($pf->idPermisoIngFicha);
 
-        //Faltan las validaciones
-
-          if ($idTipoFicha->idTipoFicha == 1) {
+          if ($tipoFicha->idTipoFicha == 1) {
 
             $correosEst = PersonaFichaBD::getCorreosEst($numCiclo, $pf->idPermisoIngFicha);
             if (empty($correosEst)) {
               echo "<h3>Estos ciclos ya se guardaron como fichas</h3>";
             } else {
-              $numPassEst = sizeof($correosEst);
-              $passEst = self::generarContrasena($numPassEst);
-              $val = false;
+              $this->enviarCorreos($correosEst, $_POST['correo']);
 
+              /*$numPassEst = sizeof($correosEst);
+              $passEst = self::generarContrasena($numPassEst);*/
+              $val = false;
+              /*
               for ($i = 0; $i < $numPassEst; $i++) {
                 if (EnviarCorreo::enviar($correosEst[$i], $passEst[$i], $this->mensaje)) {
                   set_time_limit(300);
@@ -64,9 +58,6 @@ class PersonaFichaCTR extends CTR implements DCTR
                   echo $mensaje;
                   $pf->idPersona = $correosEst[$i]->idPersona;
                   $pf->clave = $passEst[$i];
-                  $pf->fechaIngreso = $_POST['fechaInicio'];
-                  $pf->fechaModificacion = $_POST['fechaModificación'];
-
                   //Se debe validar antes de guardar
 
                   $res = PersonaFichaBD::guardarPersonaFicha($pf);
@@ -83,38 +74,17 @@ class PersonaFichaCTR extends CTR implements DCTR
                   $mensaje = "No se pudo enviar corectamente todos los correos, se enviaron a" . count($correosEst) . " estudiantes";
                   echo $mensaje;
                 }
-              }
-              if(val == true){
+
+              }*/
+              if($val == true){
                 $this->inicio();
               }
             }
 
-            //   if (EnviarCorreo::enviar($correosEst, $passEst)) {
-            //     $mensaje = "Se envío correctamente los correos a count($correosEst) estudiantes";
-            //     $pf->idPersona = $_POST['tipoficha'];
-            //     $pf->fechaInicio = $_POST['fechaInicio'];
-            //     $pf->fechaFin = $_POST['fechaFin'];
-
-            //     //Se debe validar antes de guardar
-
-            //     $res = PermisoIngresoBD::guardar($pf);
-            //     if ($res) {
-            //       echo "<h3>Guardamos correctamente a {$pf->fechaInicio}</h3>";
-
-            //       $this->inicio();
-            //     }
-            //   } else {
-            //     $mensaje = "No se pudo enviar corectamente todos los correos, se enviaron a count($correosEst) estudiantes";
-            //   }
-            //}
-
-
-          } else if ($idTipoFicha->idTipoFicha == 2) {
-
+          } else if ($tipoFicha->idTipoFicha == 2) {
             $correosDoc = PersonaFichaBD::getCorreosDoc($numCiclo, $pf->idPermisoIngFicha);
 
             if (empty($correosDoc)) {
-
               echo "<h3>Estos ciclos ya se guardaron como fichas</h3>";
             } else {
               $numPassDoc = sizeof($correosDoc);
@@ -132,7 +102,6 @@ class PersonaFichaCTR extends CTR implements DCTR
                   $res = PersonaFichaBD::guardarPersonaFicha($pf);
                   if ($res) {
                     echo "<h3>Guardamos correctamente a {$pf->fechaIngreso}</h3>";
-
                     $this->inicio();
                   } else {
                     echo "<h3>No se puedo guardar correctamente</h3>";
@@ -142,102 +111,71 @@ class PersonaFichaCTR extends CTR implements DCTR
                   echo $mensaje;
                 }
               }
-
-
-              // if (EnviarCorreo::enviar($correosEst, $passDoc)) {
-              //   $mensaje = "Se envío correctamente los correos a count($correosDoc estudiantes";
-
-              //   $pf->idPersona = $_POST['tipoficha'];
-              //   $pf->fechaInicio = $_POST['fechaInicio'];
-              //   $pf->fechaFin = $_POST['fechaFin'];
-
-              //   //Se debe validar antes de guardar
-
-              //   $res = PermisoIngresoBD::guardar($pf);
-              //   if ($res) {
-              //     echo "<h3>Guardamos correctamente a {$pf->fechaInicio}</h3>";
-
-              //     $this->inicio();
-              //   }
-              // } else {
-              //   $mensaje = "No se pudo enviar corectamente todos los correos, se enviaron a count($correosDoc) estudiantes";
-              // }
-
             }
           }
-
       } else {
         Errores::errorVariableNoEncontrada();
       }
     } else {
       $permisos = PermisoIngresoBD::getAll();
-
       require $this->cargarVista('guardarpersona.php');
     }
   }
 
+  function editar(){
+    if(isset($_POST['guardar'])){
+      $correo = $_POST['correo'];
+      $id = $_POST['idperficha'];
+      $mensaje = $_POST['mensaje'];
+      $pass = $this->getRandomPass();
 
+      if(EnviarCorreo::enviarEditar($correo, $pass, $mensaje)){
+        $res = PersonaFichaBD::editarPersonaFicha($id, $pass);
+        if($res){
+          $this->inicio('Se reenvio el correo correctamente.');
+        }
+      }
+    }
+  }
 
-  private function generarContrasena($num)
-  {
+  function reenviar(){
+    if(isset($_GET['id'])){
+      require $this->cargarVista('reenviar.php');
+    }
+  }
 
+  private function enviarCorreos($correos, $mensaje){
+    $numPass = sizeof($correos);
+    $pass = self::generarContrasena($numPass);
+    $count = 0;
+    for ($i = 0; $i < $numPass; $i++) {
+      if (EnviarCorreo::enviar($correos[$i], $pass[$i], $mensaje)) {
+        set_time_limit(300);
+        $pf->idPersona = $correos[$i]->idPersona;
+        $pf->clave = $pass[$i];
+        //Se debe validar antes de guardar
+        $res = PersonaFichaBD::guardarPersonaFicha($pf);
+        if ($res) {
+          $count++;
+        }
+      }
+    }
+    return $count;
+  }
+
+  private function generarContrasena($num){
     $pass = array();
     for ($i = 0; $i < $num; $i++) {
-      $generate = substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
-      array_push($pass, $generate);
+      array_push($pass, $this->getRandomPass());
     }
-
     return $pass;
   }
 
-  //Falta acabar la funcionalidad
-  public function editar()
-  {
-
-    if (isset($_GET['id'])) {
-      echo "Vamos a editar";
-
-      $pi = PersonaFichaBD::getPorId($_GET['id']);
-      if ($pi != null) {
-        require $this->cargarVista('editarpersona.php');
-      } else {
-        Errores::errorEditar("Permiso Ingreso Ficha");
-      }
-    }
-
-    if (isset($_POST['editar'])) {
-
-      if (
-        isset($_POST['password'])
-      ) {
-        //var_dump($_POST);
-
-        $pf = new PersonaFichaMD();
-        $pf->clave = $_POST['password'];
-
-        // $p = new PersonaMD();
-        // $p->personaCorreo = $_POST['correo'];
-        // $p->idPersona = $POST['idPersona'];
-
-        //Se debe validar antes de guardar
-
-        $res = PersonaFichaBD::editarPersonaFicha($pf);
-        if ($res) {
-          echo "<h3>Editamos correctamente </h3>";
-
-          $this->inicio();
-        }
-      } else {
-        var_dump($_POST);
-      }
-    } else{
-
-    }
+  private function getRandomPass(){
+    return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
   }
 
-  public function reenviarCorreo()
-  {
-
+  public function reenviarCorreo(){
     if (
       isset($_POST['correo'])
     ) {
@@ -251,14 +189,11 @@ class PersonaFichaCTR extends CTR implements DCTR
     }
   }
 
-  //Todavía falta crear la vista para eliminar a uan ficha de persona
-  public function eliminar()
-  {
+  //Todavía falta crear la vista para eliminar una ficha de persona
+  public function eliminar(){
     if (isset($_GET['id'])) {
-      echo "Vamos a eliminar";
       $res = PersonaFichaBD::eliminarPersonaFicha($_GET['id']);
       if ($res) {
-        echo "<h1>Eliminaremos con el id {$_GET['id']}</h1>";
         $this->inicio();
       } else {
         Errores::errorEliminar("Permiso Ingreso Ficha");
@@ -266,19 +201,12 @@ class PersonaFichaCTR extends CTR implements DCTR
     }
   }
 
-  public function enviarCorreoIndividual($idPersona, $correo, $mensajePersonalizado)
-  {
-
+  public function enviarCorreoIndividual($idPersona, $correo, $mensajePersonalizado){
     //Revisa que todos los componentes esten llenos
     if (
       isset($_POST['permiso']) &&
-      isset($_POST['fechaInicio']) &&
-      isset($_POST['fechaModificación']) &&
       isset($_POST['correo'])
     ) {
-
-      //No vengan datos vaciossss y que no tenga XSS
-
       $passDoc = self::generarContrasena(1);
       $personaFicha = new PersonaFichaMD();
       $personaFicha->idPermisoIngFicha = $_POST['permiso'];
@@ -288,22 +216,15 @@ class PersonaFichaCTR extends CTR implements DCTR
         $mensaje = "Se envío correctamente el correo";
         echo $mensaje;
         $personaFicha->clave = $passDoc[0];
-        $personaFicha->fechaIngreso = $_POST['fechaInicio'];
-        $personaFicha->fechaModificacion = $_POST['fechaModificación'];
-
-        //Se debe validar antes de guardar
 
         $res = PersonaFichaBD::guardarPersonaFicha($personaFicha);
         if ($res) {
-          echo "<h3>Guardamos correctamente a {$personaFicha->fechaIngreso}</h3>";
-
           $this->inicio();
         } else {
           echo "<h3>No se puedo guardar correctamente</h3>";
         }
       } else {
         $mensaje = "No se pudo enviar corectamente el correo";
-        echo $mensaje;
       }
     }
   }
