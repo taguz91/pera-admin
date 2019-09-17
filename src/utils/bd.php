@@ -23,7 +23,7 @@
     }
   }
 
-  static function execute($sql, $params) {
+  function execute($sql, $params) {
     $ct = getCon();
     if($ct != null){
       $sen = $ct->prepare($sql);
@@ -33,11 +33,12 @@
     }
   }
 
-  static function getRes($sql, $params){
+  function getRes($sql, $params){
     $ct = getCon();
     if($ct != null){
       $res = $ct->prepare($sql);
-      return $res->execute($params);
+      $res->execute($params);
+      return $res;
     }
   }
 

@@ -52,7 +52,7 @@ abstract class TipoFichaBD{
     $sql = self::$BASEQUERY.'
     '.self::$ENDQUERY;
 
-    $res = getRes();
+    $res = getRes($sql, []);
     if($res != null){
       return self::obtenerParaTbl($res);
     }else{
