@@ -1,4 +1,5 @@
 <?php
+$pagina  = 'Reporte';
 require 'src/vista/templates/header.php';
 ?>
 
@@ -34,14 +35,6 @@ $resficha = $reportes['respuestas'];
         </div>
       </div>
     <?php endif; ?>
-
-
-    <div class="row">
-      <table class="table" id="tblexport" >
-
-      </table>
-
-    </div>
 
   </div>
 
