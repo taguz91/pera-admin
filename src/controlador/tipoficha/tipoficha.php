@@ -16,7 +16,7 @@ class TipoFichaCTR extends CTR implements DCTR {
     $tf = $this->tipoFichaFromPOST();
     if($tf == null){
       include $this->cargarVista('guardar.php');
-    } else {      
+    } else {
         var_dump($tf);
 
         $res = TipoFichaBD::guardar($tf);
@@ -46,9 +46,7 @@ class TipoFichaCTR extends CTR implements DCTR {
       isset($_POST['nombreficha']) &&
       isset($_POST['descripcionficha'])
     ){
-
-      //No este nulo y que no este con codigo malisioso 
-
+      // No este nulo y que no este con codigo malisioso 
       $tipo = $_POST['nombreficha'];
       $des = $_POST['descripcionficha'];
       if($tipo != '' && $des != ''){
