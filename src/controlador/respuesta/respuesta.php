@@ -11,7 +11,7 @@ class RespuestaCTR extends CTR implements DCTR {
   }
 
   function reporte() {
-    $res = json_decode(file_get_contents('http://localhost/pera-public/api/v1/respuesta/reporte?id_permiso=6'), true);
+    $res = json_decode(file_get_contents('http://localhost/pera-public/api/v1/respuesta/reporte?id_permiso=2'), true);
     if($res['statuscode'] == 200){
       $reportes = $res['items'];
       $reportes = $reportes[0];

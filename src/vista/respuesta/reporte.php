@@ -46,7 +46,7 @@ $resficha = $reportes['respuestas'];
         <thead class="thead-dark bg-ista-blue">
           <tr>
             <th scope="col" colspan="35">Alumno</th>
-            <th scope="col" colspan="2">Ficha</th>
+            <th scope="col" colspan="6">Ficha</th>
             <?php echo $ths ?>
           </tr>
           <tr>
@@ -91,6 +91,13 @@ $resficha = $reportes['respuestas'];
             <th scope="col">Fecha Ingreso</th>
             <th scope="col">Fecha Modificación</th>
             <!--/FICHA-->
+
+            <!-- GRUPOSOCIOECONOMICO -->
+            <th scope="col">GrupoSocioeconómico</th>
+            <th scope="col">Puntaje Minimo</th>
+            <th scope="col">Puntaje maximo</th>
+            <th scope="col">Puntaje Alumno</th>
+            <!-- GRUPOSOCIOECONOMICO -->
             <?php echo $thi ?>
           </tr>
 
@@ -103,16 +110,28 @@ $resficha = $reportes['respuestas'];
 
             <?php foreach ($resficha as $rf): ?>
               <tr>
-              <?php $per = $rf['persona'];
+              <?php $per = $rf['persona'];?>
 
-
-              ?>
               <?php foreach ($per[0] as $p): ?>
                 <td><?php echo $p; ?></td>
               <?php endforeach;
 
                 $pr = $rf['preguntas'];
+                $gs = $rf['gruposocioeconomico'][0];
               ?>
+              <td><?php
+              echo isset($gs['grupo_socioeconomico']) ? $gs['grupo_socioeconomico'] : '';
+              ?></td>
+              <td><?php
+              echo isset($gs['puntaje_minimo']) ? $gs['puntaje_minimo'] : '';
+              ?></td>
+              <td><?php
+              echo isset($gs['puntaje_maximo']) ? $gs['puntaje_maximo'] : '';
+              ?></td>
+              <td><?php
+              echo isset($gs['puntaje_alumno']) ? $gs['puntaje_alumno'] : '';
+              ?></td>
+
 
               <?php foreach ($pr as $pfa): ?>
 
@@ -165,7 +184,7 @@ require 'src/vista/templates/footer.php';
    const COLS = document.querySelectorAll('.pre');
    const TBL = document.querySelector('#tblresfs');
 
-   COLS.forEach(c => {
+   /*COLS.forEach(c => {
      let clase = c.className;
      let num = clase.split('--');
      let id = num[num.length - 1];
@@ -175,7 +194,7 @@ require 'src/vista/templates/footer.php';
      VALS.forEach(v => {
        v.style.backgroundColor = color;
      });
-   });
+   });*/
 
   function getRandomColor() {
     var letters = '0123456789ABCDEF';
