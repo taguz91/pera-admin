@@ -91,7 +91,7 @@ class PersonaFichaCTR extends CTR implements DCTR
               $passDoc = self::generarContrasena($numPassDoc);
 
               for ($i = 0; $i < $numPassDoc; $i++) {
-                if (EnviarCorreo::enviar($correosDoc, $passDoc, $this->mensaje)) {
+                if (EnviarCorreo::enviar($correosDoc->correo, $passDoc, $this->mensaje)) {
                   $mensaje = "Se envío correctamente los correos a count($correosDoc) estudiantes";
                   echo $mensaje;
 
@@ -129,7 +129,7 @@ class PersonaFichaCTR extends CTR implements DCTR
       $mensaje = $_POST['mensaje'];
       $pass = $this->getRandomPass();
 
-      if(EnviarCorreo::enviarEditar($correo, $pass, $mensaje)){
+      if(EnviarCorreo::enviar($correo, $pass, $mensaje)){
         $res = PersonaFichaBD::editarPersonaFicha($id, $pass);
         if($res){
           $this->inicio('Se reenvio el correo correctamente.');
@@ -181,7 +181,7 @@ class PersonaFichaCTR extends CTR implements DCTR
     ) {
       $correo = $_POST['correo'];
       $pass = generarContrasena(1);
-      if (EnviarCorreo::enviarEditar($correo, $pass, $this->mensaje)) {
+      if (EnviarCorreo::enviar($correo, $pass, $this->mensaje)) {
         $mensaje = "Se envío conrrectamente el mensaje";
       } else {
         $mensaje = "No se pudo enviar el correo";
@@ -212,7 +212,7 @@ class PersonaFichaCTR extends CTR implements DCTR
       $personaFicha->idPermisoIngFicha = $_POST['permiso'];
       $personaFicha->idPersona = $idPersona;
 
-      if (EnviarCorreo::enviarEditar($correo, $passDoc[0], $mensajePersonalizado)) {
+      if (EnviarCorreo::enviar($correo, $passDoc[0], $mensajePersonalizado)) {
         $mensaje = "Se envío correctamente el correo";
         echo $mensaje;
         $personaFicha->clave = $passDoc[0];

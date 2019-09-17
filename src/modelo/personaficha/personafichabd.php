@@ -5,210 +5,184 @@ require_once "src/modelo/clases/personamd.php";
 abstract class PersonaFichaBD {
 
   static function guardarPersonaFicha($personaFicha) {
-    $ct = getCon();
-    if ($ct != null) {
-      $sentencia = $ct->prepare(self::$INSERT);
-      $res = $sentencia->execute([
-        'id_permiso_ingreso_ficha' => $personaFicha->idPermisoIngFicha,
-        'id_persona' => $personaFicha->idPersona,
-        'persona_ficha_clave' => $personaFicha->clave
-      ]);
-      if ($res != null) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
+    return execute(self::$INSERT, [
+      'id_permiso_ingreso_ficha' => $personaFicha->idPermisoIngFicha,
+      'id_persona' => $personaFicha->idPersona,
+      'persona_ficha_clave' => $personaFicha->clave
+    ]);
   }
 
   static function editarPersonaFicha($id, $clave){
-    $ct = getCon();
-    if ($ct != null) {
-      $sentencia = $ct->prepare(self::$UPDATE);
-      return $sentencia->execute([
-        'id' => $id,
-        'persona_ficha_clave' => $clave
-      ]);
-    } else {
-      return false;
-    }
+    return execute(self::$UPDATE, [
+      'id' => $id,
+      'persona_ficha_clave' => $clave
+    ]);
   }
 
   static function eliminarPersonaFicha($id){
-    $ct = getCon();
-    if ($ct != null) {
-      $sentencia = $ct->prepare(self::$DELETE);
-      $res = $sentencia->execute([
-        'id_persona_ficha' => $id
-      ]);
-      if ($res != null) {
-        return true;
-      } else {
-        return false;
-      }
-    } else {
-      return false;
-    }
+    return execute(self::$DELETE, [
+      'id' => $id
+    ]);
   }
 
   static function getMatricula($idPeriodo)
   {
     $sql = '
-      SELECT
-      id_matricula,
-      id_alumno,
-      id_prd_lectivo,
-      matricula_fecha,
-      matricula_tipo,
-      matricula_activa
-      FROM
-      public."Matricula"
-      WHERE
-      matricula_activa = true AND
-      id_prd_lectivo = ' . $idPeriodo . '
-      ORDER BY
-      matricula_fecha DESC;
-      ';
+    SELECT
+    id_matricula,
+    id_alumno,
+    id_prd_lectivo,
+    matricula_fecha,
+    matricula_tipo,
+    matricula_activa
+    FROM
+    public."Matricula"
+    WHERE
+    matricula_activa = true AND
+    id_prd_lectivo = :idPeriodo
+    ORDER BY
+    matricula_fecha DESC;';
 
-    $ct = getCon();
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        $items = array();
-        while ($r = $res->fetch(PDO::FETCH_ASSOC)) {
-          $m = new MatriculaMD();
-          $m->idMatricula = $r['id_matricula'];
-          $m->idAlumno = $r['id_alumno'];
-          $m->idPrdLectivo = $r['id_prd_lectivo'];
-          $m->matriculaFecha = $r['matricula_fecha'];
-          $m->matriculaTipo = $r['matricula_tipo'];
-          $m->matriculaActivo = $r['matricula_activa'];
-          array_push($items, $m);
-        }
-        return $items;
-      } else {
-        return [];
+    $res = getRes($sql, [
+      'idPeriodo' => $idPeriodo
+    ]);
+    if ($res != null) {
+      $items = array();
+      while ($r = $res->fetch(PDO::FETCH_ASSOC)) {
+        $m = new MatriculaMD();
+        $m->idMatricula = $r['id_matricula'];
+        $m->idAlumno = $r['id_alumno'];
+        $m->idPrdLectivo = $r['id_prd_lectivo'];
+        $m->matriculaFecha = $r['matricula_fecha'];
+        $m->matriculaTipo = $r['matricula_tipo'];
+        $m->matriculaActivo = $r['matricula_activa'];
+        array_push($items, $m);
       }
+      return $items;
+    } else {
+      return [];
     }
   }
 
   static function getAll()
   {
     $sql = self::$BASEQUERY . ' ' . self::$ENDQUERY;
-    $ct = getCon();
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        return self::obtenerParaTbl($res);
-      } else {
-        return [];
-      }
+
+    $res = getRes($sql, []);
+    if ($res != null) {
+      return self::obtenerParaTbl($res);
+    } else {
+      return [];
     }
   }
 
   static function getCorreosEst($numCiclo, $idPermiso)
   {
-    $sql = self::$ESTUDIANTE . " (SELECT id_prd_lectivo FROM public.\"PermisoIngresoFichas\" WHERE id_permiso_ingreso_ficha = $idPermiso)  AND
-    curso_ciclo = $numCiclo))) AND id_persona NOT IN
-    (SELECT id_persona FROM public.\"PersonaFicha\" WHERE id_permiso_ingreso_ficha = $idPermiso) ORDER BY id_persona;";
-    $ct = getCon();
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        return self::obtenerParaTblPer($res);
-      } else {
-        return [];
-      }
+    $sql = self::$ESTUDIANTE . " (SELECT id_prd_lectivo FROM public.\"PermisoIngresoFichas\" WHERE id_permiso_ingreso_ficha = :idPermiso1)  AND
+    curso_ciclo = :numCiclo))) AND id_persona NOT IN
+    (SELECT id_persona FROM public.\"PersonaFicha\" WHERE id_permiso_ingreso_ficha = idPermiso2) ORDER BY id_persona;";
+
+    $res = getRes($sql, [
+      'idPermiso1' => $idPermiso,
+      'numCiclo' => $numCiclo,
+      'idPermiso2' => $idPeriodo
+    ]);
+    if ($res != null) {
+      return self::obtenerParaTblPer($res);
+    } else {
+      return [];
     }
   }
 
   static function getCorreosDoc($numCiclo, $idPermiso)
   {
-    $sql = self::$DOCENTE . " (SELECT id_prd_lectivo FROM public.\"PermisoIngresoFichas\" WHERE id_permiso_ingreso_ficha = $idPermiso) AND
-    curso_ciclo = $numCiclo)) AND id_persona NOT IN
-    (SELECT id_persona FROM public.\"PersonaFicha\" WHERE id_permiso_ingreso_ficha = $idPermiso) ORDER BY id_persona;";
-    $ct = getCon();
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        return self::obtenerParaTblPer($res);
-      } else {
-        return [];
-      }
+    $sql = self::$DOCENTE . " (SELECT id_prd_lectivo FROM public.\"PermisoIngresoFichas\" WHERE id_permiso_ingreso_ficha = :idPermiso1) AND
+    curso_ciclo = :numCiclo)) AND id_persona NOT IN
+    (SELECT id_persona FROM public.\"PersonaFicha\" WHERE id_permiso_ingreso_ficha = :idPermiso2) ORDER BY id_persona;";
+
+    $res = getRes($sql, [
+      'idPermiso1' => $idPermiso,
+      'numCiclo' => $numCiclo,
+      'idPermiso2' => $idPeriodo
+    ]);
+    if ($res != null) {
+      return self::obtenerParaTblPer($res);
+    } else {
+      return [];
     }
   }
 
   static function getPorId($id)
   {
     $sql = '
-        SELECT
-        pr.id_persona_ficha,
-        pi.id_permiso_ingreso_ficha,
-        p.id_persona,
-        pr.persona_ficha_clave,
-        pr.persona_ficha_fecha_ingreso,
-        pr.persona_ficha_fecha_modificacion
-        FROM
-        public."PersonaFicha" pr,
-        public."PermisoIngresoFichas" pi,
-        public."Personas" p
-        WHERE
-        pr.id_permiso_ingreso_ficha = pi.id_permiso_ingreso_ficha
-        AND pr.id_persona = p.id_persona
-        AND pr.persona_ficha_activa = true
-        AND id_persona_ficha = ' . $id . ';';
+    SELECT
+    pr.id_persona_ficha,
+    pi.id_permiso_ingreso_ficha,
+    p.id_persona,
+    pr.persona_ficha_clave,
+    pr.persona_ficha_fecha_ingreso,
+    pr.persona_ficha_fecha_modificacion
+    FROM
+    public."PersonaFicha" pr,
+    public."PermisoIngresoFichas" pi,
+    public."Personas" p
+    WHERE
+    pr.id_permiso_ingreso_ficha = pi.id_permiso_ingreso_ficha
+    AND pr.id_persona = p.id_persona
+    AND pr.persona_ficha_activa = true
+    AND id_persona_ficha = :id;';
 
-    $ct = getCon();
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        $pi = new PermisoIngresoMD();
-        while ($r = $res->fetch(PDO::FETCH_ASSOC)) {
-          $pi->id = $r['id_permiso_ingreso_ficha'];
-          $pi->idPeriodo = $r['id_prd_lectivo'];
-          $pi->idTipoFicha = $r['id_tipo_ficha'];
-          $pi->fechaInicio = $r['permiso_ingreso_fecha_inicio'];
-          $pi->fechaFin = $r['permiso_ingreso_fecha_fin'];
-        }
-        return $pi;
-      } else {
-        return null;
+    $res = getRes($sql, [
+      'id' => $id
+    ]);
+    if ($res != null) {
+      $pi = new PermisoIngresoMD();
+      while ($r = $res->fetch(PDO::FETCH_ASSOC)) {
+        $pi->id = $r['id_permiso_ingreso_ficha'];
+        $pi->idPeriodo = $r['id_prd_lectivo'];
+        $pi->idTipoFicha = $r['id_tipo_ficha'];
+        $pi->fechaInicio = $r['permiso_ingreso_fecha_inicio'];
+        $pi->fechaFin = $r['permiso_ingreso_fecha_fin'];
       }
+      return $pi;
     }
   }
 
   static function buscarPorNombre($aguja)
   {
-    $sql = self::$BASEQUERY
-      . " AND p.persona_primer_apellido ILIKE '%$aguja%' OR p.persona_segundo_apellido ILIKE '%$aguja%'
-        OR p.persona_primer_nombre ILIKE '%$aguja%' OR p.persona_segundo_nombre ILIKE '%$aguja%'"
-      . self::$ENDQUERY;
-    $ct = getCon();
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        return self::obtenerParaTbl($res);
-      } else {
-        return [];
-      }
+    $sql = self::$BASEQUERY. "
+    AND p.persona_primer_apellido
+    ILIKE :aguja1 OR p.persona_segundo_apellido
+    ILIKE :aguja2 OR p.persona_primer_nombre
+    ILIKE :aguja3 OR p.persona_segundo_nombre
+    ILIKE :aguja4 ".self::$ENDQUERY;
+
+    $res = getRes($sql, [
+      'aguja1' => '%'.$aguja.'%',
+      'aguja2' => '%'.$aguja.'%',
+      'aguja3' => '%'.$aguja.'%',
+      'aguja4' => '%'.$aguja.'%'
+    ]);
+    if ($res != null) {
+      return self::obtenerParaTbl($res);
+    } else {
+      return [];
     }
   }
 
   static function buscarPorCedula($aguja)
   {
-    $sql = self::$BASEQUERY
-      . " AND p.persona_identificacion ILIKE '%$aguja%' "
-      . self::$ENDQUERY;
-    $ct = getCon();
-    if ($ct != null) {
-      $res = $ct->query($sql);
-      if ($res != null) {
-        return self::obtenerParaTbl($res);
-      } else {
-        return [];
-      }
+    $sql = self::$BASEQUERY. "
+    AND p.persona_identificacion
+    ILIKE :aguja ". self::$ENDQUERY;
+
+    $res = getRes($sql, [
+      'aguja' => '%'.$aguja.'%'
+    ]);
+    if ($res != null) {
+      return self::obtenerParaTbl($res);
+    } else {
+      return [];
     }
   }
 
