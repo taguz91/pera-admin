@@ -2,8 +2,7 @@
 
 class RespuestaCTR extends CTR implements DCTR {
 
-  public function __construct()
-  {
+  public function __construct() {
       parent::__construct("src/vista/respuesta/");
   }
 
@@ -12,7 +11,7 @@ class RespuestaCTR extends CTR implements DCTR {
   }
 
   function reporte() {
-    $res = json_decode(file_get_contents('http://localhost/pera-public/api/v1/respuesta/reporte'), true);
+    $res = json_decode(file_get_contents('http://localhost/pera-public/api/v1/respuesta/reporte?id_permiso=6'), true);
     if($res['statuscode'] == 200){
       $reportes = $res['items'];
       $reportes = $reportes[0];

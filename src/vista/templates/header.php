@@ -138,6 +138,25 @@
     <!-- Divider -->
     <hr class="sidebar-divider">
 
+    <div class="sidebar-heading">
+      Respuesta
+    </div>
+
+    <li class="nav-item">
+      <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseREF" aria-expanded="true" aria-controls="collapseREF">
+        <i class="fas fa-fw fa-wrench"></i>
+        <span>Respuestas Fichas</span>
+      </a>
+      <div id="collapseREF" class="collapse"  data-parent="#accordionSidebar">
+        <div class="bg-white py-2 collapse-inner rounded">
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>respuesta/reporte">Ficha Socioeconomica</a>
+        </div>
+      </div>
+    </li>
+
+    <!-- Divider -->
+    <hr class="sidebar-divider">
+
     <!-- Sidebar Toggler (Sidebar) -->
     <div class="text-center d-none d-md-inline">
       <button class="rounded-circle border-0" id="sidebarToggle"></button>

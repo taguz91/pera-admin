@@ -8,7 +8,7 @@ require 'src/vista/templates/header.php';
     <div class="row">
       <div class="col">
         <h6 class="m-0 font-weight-bold text-primary">
-          Todas las fichas enviadas a una persona
+          Todas las fichas enviadas
         </h6>
       </div>
 
