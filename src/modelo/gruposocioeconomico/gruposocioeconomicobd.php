@@ -118,7 +118,7 @@ abstract class GrupoSocioEconomicoBD {
 
   public static $BASEQUERY = '
   SELECT
-  id_grupo_socioeconomico,
+  gs.id_grupo_socioeconomico,
   tf.tipo_ficha,
   gS.grupo_socioeconomico,
   gS.puntaje_minimo,
