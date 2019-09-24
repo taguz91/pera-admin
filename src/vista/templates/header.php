@@ -98,7 +98,6 @@
 
 
 
-
     <!-- Grupo Socioeconomico -->
     <li class="nav-item">
       <a class="nav-link collapsed" href="#" data-toggle="collapse" data-target="#collapseGS" aria-expanded="true" aria-controls="collapseGS">
@@ -129,7 +128,8 @@
       </a>
       <div id="collapsePF" class="collapse"  data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="<?php echo constant('URL'); ?>personaficha/">Lista</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>persona/">Todas</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>personaficha/">Lista enviados</a>
           <a class="collapse-item" href="<?php echo constant('URL'); ?>personaficha/guardar/">Ingresar</a>
         </div>
       </div>

@@ -166,14 +166,14 @@ abstract class PermisoIngresoBD {
     UPDATE public."PermisoIngresoFichas"
     SET id_prd_lectivo = :idPeriodo,
     id_tipo_ficha = :idTipoFicha,
-    permiso_ingreso_fecha_inicio =: fechaInicio,
-    permiso_ingreso_fecha_fin =: fechaFin
-    WHERE id_permiso_ingreso_ficha =: id;';
+    permiso_ingreso_fecha_inicio = :fechaInicio,
+    permiso_ingreso_fecha_fin = :fechaFin
+    WHERE id_permiso_ingreso_ficha = :id;';
 
     public static $DELETE = '
     UPDATE public."PermisoIngresoFichas"
     SET permiso_ingreso_activo = false
-    WHERE id_permiso_ingreso_ficha=:id;
+    WHERE id_permiso_ingreso_ficha= :id;
     ';
 }
 

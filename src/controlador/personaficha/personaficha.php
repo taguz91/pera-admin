@@ -97,8 +97,6 @@ class PersonaFichaCTR extends CTR implements DCTR
 
                   $pf->idPersona = $correosDoc[$i]->idPersona;
                   $pf->clave = $passDoc[$i];
-                  $pf->fechaIngreso = $_POST['fechaInicio'];
-                  $pf->fechaModificacion = $_POST['fechaModificación'];
                   $res = PersonaFichaBD::guardarPersonaFicha($pf);
                   if ($res) {
                     echo "<h3>Guardamos correctamente a {$pf->fechaIngreso}</h3>";
@@ -138,9 +136,38 @@ class PersonaFichaCTR extends CTR implements DCTR
     }
   }
 
+
+  function enviarCorreo() {
+    if(isset($_POST['guardar'])){
+      $idPersona = $_POST['idpersona'];
+      $idPermiso = $_POST['permiso'];
+      $correo = $_POST['correo'];
+      $mensaje = $_POST['mensaje'];
+      $pass = $this->getRandomPass();
+      if(EnviarCorreo::enviar($correo, $pass, $mensaje)){
+        var_dump($idPersona);
+        $pf = new PersonaFichaMD();
+        $pf->idPermisoIngFicha = $idPermiso;
+        $pf->idPersona = $idPersona;
+        $pf->clave = $pass;
+        $res = PersonaFichaBD::guardarPersonaFicha($pf);
+        if($res){
+          $this->inicio();
+        }
+      }
+    }
+  }
+
   function reenviar(){
     if(isset($_GET['id'])){
       require $this->cargarVista('reenviar.php');
+    }
+  }
+
+  function enviar() {
+    if(isset($_GET['idpersona'])){
+      $permisos = PermisoIngresoBD::getAll();
+      require $this->cargarVista('enviaruno.php');
     }
   }
 
@@ -173,20 +200,6 @@ class PersonaFichaCTR extends CTR implements DCTR
 
   private function getRandomPass(){
     return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
-  }
-
-  public function reenviarCorreo(){
-    if (
-      isset($_POST['correo'])
-    ) {
-      $correo = $_POST['correo'];
-      $pass = generarContrasena(1);
-      if (EnviarCorreo::enviar($correo, $pass, $this->mensaje)) {
-        $mensaje = "Se envío conrrectamente el mensaje";
-      } else {
-        $mensaje = "No se pudo enviar el correo";
-      }
-    }
   }
 
   //Todavía falta crear la vista para eliminar una ficha de persona
@@ -228,6 +241,5 @@ class PersonaFichaCTR extends CTR implements DCTR
       }
     }
   }
-
 
 }

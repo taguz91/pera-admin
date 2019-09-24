@@ -247,12 +247,13 @@ abstract class PersonaFichaBD {
         id_permiso_ingreso_ficha, id_persona, persona_ficha_clave, persona_ficha_activa)
       VALUES(
         :id_permiso_ingreso_ficha,
-        :id_persona, bytea(md5(:persona_ficha_clave)),
+        :id_persona,
+        set_byte( MD5(:persona_ficha_clave) :: bytea, 4, 64),
         true)';
 
   public static $UPDATE = '
       UPDATE public."PersonaFicha"
-      SET persona_ficha_clave =  bytea(md5(:persona_ficha_clave))
+      SET persona_ficha_clave = set_byte( MD5(:persona_ficha_clave) :: bytea, 4, 64)
       WHERE id_persona_ficha = :id;';
 
   public static $DELETE = '

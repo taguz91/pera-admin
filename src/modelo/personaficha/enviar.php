@@ -27,6 +27,8 @@ class EnviarCorreo {
       '<p>'. $mensaje.'</p>'.
       '<p> A continuación se presenta un enlace el cual le redirecciona a la página de ingreso de las Fichas Socioecon&oacute;micas </p>
       <hr>
+      <h2>Su contraseña es: </h2> <h1>'.$pass.'</h1>
+      <hr>
       <p>
         <a href="http://ubi.tecazuay.edu.ec" target="_blank">Click </a>
         para ingresar su ficha

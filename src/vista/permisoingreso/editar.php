@@ -1,10 +1,12 @@
 <?php
-require 'src/vista/templates/headerform.php';
+$pagina = 'Permiso Ingreso Ficha | Editar';
+require 'src/vista/templates/header.php';
  ?>
 
  <h2>Editar </h2>
  <div class="formulario">
    <form class="" action="<?php echo constant('URL'); ?>permisoficha/editar" method="post">
+
      <input type="hidden" name="id" value="<?php echo $pi->id; ?>">
 
      <label for="periodo">Seleccione un periodo:</label>
@@ -18,7 +20,7 @@ require 'src/vista/templates/headerform.php';
 
      <label for="">Seleccione un tipo de ficha</label>
      <select class="" name="tipoficha">
-       <option value="<?php echo $pi->idTipoFicha; ?>">Periodos</option>
+       <option value="<?php echo $pi->idTipoFicha; ?>">Tipo Fichas</option>
        <option value="1">Socioeconomica</option>
        <option value="1">Ocupacional</option>
      </select>
@@ -35,5 +37,5 @@ require 'src/vista/templates/headerform.php';
 
 
 <?php
-require 'src/vista/templates/footerform.php';
+require 'src/vista/templates/footer.php';
  ?>
