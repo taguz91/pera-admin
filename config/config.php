@@ -4,10 +4,10 @@ define('URL', 'http://localhost/pera-admin/');
 
 //Constantes de conexion a la base de datos
 define('HOST', 'localhost');
-define('DB', 'BDIstaJulio2019');
+define('DB', 'BDShopShop');
 define('PORT', '5432');
 define('USER', 'postgres');
-define('PASS', 'Holapostgres');
+define('PASS', 'Linis_4413');
 define('CHARSET', 'utf8mb4');
 
 
