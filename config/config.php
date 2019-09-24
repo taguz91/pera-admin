@@ -4,11 +4,20 @@ define('URL', 'http://localhost/pera-admin/');
 
 //Constantes de conexion a la base de datos
 define('HOST', 'localhost');
-define('DB', 'BDShopShop');
+define('DB', 'BDIstaJulio2019');
 define('PORT', '5432');
 define('USER', 'postgres');
-define('PASS', 'Linis_4413');
+define('PASS', 'Holapostgres');
 define('CHARSET', 'utf8mb4');
+
+// Conexion a BDNotas
+
+/*define('HOST', '35.192.7.211');
+define('DB', 'BDnotas');
+define('PORT', '5432');
+define('USER', 'fichasphpubi');
+define('PASS', 'fichasubiphp2019');
+define('CHARSET', 'utf8mb4');*/
 
 
 ?>
