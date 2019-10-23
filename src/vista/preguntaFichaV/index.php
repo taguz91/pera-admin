@@ -34,15 +34,25 @@ require_once 'src/vista/preguntaFichaV/eliminar.php';
 
   <div class="card-body">
     <div class="table-responsive">
-      <table class="table table-bordered" id="" width="100%" cellspacing="0">
+      <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
 
         <thead class="thead-dark">
           <tr>
             <th scope="col">#</th>
             <th scope="col">Seccion</th>
             <th scope="col">Pregunta</th>
+
+            <th style="display:none;">cols</th>
+            <th style="display:none;">cols</th>
+            <th style="display:none;">cols</th>
+            <th style="display:none;">cols</th>
+            <th style="display:none;">cols</th>
+            <th style="display:none;">cols</th>
+
             <th scope="col">Editar</th>
+            <!--
             <th scope="col">Eliminar</th>
+            -->
           </tr>
         </thead>
 
@@ -65,12 +75,14 @@ require_once 'src/vista/preguntaFichaV/eliminar.php';
                   data-toggle='modal' data-target='#actualizarPregunta'>Actualizar
                   </button>
                 </td>
+                <!--
                 <td>
                   <button type='button' class='btn btn-danger eliminarBtnP'
                   data-toggle='modal' data-target='#eliminarPregunta'>
                     Eliminar
                   </button>
                 </td>
+                -->
                 </tr>";
                }
              }
