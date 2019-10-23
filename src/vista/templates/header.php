@@ -149,7 +149,7 @@
       </a>
       <div id="collapseREF" class="collapse"  data-parent="#accordionSidebar">
         <div class="bg-white py-2 collapse-inner rounded">
-          <a class="collapse-item" href="<?php echo constant('URL'); ?>respuesta/reporte">Ficha Socioeconomica</a>
+          <a class="collapse-item" href="<?php echo constant('URL'); ?>respuesta">Ver respuestas</a>
         </div>
       </div>
     </li>
