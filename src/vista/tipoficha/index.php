@@ -30,7 +30,6 @@ require 'src/vista/templates/header.php';
             <th scope="col">Tipo Ficha</th>
             <th scope="col">Descripcion</th>
             <th scope="col">Editar</th>
-            <th scope="col">Eliminar</th>
           </tr>
         </thead>
 
@@ -42,7 +41,6 @@ require 'src/vista/templates/header.php';
                 <td><?php echo $tf->tipoFicha; ?></td>
                 <td><?php echo $tf->descripcion; ?></td>
                 <td> <a href="<?php echo constant('URL').'tipoficha/editar/?editar='.$tf->id; ?>"> Editar </a> </td>
-                <td> <a href="#">Eliminar</a> </td>
               </tr>
             <?php endforeach; ?>
             <?php }else{

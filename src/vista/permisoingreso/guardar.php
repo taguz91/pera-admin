@@ -18,7 +18,6 @@ require 'src/vista/templates/header.php';
                     <option value="0">Periodos</option>
 
                     <?php
-                    //Cargamos todos los periodos de la base de datos
                     if (isset($periodos)) {
                         foreach ($periodos as $pl) {
                             echo '<option value="' . $pl->id . '">' . $pl->nombre . '</option>';

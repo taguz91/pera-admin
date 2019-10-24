@@ -1,5 +1,4 @@
 <?php
-
 require_once "src/modelo/personaficha/personafichabd.php";
 require_once "src/modelo/permisoingreso/permisoingresobd.php";
 require_once "src/modelo/personaficha/enviar.php";
@@ -46,36 +45,6 @@ class PersonaFichaCTR extends CTR implements DCTR
               echo "<h3>Estos ciclos ya se guardaron como fichas</h3>";
             } else {
               $this->enviarCorreos($correosEst, $_POST['correo']);
-
-              /*$numPassEst = sizeof($correosEst);
-              $passEst = self::generarContrasena($numPassEst);*/
-              $val = false;
-              /*
-              for ($i = 0; $i < $numPassEst; $i++) {
-                if (EnviarCorreo::enviar($correosEst[$i], $passEst[$i], $this->mensaje)) {
-                  set_time_limit(300);
-                  $mensaje = "Se envío correctamente los correos a count($correosEst) estudiantes";
-                  echo $mensaje;
-                  $pf->idPersona = $correosEst[$i]->idPersona;
-                  $pf->clave = $passEst[$i];
-                  //Se debe validar antes de guardar
-
-                  $res = PersonaFichaBD::guardarPersonaFicha($pf);
-                  if ($res) {
-                    echo "<h3>Guardamos correctamente a {$pf->fechaIngreso}</h3>";
-                    $val = true;
-                    //$this->inicio();
-
-                  } else {
-                    echo "<h3>No se puedo guardar correctamente a {$pf->idPersonaFicha}</h3>";
-                    $val = false;
-                  }
-                } else {
-                  $mensaje = "No se pudo enviar corectamente todos los correos, se enviaron a" . count($correosEst) . " estudiantes";
-                  echo $mensaje;
-                }
-
-              }*/
               if($val == true){
                 $this->inicio();
               }
@@ -205,7 +174,7 @@ class PersonaFichaCTR extends CTR implements DCTR
   //Todavía falta crear la vista para eliminar una ficha de persona
   public function eliminar(){
     if (isset($_GET['id'])) {
-      $res = PersonaFichaBD::eliminarPersonaFicha($_GET['id']);
+      $res = PersonaFichaBD::eliminar($_GET['id']);
       if ($res) {
         $this->inicio();
       } else {

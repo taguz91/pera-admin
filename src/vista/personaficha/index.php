@@ -1,4 +1,5 @@
 <?php
+$pagina = 'Fichas Enviadas';
 require 'src/vista/templates/header.php';
  ?>
 
@@ -38,7 +39,6 @@ require 'src/vista/templates/header.php';
           <tr>
             <th scope="col">ID</th>
             <th scope="col">IDPermiso</th>
-            <th scope="col">IDPersona</th>
             <th scope="col">Nombre Persona</th>
             <th scope="col">Fecha Inicio</th>
             <th scope="col">Fecha Modificación</th>
@@ -54,12 +54,11 @@ require 'src/vista/templates/header.php';
               echo '<tr scope="row">';
               echo "<td>".$pf->idPersonaFicha."</td>";
               echo "<td>".$pf->idPermisoIngFicha."</td>";
-              echo "<td>".$pf->idPersona."</td>";
               echo "<td>".$pf->persona->primerNombre." ".$pf->persona->primerApellido."</td>";
               echo "<td>".$pf->fechaIngreso."</td>";
               echo "<td>".$pf->fechaModificacion."</td>";
               echo '<td> <a href="'.constant('URL').'personaficha/reenviar?id='.$pf->idPersonaFicha.'">Reenviar</a> </td>';
-              echo '<td> <a href="'.constant('URL').'personaficha/eliminarpersona?id='.$pf->idPersonaFicha.'">Eliminar</a> </td>';
+              echo '<td> <a href="'.constant('URL').'personaficha/eliminar?id='.$pf->idPersonaFicha.'">Eliminar</a> </td>';
               echo "</tr>";
             }
           }else{

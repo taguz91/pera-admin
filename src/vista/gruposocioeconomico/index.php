@@ -41,7 +41,7 @@ require 'src/vista/templates/header.php';
             echo '<tr scope="row">';
             echo "<td>".$pi->id."</td>";
             echo "<td>".$pi->idTipoFicha."</td>";
-            echo "<td>".$pi->grupoSocionomico."</td>";
+            echo "<td>".$pi->grupoSocioEconomico."</td>";
             echo "<td>".$pi->puntajeMinimo."</td>";
             echo "<td>".$pi->puntajeMaximo."</td>";
             echo '<td> <a href="'.constant('URL').'gruposocioeconomico/editar?id='.$pi->id.'">Editar</a> </td>';

@@ -11,6 +11,8 @@ require 'src/vista/templates/header.php';
     </h3>
     <form class="form-horizontal" action="<?php echo constant('URL') . 'tipoficha/editar'; ?>" method="post">
 
+      <input type="hidden" name="id" value="<?php echo $tf->id; ?>">
+
       <div class="form-group">
         <label for="">Nombre Ficha:</label>
         <input type="text" class="form-control" name="nombreficha" value="<?php echo $tf->tipoFicha; ?>" placeholder="Ingrese el nombre de la ficha.">

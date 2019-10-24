@@ -17,9 +17,9 @@ class TipoFichaCTR extends CTR implements DCTR {
     if($tf == null){
       include $this->cargarVista('guardar.php');
     } else {
-        var_dump($tf);
-
         $res = TipoFichaBD::guardar($tf);
+
+        $this->inicio();
     }
 
   }
@@ -30,23 +30,24 @@ class TipoFichaCTR extends CTR implements DCTR {
       include $this->cargarVista('editar.php');
     } else {
       $tf = $this->tipoFichaFromPOST();
+
+      if ($tf != null) {
+        $tf->id = isset($_POST['id']) ? $_POST['id'] : 0;
+        echo $tf->id . '<br>';
+
+        $res = TipoFichaBD::editar($tf);
+      }
+
+      $this->inicio();
     }
-
   }
-
-  function eliminar() {
-    if(isset($_GET['eliminar'])){
-      $res = TipoFichaBD::eliminar($_GET['eliminar']);
-    }
-  }
-
 
   private function tipoFichaFromPOST() {
     if(
       isset($_POST['nombreficha']) &&
       isset($_POST['descripcionficha'])
     ){
-      // No este nulo y que no este con codigo malisioso 
+      // No este nulo y que no este con codigo malisioso
       $tipo = $_POST['nombreficha'];
       $des = $_POST['descripcionficha'];
       if($tipo != '' && $des != ''){

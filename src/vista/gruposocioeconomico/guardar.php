@@ -11,7 +11,7 @@ require 'src/vista/templates/header.php';
       Ingreso de un grupo socieconómico
     </h3>
 
-    <form class="form-horizontal" id="form-gp" action="<?php echo constant('URL'); ?>gruposocienomico/guardar" method="post">
+    <form class="form-horizontal" id="form-gp" action="<?php echo constant('URL'); ?>gruposocioeconomico/guardar" method="post">
 
       <div class="form-group">
 
@@ -31,7 +31,7 @@ require 'src/vista/templates/header.php';
 
       <div class="form-group">
         <label for="nombreGrupo" class="control-label">Grupo socioeconomico</label>
-        <input type="text" name="nombreGrupo" value="" class="form-control" placeholder="Ingrese el nuevo nombre del grupo socieconómico" id="inGrupo">
+        <input type="text" name="gruposocioeconomico" value="" class="form-control" placeholder="Ingrese el nuevo nombre del grupo socieconómico" id="inGrupo">
       </div>
 
       <div class="form-row">
@@ -39,14 +39,14 @@ require 'src/vista/templates/header.php';
         <div class="col">
           <div class="form-group">
             <label for="puntajeMin" class="control-label">Puntaje mínimo</label>
-            <input type="number" name="puntajeMin" value="" min="1" class="form-control" placeholder="Ingrese el nuevo puntaje mínimo" id="inMinimo">
+            <input type="number" name="puntajeMinimo" value="" min="1" class="form-control" placeholder="Ingrese el nuevo puntaje mínimo" id="inMinimo">
           </div>
         </div>
 
         <div class="col">
           <div class="form-group">
             <label for="puntajeMax" class="control-label">Puntaje máximo</label>
-            <input type="number" name="puntajeMax" value="" class="form-control" min="2" placeholder="Ingrese el nuevo puntaje máximo" id="inMaximo">
+            <input type="number" name="puntajeMaximo" value="" class="form-control" min="2" placeholder="Ingrese el nuevo puntaje máximo" id="inMaximo">
           </div>
         </div>
       </div>
@@ -56,7 +56,7 @@ require 'src/vista/templates/header.php';
 
 
       <div class="form-group">
-        <input class="btn btn-success btn-block" type="submit" name="guardar" value="Guardar" onclick="guardarGP()" disabled id="btnGuardar">
+        <input class="btn btn-success btn-block" type="submit" name="guardar" value="Guardar" onclick="guardarGP()" id="btnGuardar">
       </div>
 
     </form>

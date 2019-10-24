@@ -116,7 +116,7 @@ abstract class TipoFichaBD{
   public static $UPDATE = '
   UPDATE public."TipoFicha"
   SET tipo_ficha = :tipoFicha,
-  tipo_ficha_descripcion = :descripcion,
+  tipo_ficha_descripcion = :descripcion 
   WHERE id_tipo_ficha = :id;';
 
   public static $DELETE = '

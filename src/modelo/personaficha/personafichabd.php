@@ -19,7 +19,7 @@ abstract class PersonaFichaBD {
     ]);
   }
 
-  static function eliminarPersonaFicha($id){
+  static function eliminar($id){
     return execute(self::$DELETE, [
       'id' => $id
     ]);
@@ -259,8 +259,7 @@ abstract class PersonaFichaBD {
   public static $DELETE = '
       UPDATE public."PersonaFicha"
       SET persona_ficha_activa = false
-      WHERE id_persona_ficha =: id_persona_ficha;
-      ';
+      WHERE id_persona_ficha = :id;';
 
   public static $ESTUDIANTE = '
       SELECT id_persona, persona_correo FROM public."Personas" WHERE

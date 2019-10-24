@@ -7,9 +7,11 @@ require 'src/vista/templates/header.php';
    <div class="col-md-8 col-lg-6 mx-auto border rounded">
 
      <h3 class="text-center my-3">
-       Edicion de un grupo socieconómico
+       Edicion de grupo socieconómico
      </h3>
-     <form class="form-horizontal" action="<?php echo constant('URL'); ?>gruposocienomico/editar" method="post">
+     <form class="form-horizontal" action="<?php echo constant('URL'); ?>gruposocioeconomico/editar" method="post">
+
+       <input type="hidden" name="id" value="<?php echo $gs->id; ?>">
 
        <div class="form-group">
 
@@ -22,7 +24,11 @@ require 'src/vista/templates/header.php';
            <?php
            if(isset($tipofichas)){
              foreach ($tipofichas as $tf) {
-               echo '<option value="'.$tf->id.'">'.$tf->tipoFicha.'</option>';
+               if ($tf->id == $gs->idTipoFicha) {
+                  echo '<option selected  value="'.$tf->id.'">'.$tf->tipoFicha.'</option>';
+               } else {
+                  echo '<option value="'.$tf->id.'">'.$tf->tipoFicha.'</option>';
+               }
              }
            }
             ?>
@@ -34,7 +40,7 @@ require 'src/vista/templates/header.php';
          <label for="nombreGrupo"
          class="control-label"
          >Grupo Socioeconomico</label>
-         <input type="text" name="nombreGrupo"
+         <input type="text" name="gruposocioeconomico"
          value="<?php echo $gs->grupoSocioEconomico; ?>"
          class="form-control"
          placeholder="Ingrese el nuevo nombre del Grupo Socieconómico" >
@@ -44,10 +50,10 @@ require 'src/vista/templates/header.php';
 
          <div class="col">
            <div class="form-group">
-             <label for="puntajeMin"
+             <label for="puntajeMinimo"
              class="control-label"
              >Puntaje Minimo</label>
-             <input type="number" name="puntajeMin" value="<?php echo $gs->puntajeMinimo; ?>"
+             <input type="number" name="puntajeMinimo" value="<?php echo $gs->puntajeMinimo; ?>"
              class="form-control"
              placeholder="Ingrese el nuevo Puntaje Mínimo">
            </div>
@@ -55,10 +61,10 @@ require 'src/vista/templates/header.php';
 
           <div class="col">
             <div class="form-group">
-              <label for="puntajeMax"
+              <label for="puntajeMaximo"
               class="control-label"
               >Puntaje Máximo</label>
-              <input type="number" name="puntajeMax" value="<?php echo $gs->puntajeMaximo; ?>"
+              <input type="number" name="puntajeMaximo" value="<?php echo $gs->puntajeMaximo; ?>"
               class="form-control"
               placeholder="Ingrese el nuevo Puntaje Máximo">
             </div>
@@ -69,7 +75,7 @@ require 'src/vista/templates/header.php';
 
        <div class="form-group">
           <input class="btn btn-success btn-block"
-          type="submit" name="guardar" value="Guardar">
+          type="submit" name="editar" value="Guardar">
        </div>
 
      </form>

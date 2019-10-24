@@ -42,7 +42,12 @@ class PermisoFichaCTR extends CTR implements DCTR {
 
   public function editar(){
     if(isset($_GET['id'])){
+      
       $pi = PermisoIngresoBD::getPorId($_GET['id']);
+      // Cargamos el formulario
+      $periodos = PeriodoLectivoBD::getParaCombo();
+      $tipofichas = TipoFichaBD::getParaCombo();
+
       if($pi != null){
         require $this->cargarVista('editar.php');
       }else{
@@ -53,12 +58,6 @@ class PermisoFichaCTR extends CTR implements DCTR {
     if(isset($_POST['editar'])){
       $pf = $this->permisoFichaPOST();
       if(isset($_POST['id']) && $pf != null){
-        //var_dump($_POST);
-        //Validamos que el perioo no sea nulo o ''
-        //Validamos que las fechas sea fecha
-        //Validamos que tengamos una id
-        //Validamos que todos no tengan codigo HTML JS o SQL
-        //XSS InyeccionSQL PHP
         $pf->id = $_POST['id'];
         $res = PermisoIngresoBD::editar($pf);
         if($res){

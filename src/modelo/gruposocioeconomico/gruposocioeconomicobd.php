@@ -3,29 +3,29 @@ require_once "src/modelo/gruposocioeconomico/gruposocioeconomico.php";
 
 abstract class GrupoSocioEconomicoBD {
 
-  static function guardarGrupoSocioeconomico($grupoSocioEconomico) {
+  static function guardar($gs) {
     $sql = self::$INSERT;
     return execute($sql, [
-      'idTipoFicha' => $grupoSocioEconomico->idTipoFicha,
-      'grupoSocioEconomico' => $grupoSocioEconomico->grupoSocioEconomico,
-      'puntajeMinimo' => $grupoSocioEconomico->puntajeMinimo,
-      'puntajeMaximo' => $grupoSocioEconomico->puntajeMaximo
+      'idTipoFicha' => $gs->idTipoFicha,
+      'grupoSocioEconomico' => $gs->grupoSocioEconomico,
+      'puntajeMinimo' => $gs->puntajeMinimo,
+      'puntajeMaximo' => $gs->puntajeMaximo
     ]);
   }
 
-  static function editarGrupoSocioeconomico($grupoSocioEconomico) {
+  static function editar($gs) {
     $sql = self::$UPDATE;
     return execute($sql, [
-      'id' => $grupoSocioEconomico->id,
-      'idTipoFicha' => $grupoSocioEconomico->idTipoFicha,
-      'grupoSocioEconomico' => $grupoSocioEconomico->grupoSocioEconomico,
-      'puntajeMinimo' => $grupoSocioEconomico->puntajeMinimo,
-      'puntajeMaximo' => $grupoSocioEconomico->puntajeMaximo
+      'id' => $gs->id,
+      'idTipoFicha' => $gs->idTipoFicha,
+      'grupoSocioEconomico' => $gs->grupoSocioEconomico,
+      'puntajeMinimo' => $gs->puntajeMinimo,
+      'puntajeMaximo' => $gs->puntajeMaximo
     ]);
   }
 
-  static function eliminarGrupoSocioeconomico($id) {
-    $sql = self::$UPDATE;
+  static function eliminar($id) {
+    $sql = self::$DELETE;
     return execute($sql, [
       'id' => $id
     ]);
@@ -38,8 +38,9 @@ abstract class GrupoSocioEconomicoBD {
     tF.id_tipo_ficha,
     gS.grupo_socioeconomico,
     gS.puntaje_minimo,
-    gS.puntaje_maximo,
-    FROM public."GrupoSocioeconomico" gS,public."TipoFicha" tF
+    gS.puntaje_maximo
+    FROM public."GrupoSocioeconomico" gS,
+    public."TipoFicha" tF
     WHERE gS.id_tipo_ficha=tF.id_tipo_ficha
     AND gS.grupo_socioeconomico_activo=true
     AND id_grupo_socioeconomico = :id;';
@@ -49,15 +50,15 @@ abstract class GrupoSocioEconomicoBD {
     ]);
 
     if ($res != null) {
-      $pi = new GrupoSocioEconomicoMD();
+      $gs = new GrupoSocioEconomicoMD();
       while($r = $res->fetch(PDO::FETCH_ASSOC)){
-        $pi->id = $r['id_grupo_socioeconomico'];
-        $pi->idTipoFicha = $r['id_tipo_ficha'];
-        $pi->grupoSocioeconomico = $r['grupo_socioeconomico'];
-        $pi->fechaInicio = $r['puntaje_minimo'];
-        $pi->fechaFin = $r['puntaje_maximo'];
+        $gs->id = $r['id_grupo_socioeconomico'];
+        $gs->idTipoFicha = $r['id_tipo_ficha'];
+        $gs->grupoSocioEconomico = $r['grupo_socioeconomico'];
+        $gs->puntajeMinimo = $r['puntaje_minimo'];
+        $gs->puntajeMaximo = $r['puntaje_maximo'];
       }
-      return $pi;
+      return $gs;
     }
   }
 
@@ -104,14 +105,14 @@ abstract class GrupoSocioEconomicoBD {
     $items = array();
     while($r = $res->fetch(PDO::FETCH_ASSOC)){
       //var_dump($r);
-      $pi = new GrupoSocioeconomicoMD();
-      $pi->id = $r['id_grupo_socioeconomico'];
-      $pi->idTipoFicha = $r['tipo_ficha'];
-      $pi->grupoSocioEconomico = $r['grupo_socioeconomico'];
-      $pi->puntajeMinimo = $r['puntaje_minimo'];
-      $pi->puntajeMinimo = $r['puntaje_maximo'];
+      $gs = new GrupoSocioeconomicoMD();
+      $gs->id = $r['id_grupo_socioeconomico'];
+      $gs->idTipoFicha = $r['tipo_ficha'];
+      $gs->grupoSocioEconomico = $r['grupo_socioeconomico'];
+      $gs->puntajeMinimo = $r['puntaje_minimo'];
+      $gs->puntajeMaximo = $r['puntaje_maximo'];
 
-      array_push($items, $pi);
+      array_push($items, $gs);
     }
     return $items;
   }
@@ -137,13 +138,13 @@ abstract class GrupoSocioEconomicoBD {
   public static $INSERT = '
   INSERT INTO public."GrupoSocioeconomico"(
      id_tipo_ficha, grupo_socioeconomico, puntaje_minimo, puntaje_maximo)
-  VALUES(:idTipoFicha, :grupoSocioecomomo, :puntajeMinimo, :puntajeMaximo )
+  VALUES(:idTipoFicha, :grupoSocioEconomico, :puntajeMinimo, :puntajeMaximo )
   ';
 
   public static $UPDATE = '
   UPDATE public."GrupoSocioeconomico"
   SET id_tipo_ficha = :idTipoFicha,
-  grupo_socioecomimino = :grupoSocioEconomico,
+  grupo_socioeconomico = :grupoSocioEconomico,
   puntaje_minimo = :puntajeMinimo,
   puntaje_maximo = :puntajeMaximo
   WHERE id_grupo_socioeconomico = :id;

@@ -9,7 +9,7 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
   }
 
   public function inicio (){
-    $grupoSocioeconomico = GrupoSocioEconomicoBD::getAll();
+    $gruposocioeconomico = GrupoSocioEconomicoBD::getAll();
     require $this->cargarVista('index.php');
   }
 
@@ -35,6 +35,7 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
 
     if(isset($_GET['id'])){
       $gs = GrupoSocioEconomicoBD::getPorId($_GET['id']);
+      $tipofichas = TipoFichaBD::getParaCombo();
       if($gs != null){
           require $this->cargarVista('editar.php');
       }else{
@@ -46,12 +47,9 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
       $gS = $this->grupoSocionomicoPOST();
       if($gS != null && isset($_POST['id'])) {
         $gS->id = $_POST['id'];
-
-        //Se debe validar antes de guardar
-
         $res = GrupoSocioEconomicoBD::editar($gS);
         if($res){
-          echo "<h3>Editamos correctamente a {$gS->grupoSocionomico}</h3>";
+          echo "<h3>Editamos correctamente a {$gS->grupoSocioEconomico}</h3>";
         }
       }
       $this->inicio();
@@ -73,16 +71,18 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
   private function grupoSocionomicoPOST(){
     if(
         isset($_POST['tipoficha']) &&
-        isset($_POST['grupoSocioeconomico']) &&
+        isset($_POST['gruposocioeconomico']) &&
         isset($_POST['puntajeMinimo']) &&
         isset($_POST['puntajeMaximo'])
       ){
         // Sin datos vacios y que el puntaje maximo sea mayor al minimo
         $gS = new GrupoSocioEconomicoMD();
         $gS->idTipoFicha = $_POST['tipoficha'];
-        $gS->grupoSocioeconomico = $_POST['gruposocioeconomico'];
+        $gS->grupoSocioEconomico = $_POST['gruposocioeconomico'];
         $gS->puntajeMinimo = $_POST['puntajeMinimo'];
         $gS->puntajeMaximo = $_POST['puntajeMaximo'];
+
+        return $gS;
     }
   }
 
