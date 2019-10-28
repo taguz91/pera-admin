@@ -92,8 +92,7 @@ require 'src/vista/templates/footer.php';
     formdata.append('guardar', 'true');
 
     if (formdata.get('periodo') != '0' && formdata.get('tipoficha') != '0' && formdata.get('fechaInicio') != '' &&
-    formdata.get('fechaFin') != '' &&
-    fechaValida(formdata.get('fechaInicio'), formdata.get('fechaFin'));
+    formdata.get('fechaFin') != ''
     ) {
       fetch(URLPG, {
         method: 'POST',

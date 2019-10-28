@@ -19,7 +19,7 @@ require 'src/vista/templates/header.php';
           <?php
           if (isset($permisos)) {
             foreach ($permisos as $pf) {
-              echo '<option value="' . $pf->id . '">' . $pf->tipoFicha->tipoFicha . ' - ' . $pf->periodo->nombre . '</option>';
+              echo '<option value="' . $pf['id_permiso_ingreso_ficha'] . '">' . $pf['tipo_ficha'] . ' - ' . $pf['prd_lectivo_nombre'] . '</option>';
             }
           }
           ?>

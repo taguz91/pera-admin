@@ -48,29 +48,11 @@ abstract class PermisoIngresoBD {
     return getOneFromSQL($sql, [
       'id' => $id
     ]);
-    /*
-    if ($res != null) {
-      $pi = new PermisoIngresoMD();
-      while($r = $res->fetch(PDO::FETCH_ASSOC)){
-        $pi->id = $r['id_permiso_ingreso_ficha'];
-        $pi->idPeriodo = $r['id_prd_lectivo'];
-        $pi->idTipoFicha = $r['id_tipo_ficha'];
-        $pi->fechaInicio = $r['permiso_ingreso_fecha_inicio'];
-        $pi->fechaFin = $r['permiso_ingreso_fecha_fin'];
-      }
-      return $pi;
-    }*/
   }
 
   static function getAll() {
     $sql = self::$BASEQUERY.' '.self::$ENDQUERY;
-
     return getArrayFromSQL($sql, []);
-    /*if ($res != null) {
-      return self::obtenerParaTbl($res);
-    }else{
-      return [];
-    }*/
   }
 
   static function getPorPeriodo($idPeriodo){
@@ -79,11 +61,6 @@ abstract class PermisoIngresoBD {
     .self::$ENDQUERY;
 
     return getArrayFromSQL($sql, []);
-    /*if ($res != null) {
-      return self::obtenerParaTbl($res);
-    }else{
-      return [];
-    }*/
   }
 
   static function getPorTipoFicha($idTipoFicha){
@@ -93,12 +70,6 @@ abstract class PermisoIngresoBD {
     return getArrayFromSQL($sql, [
       'idTipoFicha' => $idTipoFicha
     ]);
-    /*
-    if ($res != null) {
-      return self::obtenerParaTbl($res);
-    }else{
-      return [];
-    }*/
   }
 
   static function buscar($aguja){
@@ -108,12 +79,6 @@ abstract class PermisoIngresoBD {
     return getArrayFromSQL($sql, [
       'aguja' => '%'.$aguja.'%'
     ]);
-    /*
-    if ($res != null) {
-      return self::obtenerParaTbl($res);
-    }else{
-      return [];
-    }*/
   }
 
   private static function obtenerParaTbl($res){

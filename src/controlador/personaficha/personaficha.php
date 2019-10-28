@@ -1,6 +1,8 @@
 <?php
 require_once "src/modelo/personaficha/personafichabd.php";
 require_once "src/modelo/permisoingreso/permisoingresobd.php";
+require_once "src/modelo/clases/periodolectivobd.php";
+require_once "src/modelo/tipoficha/tipofichabd.php";
 require_once "src/modelo/personaficha/enviar.php";
 require_once "src/modelo/clases/personamd.php";
 
@@ -84,8 +86,11 @@ class PersonaFichaCTR extends CTR implements DCTR
         Errores::errorVariableNoEncontrada();
       }
     } else {
+      $periodos = PeriodoLectivoBD::getParaCombo();
+      $tipofichas = TipoFichaBD::getParaCombo();
+
       $permisos = PermisoIngresoBD::getAll();
-      require $this->cargarVista('guardarpersona.php');
+      require $this->cargarVista('guardar.php');
     }
   }
 

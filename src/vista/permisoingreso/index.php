@@ -38,8 +38,8 @@ require 'src/vista/templates/header.php';
           <thead class="thead-dark">
             <tr>
               <th scope="col">ID</th>
-              <th scope="col">IDPeriodo</th>
-              <th scope="col">IDTipoFicha</th>
+              <th scope="col">Periodo</th>
+              <th scope="col">Tipo Ficha</th>
               <th scope="col">Fecha Inicio</th>
               <th scope="col">Fecha Fin</th>
               <th scope="col">Editar</th>
@@ -55,12 +55,9 @@ require 'src/vista/templates/header.php';
                 <tr id="fila<?php echo $pi['id_permiso_ingreso_ficha']; ?>">
 
                   <td><?php echo $pi['id_permiso_ingreso_ficha']; ?></td>
-                  <td><?php echo $pi['id_prd_lectivo'] ?></td>
-
+                  <td><?php echo $pi['prd_lectivo_nombre'] ?></td>
                   <td><?php echo $pi['tipo_ficha']; ?></td>
-
-                  <td><?php echo $pi['fecha_inicio']; ?></td>
-
+                  <td><?php echo $pi['fecha_inicio'];?></td>
                   <td><?php echo $pi['fecha_fin']; ?></td>
 
                   <td> <a href="<?php echo constant('URL').'permisoficha/editar?id='.$pi['id_permiso_ingreso_ficha']; ?>" class="btn btn-info btn-sm">Editar</a> </td>

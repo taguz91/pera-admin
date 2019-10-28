@@ -25,7 +25,7 @@ class EnviarCorreo {
       $mail->Subject = 'Ficha Socioecon&oacute;mica';
       $mail->Body =
       '<p>'. $mensaje.'</p>'.
-      '<p> A continuación se presenta un enlace el cual le redirecciona a la página de ingreso de las Fichas Socioecon&oacute;micas </p>
+      '<p> A continuación se presenta un enlace el cual le redirecciona a la página de ingreso de la ficha</p>
       <hr>
       <h2>Su contraseña es: </h2> <h1>'.$pass.'</h1>
       <hr>
@@ -37,7 +37,6 @@ class EnviarCorreo {
       $mail->send();
       return true;
     } catch (Exception $e) {
-      echo "El mensaje no pudo ser enviado: {$mail->ErrorInfo}";
       return false;
     }
   }
