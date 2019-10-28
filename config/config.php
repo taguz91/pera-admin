@@ -2,6 +2,8 @@
 //Path de nuestra WEB
 define('URL', 'http://localhost/pera-admin/');
 
+define('URLAPI', 'http://localhost/pera-public/');
+
 //Constantes de conexion a la base de datos
 define('HOST', 'localhost');
 define('DB', 'BDIstaJulio2019');

@@ -1,5 +1,5 @@
 INSERT INTO public."TipoFicha"(tipo_ficha, tipo_ficha_descripcion)
-VALUES ('Ficha Socioeconomica', 'Nivel socioeconomico.');
+VALUES ('Ficha Socioeconómica', 'Nivel socioeconómico de los alumnos de la institución.');
 
 --Para las preguntas
 INSERT INTO public."SeccionesFicha"(

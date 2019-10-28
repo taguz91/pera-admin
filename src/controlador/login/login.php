@@ -19,36 +19,30 @@ class LoginCTR extends CTR implements DCTR {
   }
 
   public function ingresar() {
-    if(isset($_POST['ingresar'])){
-      var_dump($_POST);
-      $user = new UsuarioMD();
-      $per = new PersonaMD();
-      $user->user = 'PRUEBA';
 
-      $per->primerNombre = 'Johnny';
-      $per->segundoNombre = 'Gustavo';
-      $per->primerApellido = 'Garcia';
-      $per->segundoApellido = 'Inga';
-      $per->identificacion = '0107390270';
-      $per->correo = 'gus199811@gmail.com';
-      $per->celular = '0968796010';
+    //Guardamos el usuario en la cookie
+    $usuario = isset($_POST['txtUsuario']) ? $_POST['txtUsuario'] : null;
+    $pass = isset($_POST['txtPass']) ? $_POST['txtPass'] : null;
 
-      $user->persona = $per;
+    if ($usuario != null && $pass != null) {
+      $user = UsuarioBD::buscarParaLogin($usuario, $pass);
       var_dump($user);
-      //Guardamos el usuario en la cookie
-      setcookie('usuario', serialize($user), time()+360000, '/');
-      header("Location: ".constant('URL'));
+      if (isset($user['usu_username'])) {
+        setcookie('userperadmin', serialize($user), time()+3600, '/');
+        header("Location: ".constant('URL'));
+      } else {
+        echo "NO ENCONTRAMOS SU USUARIO ";
+      }
+    } else  {
+      echo "NO TENEMOS LOS DATOS PARA LOGUEANOS";
     }
 
-    if(isset($_POST['olvide'])){
-      var_dump($_POST);
-    }
   }
 
   public function salir() {
     //Borramos la cookie
-    if(isset($_COOKIE['usuario'])){
-      setcookie('usuario', null , time() - 360, '/');
+    if(isset($_COOKIE['userperadmin'])){
+      setcookie('userperadmin', null , time() - 360, '/');
     }
     header("Location: ".constant('URL'));
   }

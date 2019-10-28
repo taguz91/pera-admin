@@ -42,6 +42,20 @@
     }
   }
 
+
+  function getOneFromSQL($sql, $params){
+    $ct = getCon();
+    if($ct != null){
+      $sen = $ct->prepare($sql);
+      $sen->execute($params);
+      $res = null;
+      while($r = $sen->fetch(PDO::FETCH_ASSOC)){
+        $res = $r;
+      }
+      return $res;
+    }
+  }
+
   function getArrayFromSQL($sql, $params){
     $res = [];
     $ct = getCon();

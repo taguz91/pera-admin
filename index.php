@@ -9,13 +9,13 @@
   //Debemos cargar la clase para que la reconosca como un objeto y podamos cargar bien sus atributos
   require_once 'src/modelo/usuario/usuario.php';
   require_once 'src/modelo/clases/personamd.php';
-  $usuario = new UsuarioMD();
+  // $usuario = new UsuarioMD();
+
+  $usuario = null;
 
   //Preguntamos si tenemos el usuario para cargarlo
-  if(isset($_COOKIE['usuario'])){
-    $usuario = unserialize($_COOKIE['usuario']);
-  } else {
-    $usuario = null;
+  if(isset($_COOKIE['userperadmin'])){
+    $usuario = unserialize($_COOKIE['userperadmin']);
   }
 
   $M = new Main();

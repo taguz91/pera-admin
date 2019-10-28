@@ -5,19 +5,14 @@ require_once 'src/modelo/clases/personamd.php';
 
 abstract class UsuarioBD {
 
-  static function buscarParaLogin ($usuario, $pass) {
+  static function buscarParaLogin($usuario, $pass) {
     $sql = '
     SELECT
     u.usu_username,
     u.id_usuario,
     u.id_persona,
-    p.persona_primer_nombre,
-    p.persona_segundo_nombre,
-    p.persona_primer_apellido,
-    p.persona_segundo_apellido,
-    p.persona_identificacion,
-    p.persona_correo,
-    p.persona_celular
+    p.persona_primer_nombre || \' \' ||
+    p.persona_primer_apellido  AS nombre_persona
     FROM
     public."Usuarios" u,
     public."Personas" p
@@ -25,35 +20,12 @@ abstract class UsuarioBD {
     usu_username = :user AND
     usu_password = set_byte( MD5(:pass) :: bytea, 4, 64 ) AND
     usu_estado = TRUE AND
-    p.id_persona = u.id_persona;
-    ';
+    p.id_persona = u.id_persona;';
 
-    $res = getRes($sql, [
-      'user' => '%'.$usuario.'%',
+    return getOneFromSQL($sql, [
+      'user' => $usuario,
       'pass' => $pass
     ]);
-
-    if($res != null){
-      $u = null;
-      $p = new PersonaMD();
-      while($r = $res->fetch(PDO::FETCH_ASSOC)){
-        $u = new UsuarioMD();
-
-        $u->id = $r['id_usuario'];
-        $u->user = $r['usu_username'];
-        $p->primerNombre = $r['persona_primer_nombre'];
-        $p->segundoNombre = $r['persona_segundo_nombre'];
-        $p->primerApellido = $r['persona_primer_apellido'];
-        $r->segundoApellido = ['persona_segundo_apellido'];
-        $r->identificacion = ['persona_identificacion'];
-        $r->correo = ['persona_correo'];
-        $r->celular = ['persona_celular'];
-
-        $u->persona = $p;
-        $u->roles = self::getRoles($usuario);
-      }
-      return $u;
-    }
   }
 
   static function getRoles($username){

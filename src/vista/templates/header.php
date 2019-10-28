@@ -19,6 +19,9 @@
   <!-- Estilo para las tablas -->
   <link href="<?php echo constant('URL');?>public/vendor/datatables/dataTables.bootstrap4.min.css" rel="stylesheet">
 
+  <!-- Mensajes para JavaScript -->
+  <script  type="text/javascript" src="<?php echo constant('URL');?>public/js/msg.js"></script>
+
 </head>
 <body id="page-top">
 
@@ -193,8 +196,7 @@
             <a class="nav-link dropdown-toggle" href="#" id="userDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
               <span class="mr-2 d-none d-lg-inline text-gray-600 small">
                 <?php
-                echo $usuario->persona->primerNombre
-                ." ". $usuario->persona->primerApellido;
+                echo $usuario['nombre_persona'];
                 ?>
               </span>
               <img class="img-profile rounded-circle"

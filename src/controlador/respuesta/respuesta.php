@@ -7,7 +7,7 @@ class RespuestaCTR extends CTR implements DCTR {
       parent::__construct("src/vista/respuesta/");
   }
 
-  function inicio() {
+  function inicio($mensaje = null) {
     $res = PermisoIngresoBD::getParaReporte();
     require $this->cargarVista('index.php');
   }
@@ -18,7 +18,7 @@ class RespuestaCTR extends CTR implements DCTR {
     if($res['statuscode'] == 200){
       $reportes = $res['items'];
       $reportes = $reportes[0];
-      
+
       include $this->cargarVista('reporte.php');
     }else{
       echo "No obtuvimos resultados";

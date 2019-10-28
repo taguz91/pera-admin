@@ -9,9 +9,11 @@ require 'src/vista/templates/header.php';
 
      <h3 class="text-center my-3">Editar Permiso Ficha</h3>
 
-     <form class="" action="<?php echo constant('URL'); ?>permisoficha/editar" method="post">
+     <div id="ctn-msg"></div>
 
-       <input type="hidden" name="id" value="<?php echo $pi->id; ?>">
+     <form class="" method="post" id="form-permiso">
+
+       <input type="hidden" name="id" value="<?php echo $pi['id_permiso_ingreso_ficha']; ?>">
 
        <div class="form-group">
            <label for="periodo" class="control-label">Seleccione un periodo:</label>
@@ -21,8 +23,8 @@ require 'src/vista/templates/header.php';
                <?php
                if (isset($periodos)) {
                    foreach ($periodos as $pl) {
-                     if ($pi->idPeriodo == $pl->id) {
-                       echo '<option selected value="' . $pl->id . '">' . $pl->nombre . '</option>';
+                     if ($pi['id_prd_lectivo'] == $pl->id) {
+                       echo '<option selected value="' . $pi['id_prd_lectivo'] . '">' . $pl->nombre . '</option>';
                      } else {
                        echo '<option value="' . $pl->id . '">' . $pl->nombre . '</option>';
                      }
@@ -40,11 +42,10 @@ require 'src/vista/templates/header.php';
            <select name="tipoficha" class="form-control" id="cmbFichas">
                <option value="0">Fichas</option>
                <?php
-               //Cargamos todos los periodos de la base de datos
                if (isset($tipofichas)) {
                    foreach ($tipofichas as $tf) {
-                     if ($tf->id == $pi->idTipoFicha) {
-                       echo '<option selected value="' . $tf->id . '">' . $tf->tipoFicha . '</option>';
+                     if ($tf->id == $pi['id_tipo_ficha']) {
+                       echo '<option selected value="' . $pi['id_tipo_ficha'] . '">' . $tf->tipoFicha . '</option>';
                      } else {
                         echo '<option value="' . $tf->id . '">' . $tf->tipoFicha . '</option>';
                      }
@@ -60,20 +61,20 @@ require 'src/vista/templates/header.php';
            <div class="col">
                <div class="form-group">
                    <label for="fechaInicio" class="control-label">Fecha Inicio</label>
-                   <input type="date" name="fechaInicio" value="<?php echo $pi->fechaInicio; ?>" class="form-control" id="inInicio">
+                   <input type="date" name="fechaInicio" value="<?php echo $pi['permiso_ingreso_fecha_inicio']; ?>" class="form-control" id="inInicio">
                </div>
            </div>
 
            <div class="col">
                <div class="form-group">
                    <label for="fechaFin" class="control-label">Fecha Fin</label>
-                   <input type="date" name="fechaFin" value="<?php echo $pi->fechaFin; ?>" class="form-control" id="inFin">
+                   <input type="date" name="fechaFin" value="<?php echo $pi['permiso_ingreso_fecha_fin']; ?>" class="form-control" id="inFin">
                </div>
            </div>
        </div>
 
        <div class="form-group">
-           <input class="btn btn-success btn-block" type="submit" name="editar" value="Guardar"  id="btnGuardar">
+           <input class="btn btn-success btn-block" type="submit" name="editar" value="Guardar"  id="btnGuardar" onclick="guardarPermiso()">
        </div>
 
      </form>
@@ -82,6 +83,56 @@ require 'src/vista/templates/header.php';
    </div>
 
  </div>
+
+ <script type="text/javascript">
+
+   const FORM_PERMISO = document.querySelector('#form-permiso');
+   const URLPG = '<?php echo constant('URL'); ?>permisoficha/editar';
+   const CTN_MSG = document.querySelector('#ctn-msg');
+
+   FORM_PERMISO.addEventListener('submit', (e) => {
+     e.preventDefault();
+   })
+
+   function guardarPermiso() {
+     let formdata = new FormData(FORM_PERMISO);
+     formdata.append('editar', 'true');
+
+     if (formdata.get('periodo') != '0' && formdata.get('tipoficha') != '0') {
+       fetch(URLPG, {
+         method: 'POST',
+         body: formdata
+       })
+       .then(res => res)
+       .then(data => {
+         window.location.replace(URLPG.replace('editar', ''));
+       })
+       .catch(e =>{
+         CTN_MSG.innerHTML = msgError('Error al guardar el formulario');
+       });
+
+     }
+
+   }
+
+   function msgError(msg) {
+     return `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+     <span>` + msg + `</span>
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button> </div>`;
+   }
+
+   function msgSuccess(msg) {
+     return `<div class="alert alert-success alert-dismissible fade show" role="alert">
+     <span>` + msg + `</span>
+     <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+       <span aria-hidden="true">&times;</span>
+     </button> </div>`;
+   }
+
+ </script>
+
 
 
 <?php

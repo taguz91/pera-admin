@@ -16,9 +16,22 @@ require 'src/vista/templates/header.php';
         class="btn btn-success btn-block">Ingresar</a>
       </div>
     </div>
+
+    <?php if (isset($mensaje)): ?>
+      <div class="row">
+        <div class="col-10 mx-auto">
+          <div class="alert alert-info my-2 text-center">
+            <?php echo $mensaje; ?>
+          </div>
+        </div>
+      </div>
+    <?php endif; ?>
+
   </div>
 
     <div class="card-body">
+
+      <div id="ctn-msg"></div>
 
       <div class="table-responsive">
         <table class="table table-bordered" id="dataTable" width="100%" cellspacing="0">
@@ -34,23 +47,36 @@ require 'src/vista/templates/header.php';
             </tr>
           </thead>
           <tbody>
-            <?php
-            if(isset($permisoingresos)){
-              foreach ($permisoingresos as $pi) {
-                echo '<tr scope="row">';
-                echo "<td>".$pi->id."</td>";
-                echo "<td>".$pi->idPeriodo."</td>";
-                echo "<td>".$pi->idTipoFicha."</td>";
-                echo "<td>".$pi->fechaInicio."</td>";
-                echo "<td>".$pi->fechaFin."</td>";
-                echo '<td> <a href="'.constant('URL').'permisoficha/editar?id='.$pi->id.'">Editar</a> </td>';
-                echo '<td> <a href="'.constant('URL').'permisoficha/eliminar?id='.$pi->id.'">Eliminar</a> </td>';
-                echo "</tr>";
-              }
-            }else{
-              Errores::errorBuscar("No encontramos tipos de fichas");
-            }
-             ?>
+
+            <?php if (isset($permisoingresos)): ?>
+
+              <?php foreach ($permisoingresos as $pi): ?>
+
+                <tr id="fila<?php echo $pi['id_permiso_ingreso_ficha']; ?>">
+
+                  <td><?php echo $pi['id_permiso_ingreso_ficha']; ?></td>
+                  <td><?php echo $pi['id_prd_lectivo'] ?></td>
+
+                  <td><?php echo $pi['tipo_ficha']; ?></td>
+
+                  <td><?php echo $pi['fecha_inicio']; ?></td>
+
+                  <td><?php echo $pi['fecha_fin']; ?></td>
+
+                  <td> <a href="<?php echo constant('URL').'permisoficha/editar?id='.$pi['id_permiso_ingreso_ficha']; ?>" class="btn btn-info btn-sm">Editar</a> </td>
+
+                  <td> <button onclick="eliminar('<?php echo constant('URL').'permisoficha/eliminar?id='; ?>', '<?php echo $pi['id_permiso_ingreso_ficha']; ?>')" type="button" class="btn btn-danger btn-sm">Eliminar</button> </td>
+
+                </tr>
+
+              <?php endforeach; ?>
+
+              <?php else: ?>
+
+                <?php Errores::errorBuscar("No encontramos tipos de fichas"); ?>
+
+            <?php endif; ?>
+
           </tbody>
         </table>
       </div>
@@ -58,6 +84,29 @@ require 'src/vista/templates/header.php';
     </div>
 </div>
 
+
+<script type="text/javascript">
+
+  function eliminar(url, id) {
+
+    fetch(url + id, {
+      method: 'GET'
+    })
+    .then(res => res.json())
+    .then(data => {
+      if (data.statuscode == '200') {
+        msgSuccess(data.mensaje);
+        let row = document.querySelector('#fila'+id);
+        if (row != null) {
+          row.parentNode.removeChild(row);
+        }
+      } else {
+        console.log(data);
+      }
+    });
+
+  }
+</script>
 
 <?php
 require 'src/vista/templates/footer.php';

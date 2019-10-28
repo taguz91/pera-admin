@@ -1,5 +1,7 @@
 <?php
 
+require_once 'src/utils/json.php';
+
 class Main {
 
   function __construct(){
@@ -45,7 +47,8 @@ class Main {
       $modelo = new $nombre();
 
       //Validamos si esta iniciado session
-      if ($usuario != null OR isset($_POST['ingresar'])) {
+      if ($usuario != null OR
+      (isset($_POST['txtUsuario']) AND isset($_POST['txtPass'])) ) {
         if(isset($url[1])){
           $this->llamarMetodo($url, $modelo);
         }else{

@@ -18,7 +18,7 @@ class PreguntaFichaCTR extends CTR implements DCTR
         parent::__construct("src/vista/preguntaFichaV/");
     }
 
-    public function inicio()
+    public function inicio($mensaje = null)
     {
 
         $seccionesFicha = SeccionFichaBD::seleccionarSeccionFicha(null, 0);
@@ -41,8 +41,8 @@ class PreguntaFichaCTR extends CTR implements DCTR
             $ayudaPregunta = $_POST["ayudaPregunta"];
 
             $tipoRespuesta = (int) $_POST["tipoRespuesta"];
-            
-            
+
+
             $posicionPregunta = (int) $_POST["posicionPregunta"];
 
 

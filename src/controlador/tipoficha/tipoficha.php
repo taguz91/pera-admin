@@ -7,7 +7,7 @@ class TipoFichaCTR extends CTR implements DCTR {
     parent::__construct("src/vista/tipoficha/");
   }
 
-  function inicio(){
+  function inicio($mensaje = null){
     $tiposfichas = TipoFichaBD::getAll();
     include $this->cargarVista('index.php');
   }

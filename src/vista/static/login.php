@@ -16,13 +16,15 @@ require_once 'src/vista/templates/headersp.php';
 
         </div>
 
+        <div class="col-12 mx-auto" id="errorlogin"></div>
+
       </div>
 
       <div class="row">
 
 
         <div class="col-sm-5 my-auto pl-4">
-          <img src="<?php echo constant('URL'); ?>public/img/icons/ista-logo.png" alt="No encontramos el logo">
+          <img class="d-block m-auto" src="<?php echo constant('URL'); ?>public/img/icons/ista-logo.png" alt="No encontramos el logo">
         </div>
 
 
@@ -30,7 +32,7 @@ require_once 'src/vista/templates/headersp.php';
 
                   <form class="form-horizontal mr-4 mt-3"
                   action="<?php echo constant('URL'); ?>login/ingresar"
-                  method="post">
+                  method="post" id="loginform">
 
                     <div class="form-group">
                       <label for="txtUsuario" class="control-label">
@@ -39,7 +41,6 @@ require_once 'src/vista/templates/headersp.php';
                       <div class="input-group">
                         <div class="input-group-append">
                           <span class="input-group-text">
-                            <!--<i class="fas fa-key"></i>-->
                             U
                           </span>
 				                </div>
@@ -55,7 +56,6 @@ require_once 'src/vista/templates/headersp.php';
                         <div class="input-group">
                           <div class="input-group-append">
                             <span class="input-group-text">
-                              <!--<i class="fas fa-key"></i>-->
                               P
                             </span>
 					                </div>
@@ -68,16 +68,14 @@ require_once 'src/vista/templates/headersp.php';
 
                         <button type="submit" class="btn btn-warning btn-block text-white bg-ista-yellow"
                         name="ingresar"
-                        id="pera-ingresar">
+                        id="pera-ingresar"
+                        onclick="loguear('<?php echo constant('URLAPI').'api/v1/usuario/admin/' ?>')">
                             Ingresar
                         </button>
 
-                        <button type="submit" class="btn btn-link btn-block"
-                        name="olvide">
-                            Olvide la contrasena
-                        </button>
 
                       </div>
+
                   </form>
 
               </div>
@@ -87,6 +85,54 @@ require_once 'src/vista/templates/headersp.php';
 
 
   </div>
+
+
+  <script type="text/javascript">
+
+  const formlogin = document.querySelector('#loginform');
+  const errorlogin = document.querySelector('#errorlogin');
+  formlogin.addEventListener('submit', (e) => {
+    e.preventDefault();
+  });
+
+  function loguear(url){
+    var data = new FormData(formlogin);
+
+    if(data.get('txtUsuario') != '' && data.get('txtPass') != ''){
+      comprobarLogin(url, data);
+    }else{
+      errorLogin('No ingreso usuario ni contrasena.');
+    }
+  }
+
+  function comprobarLogin(url, data){
+    fetch(url, {
+      method: 'POST',
+      body: data
+    })
+    .then(res => res.json())
+    .then(data => {
+      if(data.statuscode  == 200){
+        formlogin.submit();
+      }else{
+        errorLogin(data.mensaje);
+        //console.log(data);
+      }
+    })
+    .catch(e =>{
+      console.log('Errores: ' + e);
+    })
+  }
+
+  function errorLogin(msg){
+    errorlogin.innerHTML = `<div class="alert alert-danger alert-dismissible fade show" role="alert">
+    <span>` + msg + `</span>
+    <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+      <span aria-hidden="true">&times;</span>
+    </button> </div>`;
+  }
+
+  </script>
 
 <?php
 require_once 'src/vista/templates/footersp.php';

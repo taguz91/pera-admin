@@ -5,22 +5,22 @@ require_once("src/modelo/clases/periodolectivomd.php");
 
 abstract class PermisoIngresoBD {
 
-  static function guardar($permisoIngreso) {
+  static function guardar($pi) {
     return execute(self::$INSERT, [
-      'idPeriodo' => $permisoIngreso->idPeriodo,
-      'idTipoFicha' => $permisoIngreso->idTipoFicha,
-      'fechaInicio' => $permisoIngreso->fechaInicio,
-      'fechaFin' => $permisoIngreso->fechaFin
+      'idPeriodo' => $pi['id_prd_lectivo'],
+      'idTipoFicha' => $pi['id_tipo_ficha'],
+      'fechaInicio' => $pi['fecha_inicio'],
+      'fechaFin' => $pi['fecha_fin']
     ]);
   }
 
-  static function editar($permisoIngreso) {
+  static function editar($pi) {
     return execute(self::$UPDATE, [
-      'id' => $permisoIngreso->id,
-      'idPeriodo' => $permisoIngreso->idPeriodo,
-      'idTipoFicha' => $permisoIngreso->idTipoFicha,
-      'fechaInicio' => $permisoIngreso->fechaInicio,
-      'fechaFin' => $permisoIngreso->fechaFin
+      'id' => $pi['id_permiso_ingreso_ficha'],
+      'idPeriodo' => $pi['id_prd_lectivo'],
+      'idTipoFicha' => $pi['id_tipo_ficha'],
+      'fechaInicio' => $pi['fecha_inicio'],
+      'fechaFin' => $pi['fecha_fin']
     ]);
   }
 
@@ -45,9 +45,10 @@ abstract class PermisoIngresoBD {
     AND pF.permiso_ingreso_activo=true
     AND id_permiso_ingreso_ficha = :id;';
 
-    $res = getRes($sql, [
+    return getOneFromSQL($sql, [
       'id' => $id
     ]);
+    /*
     if ($res != null) {
       $pi = new PermisoIngresoMD();
       while($r = $res->fetch(PDO::FETCH_ASSOC)){
@@ -58,18 +59,18 @@ abstract class PermisoIngresoBD {
         $pi->fechaFin = $r['permiso_ingreso_fecha_fin'];
       }
       return $pi;
-    }
+    }*/
   }
 
   static function getAll() {
     $sql = self::$BASEQUERY.' '.self::$ENDQUERY;
 
-    $res = getRes($sql, []);
-    if ($res != null) {
+    return getArrayFromSQL($sql, []);
+    /*if ($res != null) {
       return self::obtenerParaTbl($res);
     }else{
       return [];
-    }
+    }*/
   }
 
   static function getPorPeriodo($idPeriodo){
@@ -77,40 +78,42 @@ abstract class PermisoIngresoBD {
     AND pl.id_prd_lectivo = :idPeriodo "
     .self::$ENDQUERY;
 
-    $res = getRes($sql, []);
-    if ($res != null) {
+    return getArrayFromSQL($sql, []);
+    /*if ($res != null) {
       return self::obtenerParaTbl($res);
     }else{
       return [];
-    }
+    }*/
   }
 
   static function getPorTipoFicha($idTipoFicha){
     $sql = self::$BASEQUERY . "
     AND tf.id_tipo_ficha = :idTipoFicha "
     . self::$ENDQUERY;
-    $res = getRes($sql, [
+    return getArrayFromSQL($sql, [
       'idTipoFicha' => $idTipoFicha
     ]);
+    /*
     if ($res != null) {
       return self::obtenerParaTbl($res);
     }else{
       return [];
-    }
+    }*/
   }
 
   static function buscar($aguja){
     $sql = self::$BASEQUERY."
     AND pl.prd_lectivo_nombre ILIKE :aguja " .self::$ENDQUERY;
 
-    $res = getRes($sql, [
+    return getArrayFromSQL($sql, [
       'aguja' => '%'.$aguja.'%'
     ]);
+    /*
     if ($res != null) {
       return self::obtenerParaTbl($res);
     }else{
       return [];
-    }
+    }*/
   }
 
   private static function obtenerParaTbl($res){
@@ -171,8 +174,8 @@ abstract class PermisoIngresoBD {
   id_permiso_ingreso_ficha,
   pl.prd_lectivo_nombre,
   tf.tipo_ficha,
-  pf.permiso_ingreso_fecha_inicio,
-  pf.permiso_ingreso_fecha_fin,
+  pf.permiso_ingreso_fecha_inicio AS fecha_inicio,
+  pf.permiso_ingreso_fecha_fin AS fecha_fin,
   pl.id_prd_lectivo
   FROM
   public."PermisoIngresoFichas" pf,

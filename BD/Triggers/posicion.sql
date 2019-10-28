@@ -47,13 +47,13 @@ $posicion_pregunta$ LANGUAGE plpgsql;
 
 
 CREATE TRIGGER act_posicion_seccion
-AFTER UPDATE OF seccion_ficha_posicion
+AFTER INSERT OR UPDATE OF seccion_ficha_posicion
 ON public."SeccionesFicha" FOR EACH ROW
 EXECUTE PROCEDURE posicion_seccion();
 
 
 CREATE TRIGGER act_posicion_pregunta
-AFTER UPDATE OF pregunta_ficha_posicion
+AFTER INSERT OR UPDATE OF pregunta_ficha_posicion
 ON public."PreguntasFicha" FOR EACH ROW
 EXECUTE PROCEDURE posicion_pregunta();
 

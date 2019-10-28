@@ -39,6 +39,16 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
       </div>
     </div>
 
+    <?php if (isset($mensaje)): ?>
+      <div class="row">
+        <div class="col-10 mx-auto">
+          <div class="alert alert-info my-2 text-center">
+            <?php echo $mensaje; ?>
+          </div>
+        </div>
+      </div>
+    <?php endif; ?>
+
   </div>
 
     <div class="card-body">

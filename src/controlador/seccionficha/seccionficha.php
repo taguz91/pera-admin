@@ -15,7 +15,7 @@ class SeccionFichaCTR extends CTR implements DCTR {
 
     }
 
-    public function inicio(){
+    public function inicio($mensaje = null){
 
 
         $tiposSeccion = TipoFichaBD::getAll();

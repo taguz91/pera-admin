@@ -8,7 +8,7 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
     parent::__construct("src/vista/gruposocioeconomico/");
   }
 
-  public function inicio (){
+  public function inicio ($mensaje = null){
     $gruposocioeconomico = GrupoSocioEconomicoBD::getAll();
     require $this->cargarVista('index.php');
   }
@@ -18,12 +18,10 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
       $gS = $this->grupoSocionomicoPOST();
       if($gS != null){
         $res = GrupoSocioEconomicoBD::guardar($gS);
-        if($res){
-          echo "<h3>Guardamos correctamente a {$gS->grupoSocioeconomico}</h3>";
-        }
-        $this->inicio();
+        $mensaje = $res ? 'Guardamos correctamente.' : 'No pudimos guardarlo.';
+        $this->inicio($mensaje);
       } else {
-        Errores::errorVariableNoEncontrada();
+        $this->inicio();
       }
     } else {
       $tipofichas = TipoFichaBD::getParaCombo();
@@ -38,7 +36,7 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
       $tipofichas = TipoFichaBD::getParaCombo();
       if($gs != null){
           require $this->cargarVista('editar.php');
-      }else{
+      } else {
         Errores::errorEditar("Grupo Socioeconomico");
       }
     }

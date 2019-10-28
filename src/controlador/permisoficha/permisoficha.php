@@ -6,13 +6,11 @@ require_once "src/modelo/tipoficha/tipofichabd.php";
 
 class PermisoFichaCTR extends CTR implements DCTR {
 
-  public $permisoingresos = [];
-
   function __construct(){
     parent::__construct("src/vista/permisoingreso/");
   }
 
-  public function inicio(){
+  public function inicio($mensaje = null){
     $permisoingresos =PermisoIngresoBD::getAll();
     require $this->cargarVista('index.php');
   }
@@ -25,7 +23,7 @@ class PermisoFichaCTR extends CTR implements DCTR {
       if($pf != null){
         $res = PermisoIngresoBD::guardar($pf);
         if($res){
-          echo "<h3>Guardamos correctamente a {$pf->fechaInicio}</h3>";
+          echo "<h3>Guardamos correctamente a {$pf['fecha_inicio']}</h3>";
         }
         $this->inicio();
       }else{
@@ -42,7 +40,7 @@ class PermisoFichaCTR extends CTR implements DCTR {
 
   public function editar(){
     if(isset($_GET['id'])){
-      
+
       $pi = PermisoIngresoBD::getPorId($_GET['id']);
       // Cargamos el formulario
       $periodos = PeriodoLectivoBD::getParaCombo();
@@ -58,10 +56,10 @@ class PermisoFichaCTR extends CTR implements DCTR {
     if(isset($_POST['editar'])){
       $pf = $this->permisoFichaPOST();
       if(isset($_POST['id']) && $pf != null){
-        $pf->id = $_POST['id'];
+        $pf['id_permiso_ingreso_ficha'] = $_POST['id'];
         $res = PermisoIngresoBD::editar($pf);
         if($res){
-          echo "<h3>Editamos correctamente a {$pf->fechaInicio}</h3>";
+          echo "<h3>Editamos correctamente a {$pf['id_permiso_ingreso_ficha']}</h3>";
         }
       }
       $this->inicio();
@@ -72,11 +70,12 @@ class PermisoFichaCTR extends CTR implements DCTR {
     if(isset($_GET['id'])){
       $res = PermisoIngresoBD::eliminar($_GET['id']);
       if($res){
-          echo "<h1>Eliminaremos con el id {$_GET['id']}</h1>";
+        JSON::confirmacion('Eliminamos correctamente');
       }else{
-        Errores::errorEliminar("Permiso Ingreso Ficha");
+        JSON::error('No pudimos eliminarlo');
       }
-      $this->inicio();
+    } else {
+      JSON::error('No encontramos el metodo');
     }
   }
 
@@ -87,11 +86,12 @@ class PermisoFichaCTR extends CTR implements DCTR {
       isset($_POST['fechaInicio']) &&
       isset($_POST['fechaFin'])
     ){
-      $pf = new PermisoIngresoMD();
-      $pf->idPeriodo = $_POST['periodo'];
-      $pf->idTipoFicha = $_POST['tipoficha'];
-      $pf->fechaInicio = $_POST['fechaInicio'];
-      $pf->fechaFin = $_POST['fechaFin'];
+      $pf = [
+        'id_prd_lectivo' => $_POST['periodo'],
+        'id_tipo_ficha' => $_POST['tipoficha'],
+        'fecha_inicio' => $_POST['fechaInicio'],
+        'fecha_fin' => $_POST['fechaFin']
+      ];
       return $pf;
     }
   }

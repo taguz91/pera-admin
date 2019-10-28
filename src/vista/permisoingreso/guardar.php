@@ -7,10 +7,11 @@ require 'src/vista/templates/header.php';
 
     <div class="col-md-8 col-lg-6 mx-auto border rounded shadow">
 
-        <h3 class="text-center my-3">
-          Ingreso de Permiso Ficha
-        </h3>
-        <form class="form-horizontal" action="<?php echo constant('URL'); ?>permisoficha/guardar" method="post">
+        <h3 class="text-center my-3">Ingreso de Permiso Ficha</h3>
+
+        <div id="ctn-msg"></div>
+
+        <form class="form-horizontal" action="<?php echo constant('URL'); ?>permisoficha/guardar" method="post"  id="form-permiso">
 
             <div class="form-group">
                 <label for="periodo" class="control-label">Seleccione un periodo:</label>
@@ -62,7 +63,7 @@ require 'src/vista/templates/header.php';
             </div>
 
             <div class="form-group">
-                <input class="btn btn-success btn-block" type="submit" name="guardar" value="Guardar" disabled id="btnGuardar">
+                <input class="btn btn-success btn-block" type="submit" name="guardar" value="Guardar" disabled id="btnGuardar" onclick="guardarPermiso()">
             </div>
 
         </form>
@@ -73,6 +74,60 @@ require 'src/vista/templates/header.php';
 <?php
 require 'src/vista/templates/footer.php';
 ?>
+
+
+<script type="text/javascript">
+
+  const FORM_PERMISO = document.querySelector('#form-permiso');
+  const URLPG = '<?php echo constant('URL'); ?>permisoficha/guardar';
+
+  /*const CTN_MSG = document.querySelector('#ctn-msg');*/
+
+  FORM_PERMISO.addEventListener('submit', (e) => {
+    e.preventDefault();
+  })
+
+  function guardarPermiso() {
+    let formdata = new FormData(FORM_PERMISO);
+    formdata.append('guardar', 'true');
+
+    if (formdata.get('periodo') != '0' && formdata.get('tipoficha') != '0' && formdata.get('fechaInicio') != '' &&
+    formdata.get('fechaFin') != '' &&
+    fechaValida(formdata.get('fechaInicio'), formdata.get('fechaFin'));
+    ) {
+      fetch(URLPG, {
+        method: 'POST',
+        body: formdata
+      })
+      .then(res => res)
+      .then(data => {
+        msgSuccess('Guardamos correctamente');
+        FORM_PERMISO.querySelector('select[name="periodo"]').value = 0;
+        FORM_PERMISO.querySelector('select[name="tipoficha"]').value = 0;
+        FORM_PERMISO.querySelector('input[name="fechaInicio"]').value = '';
+        FORM_PERMISO.querySelector('input[name="fechaFin"]').value = '';
+      })
+      .catch(e =>{
+        console.log('Errores: ' + e);
+        msgError('Error al guardar el formulario');
+      });
+
+    }
+
+  }
+
+  function fechaValida(fechaInicio, fechaFin) {
+    let FF = new Date(fechaInicio);
+    let FI = new Date(fechaFin);
+    if(FI > FF) {
+      msgError('LA FECHA DE INICIO NO PUEDE SER MAYOR A LA FECHA DE FIN');
+      return false;
+    }
+    return true;
+  }
+
+</script>
+
 
 <script>
     let valPeriodos = false;
