@@ -20,8 +20,11 @@ require 'src/vista/templates/header.php';
     <?php if (isset($mensaje)): ?>
       <div class="row">
         <div class="col-10 mx-auto">
-          <div class="alert alert-info my-2 text-center">
+          <div class="alert alert-info my-2 text-center alert-dismissible fade show" role="alert">
             <?php echo $mensaje; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
         </div>
       </div>

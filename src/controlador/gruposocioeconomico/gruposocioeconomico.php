@@ -21,7 +21,7 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
         $mensaje = $res ? 'Guardamos correctamente.' : 'No pudimos guardarlo.';
         $this->inicio($mensaje);
       } else {
-        $this->inicio();
+        $this->inicio('No tenemos datos para guardar');
       }
     } else {
       $tipofichas = TipoFichaBD::getParaCombo();
@@ -44,26 +44,19 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
     if(isset($_POST['editar'])){
       $gS = $this->grupoSocionomicoPOST();
       if($gS != null && isset($_POST['id'])) {
-        $gS->id = $_POST['id'];
+        $gS['id_grupo_socioeconomico'] = $_POST['id'];
+
         $res = GrupoSocioEconomicoBD::editar($gS);
-        if($res){
-          echo "<h3>Editamos correctamente a {$gS->grupoSocioEconomico}</h3>";
-        }
+        $mensaje = $res ? 'Editamos correctamente.' : 'No pudimos editarlo.';
+        $this->inicio($mensaje);
+      } else {
+        $this->inicio('No tenemos datos para editar.');
       }
-      $this->inicio();
     }
   }
 
   public function eliminar(){
-    if(isset($_GET['id'])){
-      $res = GrupoSocioEconomicoBD::eliminar($_GET['id']);
-      if($res){
-          echo "<h1>Eliminaremos con el id {$_GET['id']}</h1>";
-          $this->inicio();
-      } else {
-        Errores::errorEliminar("Grupo Socioeconomico");
-      }
-    }
+    GrupoSocioEconomicoBD::eliminar(isset($_GET['id']) ? $_GET['id'] : 0);
   }
 
   private function grupoSocionomicoPOST(){
@@ -73,14 +66,13 @@ class GrupoSocioeconomicoCTR extends CTR implements DCTR {
         isset($_POST['puntajeMinimo']) &&
         isset($_POST['puntajeMaximo'])
       ){
-        // Sin datos vacios y que el puntaje maximo sea mayor al minimo
-        $gS = new GrupoSocioEconomicoMD();
-        $gS->idTipoFicha = $_POST['tipoficha'];
-        $gS->grupoSocioEconomico = $_POST['gruposocioeconomico'];
-        $gS->puntajeMinimo = $_POST['puntajeMinimo'];
-        $gS->puntajeMaximo = $_POST['puntajeMaximo'];
-
-        return $gS;
+        $gs = [
+          'id_tipo_ficha' => $_POST['tipoficha'],
+          'grupo_socioeconomico' => $_POST['gruposocioeconomico'],
+          'puntaje_minimo' => $_POST['puntajeMinimo'],
+          'puntaje_maximo' => $_POST['puntajeMaximo']
+        ];
+        return $gs;
     }
   }
 

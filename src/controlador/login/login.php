@@ -28,7 +28,7 @@ class LoginCTR extends CTR implements DCTR {
       $user = UsuarioBD::buscarParaLogin($usuario, $pass);
       var_dump($user);
       if (isset($user['usu_username'])) {
-        setcookie('userperadmin', serialize($user), time()+3600, '/');
+        setcookie('userperadmin', serialize($user), time()+360000, '/');
         header("Location: ".constant('URL'));
       } else {
         echo "NO ENCONTRAMOS SU USUARIO ";

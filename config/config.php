@@ -7,7 +7,7 @@ define('URLAPI', 'http://localhost/pera-public/');
 //Constantes de conexion a la base de datos
 
 define('HOST', '35.192.7.211');
-define('DB', 'BDinsta');
+define('DB', 'BDnotas');
 define('PORT', '5432');
 define('USER', 'fichasphpubi');
 define('PASS', 'fichasubiphp2019');

@@ -11,16 +11,16 @@ require 'src/vista/templates/header.php';
     </h3>
     <form class="form-horizontal" action="<?php echo constant('URL') . 'tipoficha/editar'; ?>" method="post">
 
-      <input type="hidden" name="id" value="<?php echo $tf->id; ?>">
+      <input type="hidden" name="id" value="<?php echo $tf['id_tipo_ficha']; ?>">
 
       <div class="form-group">
         <label for="">Nombre Ficha:</label>
-        <input type="text" class="form-control" name="nombreficha" value="<?php echo $tf->tipoFicha; ?>" placeholder="Ingrese el nombre de la ficha.">
+        <input type="text" class="form-control" name="nombreficha" value="<?php echo $tf['tipo_ficha']; ?>" placeholder="Ingrese el nombre de la ficha.">
       </div>
 
       <div class="form-group">
         <label for="">Descripcion:</label>
-        <textarea name="descripcionficha" class="form-control" rows="5" cols="5" placeholder="Ingrese una breve descripcion de la ficha que creara."><?php echo $tf->descripcion; ?></textarea>
+        <textarea name="descripcionficha" class="form-control" rows="5" cols="5" placeholder="Ingrese una breve descripcion de la ficha que creara."><?php echo $tf['tipo_ficha_descripcion']; ?></textarea>
       </div>
 
       <div class="form-group">
@@ -31,9 +31,6 @@ require 'src/vista/templates/header.php';
 
   </div>
 </div>
-
-
-
 
 <?php
 require 'src/vista/templates/footer.php';

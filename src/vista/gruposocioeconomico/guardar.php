@@ -21,7 +21,7 @@ require 'src/vista/templates/header.php';
           <?php
           if (isset($tipofichas)) {
             foreach ($tipofichas as $tf) {
-              echo '<option value="' . $tf->id . '">' . $tf->tipoFicha . '</option>';
+              echo '<option value="' . $tf['id_tipo_ficha'] . '">' . $tf['tipo_ficha'] . '</option>';
             }
           }
           ?>
@@ -56,7 +56,7 @@ require 'src/vista/templates/header.php';
 
 
       <div class="form-group">
-        <input class="btn btn-success btn-block" type="submit" name="guardar" value="Guardar" onclick="guardarGP()" id="btnGuardar">
+        <input class="btn btn-success btn-block" type="submit" name="guardar" value="Guardar" onclick="" id="btnGuardar">
       </div>
 
     </form>

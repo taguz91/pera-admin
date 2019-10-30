@@ -17,11 +17,10 @@ class TipoFichaCTR extends CTR implements DCTR {
     if($tf == null){
       include $this->cargarVista('guardar.php');
     } else {
-        $res = TipoFichaBD::guardar($tf);
-
-        $this->inicio();
+      $res = TipoFichaBD::guardar($tf);
+      $mensaje = $res ? 'Guardamos correctamente.' : 'No pudimos guardarlo.';
+      $this->inicio($mensaje);
     }
-
   }
 
   function editar() {
@@ -33,12 +32,15 @@ class TipoFichaCTR extends CTR implements DCTR {
 
       if ($tf != null) {
         $tf->id = isset($_POST['id']) ? $_POST['id'] : 0;
-        echo $tf->id . '<br>';
 
         $res = TipoFichaBD::editar($tf);
+
+        $mensaje = $res ? 'Editamos correctamente.' : 'No pudimos editarlo.';
+        $this->inicio($mensaje);
+      } else {
+        $this->inicio('No tenemos el tipo de ficha para editarlo');
       }
 
-      $this->inicio();
     }
   }
 
@@ -51,10 +53,17 @@ class TipoFichaCTR extends CTR implements DCTR {
       $tipo = $_POST['nombreficha'];
       $des = $_POST['descripcionficha'];
       if($tipo != '' && $des != ''){
+
+        $tf = [
+          'tipo_ficha' => $tipo,
+          'tipo_ficha_descripcion' => $des
+        ];
+        return $tf;
+        /*
         $tf = new TipoFichaMD();
         $tf->tipoFicha = $tipo;
         $tf->descripcion = $des;
-        return $tf;
+        return $tf;*/
       }
     }
   }

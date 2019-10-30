@@ -73,4 +73,22 @@
     return $res;
   }
 
+
+  function deleteById($sql, $id = 0){
+    if ($id != 0) {
+      $res = execute($sql, [
+        'id' => $id
+      ]);
+
+      if($res){
+          JSON::confirmacion('Eliminamos correctamente.');
+      } else {
+        JSON::error('No pudimos eliminarlo');
+      }
+    } else {
+      JSON::error('No tenemos el id para eliminar.');
+    }
+
+  }
+
  ?>

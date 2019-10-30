@@ -6,27 +6,27 @@ abstract class GrupoSocioEconomicoBD {
   static function guardar($gs) {
     $sql = self::$INSERT;
     return execute($sql, [
-      'idTipoFicha' => $gs->idTipoFicha,
-      'grupoSocioEconomico' => $gs->grupoSocioEconomico,
-      'puntajeMinimo' => $gs->puntajeMinimo,
-      'puntajeMaximo' => $gs->puntajeMaximo
+      'idTipoFicha' => $gs['id_tipo_ficha'],
+      'grupoSocioEconomico' => $gs['grupo_socioeconomico'],
+      'puntajeMinimo' => $gs['puntaje_minimo'],
+      'puntajeMaximo' => $gs['puntaje_maximo']
     ]);
   }
 
   static function editar($gs) {
     $sql = self::$UPDATE;
     return execute($sql, [
-      'id' => $gs->id,
-      'idTipoFicha' => $gs->idTipoFicha,
-      'grupoSocioEconomico' => $gs->grupoSocioEconomico,
-      'puntajeMinimo' => $gs->puntajeMinimo,
-      'puntajeMaximo' => $gs->puntajeMaximo
+      'id' => $gs['id_grupo_socioeconomico'],
+      'idTipoFicha' => $gs['id_tipo_ficha'],
+      'grupoSocioEconomico' => $gs['grupo_socioeconomico'],
+      'puntajeMinimo' => $gs['puntaje_minimo'],
+      'puntajeMaximo' => $gs['puntaje_maximo']
     ]);
   }
 
   static function eliminar($id) {
     $sql = self::$DELETE;
-    return execute($sql, [
+    deleteById($sql, [
       'id' => $id
     ]);
   }
@@ -45,60 +45,32 @@ abstract class GrupoSocioEconomicoBD {
     AND gS.grupo_socioeconomico_activo=true
     AND id_grupo_socioeconomico = :id;';
 
-    $res = getRes($sql, [
+    return getOneFromSQL($sql, [
       'id' => $id
     ]);
-
-    if ($res != null) {
-      $gs = new GrupoSocioEconomicoMD();
-      while($r = $res->fetch(PDO::FETCH_ASSOC)){
-        $gs->id = $r['id_grupo_socioeconomico'];
-        $gs->idTipoFicha = $r['id_tipo_ficha'];
-        $gs->grupoSocioEconomico = $r['grupo_socioeconomico'];
-        $gs->puntajeMinimo = $r['puntaje_minimo'];
-        $gs->puntajeMaximo = $r['puntaje_maximo'];
-      }
-      return $gs;
-    }
   }
 
   static function getAll() {
     $sql = self::$BASEQUERY.' '.self::$ENDQUERY;
-
-    $res = getRes($sql, []);
-    if ($res != null) {
-      return self::obtenerParaTbl($res);
-    }else{
-      return [];
-    }
+    return getArrayFromSQL($sql, []);
   }
 
   static function getPorTipoFicha($idTipoFicha){
     $sql = self::$BASEQUERY. "
     AND tf.id_tipo_ficha = :idTipoFicha ".self::$ENDQUERY;
 
-    $res = getRes($sql, [
+    return getArrayFromSQL($sql, [
       'idTipoFicha' => $idTipoFicha
     ]);
-    if ($res != null) {
-      return self::obtenerParaTbl($res);
-    }else{
-      return [];
-    }
   }
 
   static function buscar($aguja){
     $sql = self::$BASEQUERY."
     AND gS.grupo_socioeconomico ILIKE :aguja ".self::$ENDQUERY;
 
-    $res = getRes($sql, [
+    return getArrayFromSQL($sql, [
       'aguja' => '%'.$aguja.'%'
     ]);
-    if ($res != null) {
-      return self::obtenerParaTbl($res);
-    }else{
-      return [];
-    }
   }
 
   private static function obtenerParaTbl($res){
@@ -107,10 +79,10 @@ abstract class GrupoSocioEconomicoBD {
       //var_dump($r);
       $gs = new GrupoSocioeconomicoMD();
       $gs->id = $r['id_grupo_socioeconomico'];
-      $gs->idTipoFicha = $r['tipo_ficha'];
-      $gs->grupoSocioEconomico = $r['grupo_socioeconomico'];
-      $gs->puntajeMinimo = $r['puntaje_minimo'];
-      $gs->puntajeMaximo = $r['puntaje_maximo'];
+      $gs['id_tipo_ficha'] = $r['tipo_ficha'];
+      $gs['grupo_socioeconomico'] = $gs['grupo_socioeconomico'];
+      $gs['puntaje_minimo'] = $r['puntaje_minimo'];
+      $gs['puntaje_maximo'] = $r['puntaje_maximo'];
 
       array_push($items, $gs);
     }

@@ -23,13 +23,16 @@ require 'src/vista/templates/header.php';
     <?php if (isset($mensaje)): ?>
       <div class="row">
         <div class="col-10 mx-auto">
-          <div class="alert alert-info my-2 text-center">
+          <div class="alert alert-info my-2 text-center alert-dismissible fade show" role="alert">
             <?php echo $mensaje; ?>
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+              <span aria-hidden="true">&times;</span>
+            </button>
           </div>
         </div>
       </div>
     <?php endif; ?>
-    
+
   </div>
 
   <div class="card-body">
@@ -48,10 +51,10 @@ require 'src/vista/templates/header.php';
           <?php if(isset($tiposfichas)){?>
             <?php foreach ($tiposfichas as $tf): ?>
               <tr scope="row">
-                <td><?php echo $tf->id; ?></td>
-                <td><?php echo $tf->tipoFicha; ?></td>
-                <td><?php echo $tf->descripcion; ?></td>
-                <td> <a href="<?php echo constant('URL').'tipoficha/editar/?editar='.$tf->id; ?>"> Editar </a> </td>
+                <td><?php echo $tf['id_tipo_ficha']; ?></td>
+                <td><?php echo $tf['tipo_ficha']; ?></td>
+                <td><?php echo $tf['tipo_ficha_descripcion']; ?></td>
+                <td> <a href="<?php echo constant('URL').'tipoficha/editar/?editar='.$tf['id_tipo_ficha']; ?>"> Editar </a> </td>
               </tr>
             <?php endforeach; ?>
             <?php }else{
@@ -59,7 +62,6 @@ require 'src/vista/templates/header.php';
             }
            ?>
         </tbody>
-
 
       </table>
     </div>

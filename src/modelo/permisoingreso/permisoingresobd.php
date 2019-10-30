@@ -26,7 +26,7 @@ abstract class PermisoIngresoBD {
 
 
   static function eliminar($id) {
-    return execute(self::$DELETE, [
+    deleteById($sql, [
       'id' => $id
     ]);
   }

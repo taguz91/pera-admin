@@ -44,10 +44,10 @@ require 'src/vista/templates/header.php';
                <?php
                if (isset($tipofichas)) {
                    foreach ($tipofichas as $tf) {
-                     if ($tf->id == $pi['id_tipo_ficha']) {
-                       echo '<option selected value="' . $pi['id_tipo_ficha'] . '">' . $tf->tipoFicha . '</option>';
+                     if ($tf['id_tipo_ficha'] == $pi['id_tipo_ficha']) {
+                       echo '<option selected value="' . $pi['id_tipo_ficha'] . '">' . $tf['id_tipo_ficha'] . '</option>';
                      } else {
-                        echo '<option value="' . $tf->id . '">' . $tf->tipoFicha . '</option>';
+                        echo '<option value="' . $tf['id_tipo_ficha'] . '">' . $tf['tipo_ficha'] . '</option>';
                      }
                    }
                }

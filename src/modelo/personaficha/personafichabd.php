@@ -4,11 +4,11 @@ require_once "src/modelo/clases/personamd.php";
 
 abstract class PersonaFichaBD {
 
-  static function guardarPersonaFicha($personaFicha) {
+  static function guardarPersonaFicha($pf) {
     return execute(self::$INSERT, [
-      'id_permiso_ingreso_ficha' => $personaFicha->idPermisoIngFicha,
-      'id_persona' => $personaFicha->idPersona,
-      'persona_ficha_clave' => $personaFicha->clave
+      'id_permiso_ingreso_ficha' => $pf['id_permiso_ingreso_ficha'],
+      'id_persona' => $pf['id_persona'],
+      'persona_ficha_clave' => $pf['clave']
     ]);
   }
 
@@ -19,14 +19,13 @@ abstract class PersonaFichaBD {
     ]);
   }
 
-  static function eliminar($id){
-    return execute(self::$DELETE, [
+  static function eliminar($id) {
+    deleteById($sql, [
       'id' => $id
     ]);
   }
 
-  static function getMatricula($idPeriodo)
-  {
+  static function getMatricula($idPeriodo) {
     $sql = '
     SELECT
     id_matricula,
@@ -43,6 +42,10 @@ abstract class PersonaFichaBD {
     ORDER BY
     matricula_fecha DESC;';
 
+    return getArrayFromSQL($sql, [
+      'idPeriodo' => $idPeriodo
+    ]);
+/*
     $res = getRes($sql, [
       'idPeriodo' => $idPeriodo
     ]);
@@ -61,19 +64,19 @@ abstract class PersonaFichaBD {
       return $items;
     } else {
       return [];
-    }
+    }*/
   }
 
-  static function getAll()
-  {
+  static function getAll() {
     $sql = self::$BASEQUERY . ' ' . self::$ENDQUERY;
-
+    return getArrayFromSQL($sql, []);
+    /*
     $res = getRes($sql, []);
     if ($res != null) {
       return self::obtenerParaTbl($res);
     } else {
       return [];
-    }
+    }*/
   }
 
   static function getCorreosEst($numCiclo, $idPermiso)
@@ -81,17 +84,25 @@ abstract class PersonaFichaBD {
     $sql = self::$ESTUDIANTE . " (SELECT id_prd_lectivo FROM public.\"PermisoIngresoFichas\" WHERE id_permiso_ingreso_ficha = :idPermiso1)  AND
     curso_ciclo = :numCiclo))) AND id_persona NOT IN
     (SELECT id_persona FROM public.\"PersonaFicha\" WHERE id_permiso_ingreso_ficha = idPermiso2) ORDER BY id_persona;";
-
-    $res = getRes($sql, [
+    return getArrayFromSQL($sql, [
       'idPermiso1' => $idPermiso,
       'numCiclo' => $numCiclo,
       'idPermiso2' => $idPeriodo
     ]);
+
+/*
+    $res = getRes($sql, [
+      'idPermiso1' => $idPermiso,
+      'numCiclo' => $numCiclo,
+      'idPermiso2' => $idPeriodo
+    ]);*/
+
+    /*
     if ($res != null) {
       return self::obtenerParaTblPer($res);
     } else {
       return [];
-    }
+    }*/
   }
 
   static function getCorreosDoc($numCiclo, $idPermiso)
@@ -100,6 +111,13 @@ abstract class PersonaFichaBD {
     curso_ciclo = :numCiclo)) AND id_persona NOT IN
     (SELECT id_persona FROM public.\"PersonaFicha\" WHERE id_permiso_ingreso_ficha = :idPermiso2) ORDER BY id_persona;";
 
+    return getArrayFromSQL($sql, [
+      'idPermiso1' => $idPermiso,
+      'numCiclo' => $numCiclo,
+      'idPermiso2' => $idPeriodo
+    ]);
+
+    /*
     $res = getRes($sql, [
       'idPermiso1' => $idPermiso,
       'numCiclo' => $numCiclo,
@@ -109,11 +127,10 @@ abstract class PersonaFichaBD {
       return self::obtenerParaTblPer($res);
     } else {
       return [];
-    }
+    }*/
   }
 
-  static function getPorId($id)
-  {
+  static function getPorId($id) {
     $sql = '
     SELECT
     pr.id_persona_ficha,
@@ -132,6 +149,10 @@ abstract class PersonaFichaBD {
     AND pr.persona_ficha_activa = true
     AND id_persona_ficha = :id;';
 
+    return getOneFromSQL($sql, [
+      'id' => $id
+    ]);
+    /*
     $res = getRes($sql, [
       'id' => $id
     ]);
@@ -145,11 +166,10 @@ abstract class PersonaFichaBD {
         $pi->fechaFin = $r['permiso_ingreso_fecha_fin'];
       }
       return $pi;
-    }
+    }*/
   }
 
-  static function buscarPorNombre($aguja)
-  {
+  static function buscarPorNombre($aguja) {
     $sql = self::$BASEQUERY. "
     AND p.persona_primer_apellido
     ILIKE :aguja1 OR p.persona_segundo_apellido
@@ -157,6 +177,13 @@ abstract class PersonaFichaBD {
     ILIKE :aguja3 OR p.persona_segundo_nombre
     ILIKE :aguja4 ".self::$ENDQUERY;
 
+    return getArrayFromSQL($sql, [
+      'aguja1' => '%'.$aguja.'%',
+      'aguja2' => '%'.$aguja.'%',
+      'aguja3' => '%'.$aguja.'%',
+      'aguja4' => '%'.$aguja.'%'
+    ]);
+    /*
     $res = getRes($sql, [
       'aguja1' => '%'.$aguja.'%',
       'aguja2' => '%'.$aguja.'%',
@@ -167,15 +194,16 @@ abstract class PersonaFichaBD {
       return self::obtenerParaTbl($res);
     } else {
       return [];
-    }
+    }*/
   }
 
-  static function buscarPorCedula($aguja)
-  {
+  static function buscarPorCedula($aguja){
     $sql = self::$BASEQUERY. "
     AND p.persona_identificacion
     ILIKE :aguja ". self::$ENDQUERY;
 
+    return getArrayFromSQL($sql, []);
+    /*
     $res = getRes($sql, [
       'aguja' => '%'.$aguja.'%'
     ]);
@@ -183,7 +211,7 @@ abstract class PersonaFichaBD {
       return self::obtenerParaTbl($res);
     } else {
       return [];
-    }
+    }*/
   }
 
   private static function obtenerParaTbl($res)
@@ -207,8 +235,7 @@ abstract class PersonaFichaBD {
     return $items;
   }
 
-  private static function obtenerParaTblPer($res)
-  {
+  private static function obtenerParaTblPer($res){
     $items = array();
     while ($r = $res->fetch(PDO::FETCH_ASSOC)) {
       $p = new PersonaMD();

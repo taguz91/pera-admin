@@ -22,10 +22,8 @@ class PermisoFichaCTR extends CTR implements DCTR {
 
       if($pf != null){
         $res = PermisoIngresoBD::guardar($pf);
-        if($res){
-          echo "<h3>Guardamos correctamente a {$pf['fecha_inicio']}</h3>";
-        }
-        $this->inicio();
+        $mensaje = $res ? 'Guardamos correctamente.' : 'No pudimos guardarlo.';
+        $this->inicio($mensaje);
       }else{
         Errores::errorVariableNoEncontrada();
       }
@@ -58,25 +56,16 @@ class PermisoFichaCTR extends CTR implements DCTR {
       if(isset($_POST['id']) && $pf != null){
         $pf['id_permiso_ingreso_ficha'] = $_POST['id'];
         $res = PermisoIngresoBD::editar($pf);
-        if($res){
-          echo "<h3>Editamos correctamente a {$pf['id_permiso_ingreso_ficha']}</h3>";
-        }
+        $mensaje = $res ? 'Editamos correctamente.' : 'No pudimos editarlo.';
+        $this->inicio($mensaje);
+      } else {
+        $this->inicio('No tenemos datos para editar.');
       }
-      $this->inicio();
     }
   }
 
   function eliminar(){
-    if(isset($_GET['id'])){
-      $res = PermisoIngresoBD::eliminar($_GET['id']);
-      if($res){
-        JSON::confirmacion('Eliminamos correctamente');
-      }else{
-        JSON::error('No pudimos eliminarlo');
-      }
-    } else {
-      JSON::error('No encontramos el metodo');
-    }
+    PermisoIngresoBD::eliminar(isset($_GET['id']) ? $_GET['id'] : 0);
   }
 
   private function permisoFichaPOST() {

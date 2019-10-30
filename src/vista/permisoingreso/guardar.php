@@ -37,7 +37,7 @@ require 'src/vista/templates/header.php';
                     //Cargamos todos los periodos de la base de datos
                     if (isset($tipofichas)) {
                         foreach ($tipofichas as $tf) {
-                            echo '<option value="' . $tf->id . '">' . $tf->tipoFicha . '</option>';
+                            echo '<option value="' . $tf['id_tipo_ficha'] . '">' . $tf['tipo_ficha'] . '</option>';
                         }
                     }
                     ?>
