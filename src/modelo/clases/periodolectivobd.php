@@ -16,7 +16,8 @@ abstract class PeriodoLectivoBD {
     ORDER BY
     prd_lectivo_fecha_fin DESC;
     ';
-
+    return getArrayFromSQL($sql, []);
+    /*
     $ct = getCon();
     if($ct != null){
       $res = $ct->query($sql);
@@ -32,10 +33,8 @@ abstract class PeriodoLectivoBD {
       }else{
         return [];
       }
-    }
+    }*/
   }
-
-
 
 }
 

@@ -29,8 +29,8 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
           <?php
           if(isset($tiposSeccion)){
             foreach ($tiposSeccion as $ts) {
-              echo "<input type='hidden' class='tiposSeccion' value='{$ts->id}'>
-              <input type='hidden' class='tiposSeccion' value='{$ts->tipoFicha}'>";
+              echo "<input type='hidden' class='tiposSeccion' value='{$ts['id_tipo_ficha']}'>
+              <input type='hidden' class='tiposSeccion' value='{$ts['tipo_ficha']}'>";
             }
           }
           ?>
@@ -80,8 +80,10 @@ require_once 'src/vista/seccionFichaV/eliminar.php';
                 <th scope='row'>{$seccion[0]}</th>
                 <td>{$seccion[1]}</td>
                 <td>{$seccion[2]}</td>
+
                 <td style='display:none;'>{$seccion[4]}</td>
                 <td style='display:none;'>{$seccion[5]}</td>
+                
                 <td>
                   <button type='button' class='btn btn-primary actualizarBtn'
                   data-toggle='modal' data-target='#actualizarSeccion'>

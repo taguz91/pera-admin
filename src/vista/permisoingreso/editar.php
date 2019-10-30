@@ -23,17 +23,16 @@ require 'src/vista/templates/header.php';
                <?php
                if (isset($periodos)) {
                    foreach ($periodos as $pl) {
-                     if ($pi['id_prd_lectivo'] == $pl->id) {
-                       echo '<option selected value="' . $pi['id_prd_lectivo'] . '">' . $pl->nombre . '</option>';
+                     if ($pi['id_prd_lectivo'] == $pl['id_prd_lectivo']) {
+                       echo '<option selected value="' . $pi['id_prd_lectivo'] . '">' . $pl['prd_lectivo_nombre'] . '</option>';
                      } else {
-                       echo '<option value="' . $pl->id . '">' . $pl->nombre . '</option>';
+                       echo '<option value="' . $pl['id_prd_lectivo'] . '">' . $pl['prd_lectivo_nombre'] . '</option>';
                      }
                    }
                }
                ?>
            </select>
        </div>
-
 
 
        <div class="form-group">

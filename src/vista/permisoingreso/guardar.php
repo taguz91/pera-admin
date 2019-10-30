@@ -21,7 +21,7 @@ require 'src/vista/templates/header.php';
                     <?php
                     if (isset($periodos)) {
                         foreach ($periodos as $pl) {
-                            echo '<option value="' . $pl->id . '">' . $pl->nombre . '</option>';
+                            echo '<option value="' . $pl['id_prd_lectivo'] . '">' . $pl['prd_lectivo_nombre'] . '</option>';
                         }
                     }
                     ?>
