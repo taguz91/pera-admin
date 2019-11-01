@@ -1,7 +1,4 @@
 <?php
-require_once("src/modelo/permisoingreso/permisoingreso.php");
-require_once("src/modelo/tipoficha/tipofichamd.php");
-require_once("src/modelo/clases/periodolectivomd.php");
 
 abstract class PermisoIngresoBD {
 
@@ -55,6 +52,29 @@ abstract class PermisoIngresoBD {
     return getArrayFromSQL($sql, []);
   }
 
+  static function getForPersona($idPersona) {
+    $sql = '
+    SELECT
+    id_permiso_ingreso_ficha,
+    pl.prd_lectivo_nombre,
+    tf.tipo_ficha
+    FROM
+    public."PermisoIngresoFichas" pf
+    JOIN public."PeriodoLectivo" pl ON pl.id_prd_lectivo = pf.id_prd_lectivo
+    JOIN public."TipoFicha" tf ON tf.id_tipo_ficha = pf.id_tipo_ficha
+    WHERE pf.id_prd_lectivo IN (
+        SELECT id_prd_lectivo
+        FROM public."Matricula" m
+        JOIN public."Alumnos" a ON a.id_alumno = m.id_alumno
+        WHERE a.id_persona = :idPersona
+    ) AND pf.permiso_ingreso_activo = true
+    AND prd_lectivo_estado = true
+    ORDER BY prd_lectivo_fecha_inicio DESC;';
+    return getArrayFromSQL($sql, [
+      'idPersona' => $idPersona
+    ]);
+  }
+
   static function getPorPeriodo($idPeriodo){
     $sql = self::$BASEQUERY."
     AND pl.id_prd_lectivo = :idPeriodo "
@@ -79,27 +99,6 @@ abstract class PermisoIngresoBD {
     return getArrayFromSQL($sql, [
       'aguja' => '%'.$aguja.'%'
     ]);
-  }
-
-  private static function obtenerParaTbl($res){
-    $items = array();
-    while($r = $res->fetch(PDO::FETCH_ASSOC)){
-      //var_dump($r);
-      $pi = new PermisoIngresoMD();
-      $tf = new TipoFichaMD();
-      $pe = new PeriodoLectivoMD();
-      $pi->id = $r['id_permiso_ingreso_ficha'];
-      $pi->idPeriodo = $r['id_prd_lectivo'];
-      $pi->idTipoFicha = $r['tipo_ficha'];
-      $pi->fechaInicio = $r['permiso_ingreso_fecha_inicio'];
-      $pi->fechaFin = $r['permiso_ingreso_fecha_fin'];
-      $tf->tipoFicha = $r['tipo_ficha'];
-      $pi->tipoFicha = $tf;
-      $pe->nombre = $r['prd_lectivo_nombre'];
-      $pi->periodo = $pe;
-      array_push($items, $pi);
-    }
-    return $items;
   }
 
   static function getParaReporte() {

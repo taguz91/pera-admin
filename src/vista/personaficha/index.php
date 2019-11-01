@@ -55,13 +55,13 @@ require 'src/vista/templates/header.php';
           if(isset($personaFichas)){
             foreach ($personaFichas as $pf) {
               echo '<tr scope="row">';
-              echo "<td>".$pf->idPersonaFicha."</td>";
-              echo "<td>".$pf->idPermisoIngFicha."</td>";
-              echo "<td>".$pf->persona->primerNombre." ".$pf->persona->primerApellido."</td>";
-              echo "<td>".$pf->fechaIngreso."</td>";
-              echo "<td>".$pf->fechaModificacion."</td>";
-              echo '<td> <a href="'.constant('URL').'personaficha/reenviar?id='.$pf->idPersonaFicha.'">Reenviar</a> </td>';
-              echo '<td> <a href="'.constant('URL').'personaficha/eliminar?id='.$pf->idPersonaFicha.'">Eliminar</a> </td>';
+              echo "<td>".$pf['id_persona_ficha']."</td>";
+              echo "<td>".$pf['id_permiso_ingreso_ficha']."</td>";
+              echo "<td>".$pf['persona_primer_nombre']."  ".$pf['persona_primer_apellido']."</td>";
+              echo "<td>".$pf['persona_ficha_fecha_ingreso']."</td>";
+              echo "<td>".$pf['persona_ficha_fecha_modificacion']."</td>";
+              echo '<td> <a href="'.constant('URL').'personaficha/reenviar?id='.$pf['id_persona_ficha'].'">Reenviar</a> </td>';
+              echo '<td> <a href="'.constant('URL').'personaficha/eliminar?id='.$pf['id_persona_ficha'].'">Eliminar</a> </td>';
               echo "</tr>";
             }
           }else{

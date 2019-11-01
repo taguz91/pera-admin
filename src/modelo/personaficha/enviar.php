@@ -4,7 +4,6 @@ use PHPMailer\PHPMailer\PHPMailer;
 use PHPMailer\PHPMailer\Exception;
 
 require 'vendor/autoload.php';
-require_once "src/modelo/clases/personamd.php";
 
 class EnviarCorreo {
 

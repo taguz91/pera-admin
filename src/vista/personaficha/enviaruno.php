@@ -15,22 +15,20 @@ require 'src/vista/templates/header.php';
       <div class="form-group">
         <label for="permiso" class="control-label">Seleccione un Permiso:</label>
         <select class="form-control" name="permiso" required id="cmbPermisos">
-          <option value="0">Permisos</option>
 
-          <?php
-          if (isset($permisos)) {
-            foreach ($permisos as $pf) {
-              echo '<option value="' . $pf->id . '">' . $pf->tipoFicha->tipoFicha . ' - ' . $pf->periodo->nombre . '</option>';
-            }
-          }
-          ?>
+          <?php if (isset($permisos)): ?>
+            <?php foreach ($permisos as $pf): ?>
+              <?php echo '<option value="' . $pf['id_permiso_ingreso_ficha'] . '">' . $pf['tipo_ficha'] . ' - ' . $pf['prd_lectivo_nombre'] . '</option>'; ?>
+            <?php endforeach; ?>
+          <?php endif; ?>
         </select>
       </div>
 
       <div class="form-group">
         <label class="control-label" for="">Correo:</label>
         <input class="form-control" type="text" name="correo"
-        placeholder="Ingrese el correo" value="<?php echo isset($_GET['correo']) ? $_GET['correo'] : ''; ?>">
+        placeholder="Ingrese el correo"
+        value="<?php echo isset($_GET['correo']) ? $_GET['correo'] : ''; ?>">
       </div>
 
       <div class="form-group">

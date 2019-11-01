@@ -1,6 +1,4 @@
 <?php
-require_once 'src/modelo/clases/periodolectivomd.php';
-
 abstract class PeriodoLectivoBD {
 
   static function getParaCombo(){
@@ -17,23 +15,6 @@ abstract class PeriodoLectivoBD {
     prd_lectivo_fecha_fin DESC;
     ';
     return getArrayFromSQL($sql, []);
-    /*
-    $ct = getCon();
-    if($ct != null){
-      $res = $ct->query($sql);
-      if($res != null){
-        $items = array();
-        while($r = $res->fetch(PDO::FETCH_ASSOC)){
-          $pl = new PeriodoLectivoMD();
-          $pl->id = $r['id_prd_lectivo'];
-          $pl->nombre = $r['prd_lectivo_nombre'];
-          array_push($items, $pl);
-        }
-        return $items;
-      }else{
-        return [];
-      }
-    }*/
   }
 
 }

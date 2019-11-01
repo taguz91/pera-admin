@@ -4,19 +4,8 @@ require_once "src/modelo/permisoingreso/permisoingresobd.php";
 require_once "src/modelo/clases/periodolectivobd.php";
 require_once "src/modelo/tipoficha/tipofichabd.php";
 require_once "src/modelo/personaficha/enviar.php";
-require_once "src/modelo/clases/personamd.php";
 
-class PersonaFichaCTR extends CTR implements DCTR
-{
-
-  public $personaFichas = [];
-
-  private $mensaje = "
-      <h1> Ficha Socioecon&oacute;mica </h1>
-      El motivo de este mensaje es comunicarle sobre el llenado de la Ficha Socioecon&oacute;mica <br>
-      El cual lo deber&aacute; hacer con su Usuario y Contrase&ntilde;a, los cuales serán su Cédula de Ciudadanía <br>
-      Adem&aacute;s de esto necesita una Contraseña para el llenado de la Ficha antes mencionada, la cual es la siguiente: <br> <br>
-      <strong>Contrase&ntilde;a:</strong> pass<br>";
+class PersonaFichaCTR extends CTR implements DCTR {
 
   function __construct() {
     parent::__construct("src/vista/personaficha/");
@@ -83,14 +72,11 @@ class PersonaFichaCTR extends CTR implements DCTR
             }
           }
       } else {
-        Errores::errorVariableNoEncontrada();
+        $this->inicio('No tenemos todos los datos necesarios.');
       }
     } else {
-      $periodos = PeriodoLectivoBD::getParaCombo();
-      $tipofichas = TipoFichaBD::getParaCombo();
-
       $permisos = PermisoIngresoBD::getAll();
-      require $this->cargarVista('guardar.php');
+      require $this->cargarVista('guardarpersona.php');
     }
   }
 
@@ -110,7 +96,6 @@ class PersonaFichaCTR extends CTR implements DCTR
     }
   }
 
-
   function enviarCorreo() {
     if(isset($_POST['guardar'])){
       $idPersona = $_POST['idpersona'];
@@ -129,16 +114,6 @@ class PersonaFichaCTR extends CTR implements DCTR
         if($res){
           $this->inicio();
         }
-
-        /*
-        $pf = new PersonaFichaMD();
-        $pf->idPermisoIngFicha = $idPermiso;
-        $pf->idPersona = $idPersona;
-        $pf->clave = $pass;
-        $res = PersonaFichaBD::guardarPersonaFicha($pf);
-        if($res){
-          $this->inicio();
-        }*/
       }
     }
   }
@@ -151,7 +126,7 @@ class PersonaFichaCTR extends CTR implements DCTR
 
   function enviar() {
     if(isset($_GET['idpersona'])){
-      $permisos = PermisoIngresoBD::getAll();
+      $permisos = PermisoIngresoBD::getForPersona($_GET['idpersona']);
       require $this->cargarVista('enviaruno.php');
     }
   }
@@ -172,15 +147,6 @@ class PersonaFichaCTR extends CTR implements DCTR
         if ($res) {
           $count++;
         }
-
-        /*
-        $pf->idPersona = $correos[$i]->idPersona;
-        $pf->clave = $pass[$i];
-        //Se debe validar antes de guardar
-        $res = PersonaFichaBD::guardarPersonaFicha($pf);
-        if ($res) {
-          $count++;
-        }*/
       }
     }
     return $count;
@@ -198,13 +164,11 @@ class PersonaFichaCTR extends CTR implements DCTR
     return substr(str_shuffle("0123456789abcdefghijklmnopqrstuvwxyzABCDEFGHIJKLMNOPQRSTUVWXYZ"), 0, 6);
   }
 
-
   public function eliminar(){
     PersonaFichaBD::eliminar(isset($_GET['id']) ? $_GET['id'] : 0);
   }
 
   public function enviarCorreoIndividual($idPersona, $correo, $mensajePersonalizado){
-    //Revisa que todos los componentes esten llenos
     if (
       isset($_POST['permiso']) &&
       isset($_POST['correo'])
@@ -214,17 +178,9 @@ class PersonaFichaCTR extends CTR implements DCTR
         'id_permiso_ingreso_ficha' => $_POST['permiso'],
         'id_persona' => $idPersona
       ];
-      /*
-      $personaFicha = new PersonaFichaMD();
-      $personaFicha->idPermisoIngFicha = $_POST['permiso'];
-      $personaFicha->idPersona = $idPersona;
-      */
 
       if (EnviarCorreo::enviar($correo, $passDoc[0], $mensajePersonalizado)) {
-        /*$mensaje = "Se envío correctamente el correo";
-        echo $mensaje;*/
-        //$personaFicha->clave = $passDoc[0];
-        $personaFicha['clave'] => $passDoc[0];
+        $personaFicha['clave'] = $passDoc[0];
 
         $res = PersonaFichaBD::guardarPersonaFicha($personaFicha);
 

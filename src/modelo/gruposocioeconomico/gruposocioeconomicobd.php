@@ -1,5 +1,4 @@
 <?php
-require_once "src/modelo/gruposocioeconomico/gruposocioeconomico.php";
 
 abstract class GrupoSocioEconomicoBD {
 
@@ -73,22 +72,6 @@ abstract class GrupoSocioEconomicoBD {
     ]);
   }
 
-  private static function obtenerParaTbl($res){
-    $items = array();
-    while($r = $res->fetch(PDO::FETCH_ASSOC)){
-      //var_dump($r);
-      $gs = new GrupoSocioeconomicoMD();
-      $gs->id = $r['id_grupo_socioeconomico'];
-      $gs['id_tipo_ficha'] = $r['tipo_ficha'];
-      $gs['grupo_socioeconomico'] = $gs['grupo_socioeconomico'];
-      $gs['puntaje_minimo'] = $r['puntaje_minimo'];
-      $gs['puntaje_maximo'] = $r['puntaje_maximo'];
-
-      array_push($items, $gs);
-    }
-    return $items;
-  }
-
   public static $BASEQUERY = '
   SELECT
   gs.id_grupo_socioeconomico,
@@ -100,8 +83,7 @@ abstract class GrupoSocioEconomicoBD {
   public."GrupoSocioeconomico" gS,
   public."TipoFicha" tf
   WHERE gS.id_tipo_ficha = tf.id_tipo_ficha
-  AND gS.grupo_socioeconomico_activo = true
-  ';
+  AND gS.grupo_socioeconomico_activo = true ';
 
   public static $ENDQUERY = '
   ORDER BY
@@ -109,9 +91,10 @@ abstract class GrupoSocioEconomicoBD {
 
   public static $INSERT = '
   INSERT INTO public."GrupoSocioeconomico"(
-     id_tipo_ficha, grupo_socioeconomico, puntaje_minimo, puntaje_maximo)
-  VALUES(:idTipoFicha, :grupoSocioEconomico, :puntajeMinimo, :puntajeMaximo )
-  ';
+     id_tipo_ficha, grupo_socioeconomico, puntaje_minimo, puntaje_maximo
+  ) VALUES (
+    :idTipoFicha, :grupoSocioEconomico, :puntajeMinimo, :puntajeMaximo
+  );';
 
   public static $UPDATE = '
   UPDATE public."GrupoSocioeconomico"
@@ -119,14 +102,12 @@ abstract class GrupoSocioEconomicoBD {
   grupo_socioeconomico = :grupoSocioEconomico,
   puntaje_minimo = :puntajeMinimo,
   puntaje_maximo = :puntajeMaximo
-  WHERE id_grupo_socioeconomico = :id;
-  ';
+  WHERE id_grupo_socioeconomico = :id;';
 
   public static $DELETE = '
-    UPDATE public."GrupoSocioeconomico"
-    SET grupo_socioeconomico_activo = false
-    WHERE id_grupo_socioeconomico = :id;
-  ';
+  UPDATE public."GrupoSocioeconomico"
+  SET grupo_socioeconomico_activo = false
+  WHERE id_grupo_socioeconomico = :id;';
 
 }
 

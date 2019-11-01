@@ -1,5 +1,4 @@
 <?php
-require_once 'src/modelo/tipoficha/tipofichamd.php';
 
 abstract class TipoFichaBD{
 
@@ -68,8 +67,7 @@ abstract class TipoFichaBD{
 
   private static $ENDQUERY = '
   ORDER BY
-  tipo_ficha;
-  ';
+  tipo_ficha;';
 
   public static $INSERT = '
   INSERT INTO public."TipoFicha"(
@@ -85,7 +83,6 @@ abstract class TipoFichaBD{
   public static $DELETE = '
   UPDATE public."TipoFicha"
   SET tipo_ficha_activo = false
-  WHERE id_tipo_ficha = :id;
-  ';
+  WHERE id_tipo_ficha = :id;';
 }
 ?>
