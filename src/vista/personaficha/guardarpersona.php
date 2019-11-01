@@ -29,12 +29,6 @@ require 'src/vista/templates/header.php';
       <div class="form-group">
         <label for="ciclo" class="control-label">Seleccione un Ciclo:</label>
         <select class="form-control" name="ciclo" required id="cmbCiclos">
-          <option value="0">CICLOS</option>
-          <option value="1">PRIMEROS</option>
-          <option value="2">SEGUNDOS</option>
-          <option value="3">TERCEROS</option>
-          <option value="4">CUARTOS</option>
-          <option value="5">QUINTOS</option>
         </select>
       </div>
 
@@ -51,6 +45,58 @@ require 'src/vista/templates/header.php';
 
   </div>
 </div>
+
+
+
+<script type="text/javascript">
+
+const URLAPI = '<?php echo constant('URLAPI'); ?>';
+
+const CMB_PERMISOS = document.querySelector('#cmbPermisos');
+
+const CMB_CICLOS = document.querySelector('#cmbCiclos');
+
+CMB_PERMISOS.addEventListener('change', function(){
+  let permiso = CMB_PERMISOS.value;
+  if (permiso > 0) {
+    getCursos(permiso);
+  }
+});
+
+
+function getCursos(idPermiso) {
+  fetch(URLAPI + 'api/v1/periodo/ciclos/' + idPermiso)
+  .then(res => res.json())
+  .then(data => {
+    if(data.statuscode == '200') {
+      llenarCiclos(data.items);
+    } else {
+      console.log(data);
+    }
+  })
+  .catch( err => {
+    console.log('Error: ' + err);
+  });
+}
+
+
+function llenarCiclos(items) {
+  while (CMB_CICLOS.firstChild) {
+    CMB_CICLOS.removeChild(CMB_CICLOS.firstChild);
+  }
+  let opt = document.createElement('option');
+  opt.appendChild(document.createTextNode('Ciclos'));
+
+  CMB_CICLOS.appendChild(opt);
+
+  items.forEach(i => {
+    let c = document.createElement('option');
+    c.value = i.ciclo;
+    c.appendChild(document.createTextNode(i.ciclo));
+    CMB_CICLOS.appendChild(c);
+  });
+}
+</script>
 
 
 <?php
