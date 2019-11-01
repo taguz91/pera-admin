@@ -33,11 +33,11 @@ class PersonaFichaCTR extends CTR implements DCTR {
 
             $correosEst = PersonaFichaBD::getCorreosEst($numCiclo, $pf->idPermisoIngFicha);
             if (empty($correosEst)) {
-              echo "<h3>Estos ciclos ya se guardaron como fichas</h3>";
+              $this->inicio('Estos ciclos ya se guardaron como fichas');
             } else {
               $this->enviarCorreos($correosEst, $_POST['correo']);
-              if($val == true){
-                $this->inicio();
+              if($val){
+                $this->inicio('Enviamos los correos');
               }
             }
 
@@ -45,28 +45,24 @@ class PersonaFichaCTR extends CTR implements DCTR {
             $correosDoc = PersonaFichaBD::getCorreosDoc($numCiclo, $pf['id_permiso_ingreso_ficha']);
 
             if (empty($correosDoc)) {
-              echo "<h3>Estos ciclos ya se guardaron como fichas</h3>";
+              $this->inicio('Estos ciclos ya se guardaron como fichas');
             } else {
               $numPassDoc = sizeof($correosDoc);
               $passDoc = self::generarContrasena($numPassDoc);
 
               for ($i = 0; $i < $numPassDoc; $i++) {
                 if (EnviarCorreo::enviar($correosDoc->correo, $passDoc, $this->mensaje)) {
-                  $mensaje = "Se envío correctamente los correos a count($correosDoc) estudiantes";
-                  echo $mensaje;
 
                   $pf['id_persona'] = $correosDoc[$i]['id_persona'];
                   $pf['clave'] = $passDoc[$i];
                   $res = PersonaFichaBD::guardarPersonaFicha($pf);
                   if ($res) {
-                    echo "<h3>Guardamos correctamente a</h3>";
-                    $this->inicio();
+                    $this->inicio('Se envío correctamente los correos a ' . count($correosDoc) . ' estudiantes');
                   } else {
-                    echo "<h3>No se puedo guardar correctamente</h3>";
+                    $this->inicio('No se puedo guardar correctamente');
                   }
                 } else {
-                  $mensaje = "No se pudo enviar corectamente todos los correos, se enviaron a" . count($correosEst) . " estudiantes";
-                  echo $mensaje;
+                  $this->inicio('No se pudo enviar corectamente todos los correos, se enviaron a' . count($correosEst) . ' estudiantes');
                 }
               }
             }
@@ -112,7 +108,7 @@ class PersonaFichaCTR extends CTR implements DCTR {
 
         $res = PersonaFichaBD::guardarPersonaFicha($pf);
         if($res){
-          $this->inicio();
+          $this->inicio('Enviamos correctamente el correo.');
         }
       }
     }
